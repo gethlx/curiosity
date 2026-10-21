@@ -1,0 +1,73 @@
+{
+  "python": "3.12.13",
+  "scope": "offline source probes; fake model responses; no upstream dependency installation or provider calls",
+  "checks": {
+    "source_integrity": {
+      "storm": {
+        "tracked_files": 74,
+        "hash_mismatches": [],
+        "git_clean": true
+      },
+      "curio": {
+        "tracked_files": 59,
+        "hash_mismatches": [],
+        "git_clean": true
+      }
+    },
+    "python_syntax": {
+      "storm": {
+        "files": 52,
+        "errors": []
+      },
+      "curio": {
+        "files": 5,
+        "errors": []
+      }
+    },
+    "curio_question_generation": {
+      "suggestions": 3,
+      "calls_for_answer_plus_suggestions": 4,
+      "history_present_in_all_three_prompts": true,
+      "model": "fake"
+    },
+    "curio_graph_error_blocks_answer": {
+      "reproduced": true,
+      "cause": "fake graph model returned non-JSON; route raised after chat appended its answer",
+      "model": "fake"
+    },
+    "curio_suggestion_buttons": {
+      "source_buttons": 3,
+      "click_handlers": 0,
+      "scope": "source inspection, not browser test"
+    },
+    "curio_dependencies": {
+      "declared": [
+        "openai",
+        "promptlayer",
+        "python-dotenv",
+        "flask"
+      ],
+      "direct_imports_missing_from_manifest": [
+        "langchain",
+        "flask-cors"
+      ],
+      "scope": "manifest/source comparison, not installation resolution"
+    },
+    "costorm_moderator_trigger": {
+      "source_method_cases": 5,
+      "threshold": 3,
+      "outcome": "all expected outcomes observed",
+      "scope": "extracted original source method with fake turn records"
+    },
+    "limited_static_screen": {
+      "credential_like_pattern_files": [],
+      "package_lifecycle_scripts": [
+        {
+          "file": "curio/frontend/package.json",
+          "scripts": {}
+        }
+      ],
+      "limits": "pattern screen and selected source review; not a security certification or dependency vulnerability audit"
+    }
+  }
+}

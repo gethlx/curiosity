@@ -1,0 +1,24 @@
+# Local reference checkouts; not project dependencies or submodules.
+/storm/
+/curio/
+
+# Credentials and machine-local state.
+.env
+.env.*
+!.env.example
+secrets.toml
+*.pem
+*.key
+.DS_Store
+.workbuddy/
+.playwright-cli/
+
+# Rebuildable dependencies and caches.
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+dist/
+build/
