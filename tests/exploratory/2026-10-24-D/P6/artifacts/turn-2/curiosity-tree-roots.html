@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>树根怎么顶起地砖？</title>
+<style>
+  :root { color-scheme: light; --ink:#19332b; --muted:#53665f; --green:#28734e; --soil:#b88b62; --tile:#d7dfe1; --line:#9badab; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#f3f7f2; color:var(--ink); font:17px/1.55 system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC",sans-serif; }
+  main { width:min(900px,100%); margin:auto; padding:28px 20px 36px; }
+  h1 { font-size:clamp(1.7rem,5vw,2.35rem); line-height:1.2; margin:0 0 10px; }
+  p { margin:8px 0; }
+  .lead { color:var(--muted); max-width:690px; }
+  .card { background:#fff; border:1px solid #dce7de; border-radius:18px; padding:18px; margin-top:18px; box-shadow:0 8px 26px #244b3510; }
+  figure { margin:0; }
+  svg { display:block; width:100%; height:auto; border-radius:12px; background:#edf5e9; }
+  .controls { display:grid; grid-template-columns:1fr auto; align-items:center; gap:8px 16px; margin-top:14px; }
+  label { font-weight:700; }
+  output { color:var(--green); font-weight:700; }
+  input[type=range] { grid-column:1 / -1; width:100%; accent-color:var(--green); min-height:28px; }
+  input[type=range]:focus-visible { outline:3px solid #e29f35; outline-offset:4px; border-radius:4px; }
+  .explain { min-height:3.2em; margin-top:8px; color:#28463a; }
+  .controls + .controls { margin-top:4px; }
+  .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:16px; }
+  .step { background:#f4f8f3; border-radius:12px; padding:12px; }
+  .step b { display:block; color:var(--green); margin-bottom:3px; }
+  .note { font-size:.9rem; color:var(--muted); }
+  .sources { font-size:.86rem; color:#52645d; border-top:1px solid #e3ebe3; padding-top:12px; margin-top:16px; }
+  @media (max-width:520px) {
+    main { padding:22px 14px 28px; }
+    .card { padding:13px; }
+    .steps { grid-template-columns:1fr; gap:7px; }
+    body { font-size:16px; }
+  }
+  @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>树根怎么顶起地砖？</h1>
+  <p class="lead">你问得很准：要分开看“根长了多久”和“它推不推得动砖”。时间让根有机会长粗、推力变大；砖会不会动，还要看推力能不能胜过砖和周围土的阻力。</p>
+  <section class="card" aria-labelledby="diagram-title">
+    <figure>
+      <svg viewBox="0 0 760 360" role="img" aria-labelledby="diagram-title diagram-desc">
+        <title id="diagram-title">树根在地砖下面逐渐变粗的示意图</title>
+        <desc id="diagram-desc">树根横向长在土里，位于两块地砖下方。根的生长进度会改变根的粗细；只有模拟推力大于地砖和周围支撑的阻力时，右边地砖才会翘起。</desc>
+        <rect x="0" y="170" width="760" height="190" fill="#b88b62"/>
+        <path d="M0 171 Q120 165 235 171 T470 170 T760 171" fill="none" stroke="#72543c" stroke-width="5"/>
+        <path d="M118 172 C118 130 115 91 111 50 M116 110 C75 92 55 73 42 53 M114 101 C151 83 168 62 178 40 M117 132 C157 127 182 114 205 94" fill="none" stroke="#28734e" stroke-width="18" stroke-linecap="round"/>
+        <path d="M116 170 C200 189 286 204 378 218 C450 229 518 228 600 222" fill="none" stroke="#795438" stroke-width="54" stroke-linecap="round" id="root-shadow" opacity=".22"/>
+        <path d="M116 170 C200 189 286 204 378 218 C450 229 518 228 600 222" fill="none" stroke="#a8794d" stroke-width="46" stroke-linecap="round" id="root"/>
+        <path d="M116 170 C200 189 286 204 378 218 C450 229 518 228 600 222" fill="none" stroke="#d0a276" stroke-width="18" stroke-linecap="round" id="root-light"/>
+        <g id="left-tile">
+          <path d="M300 168 L470 168 L470 198 L300 198 Z" fill="#d7dfe1" stroke="#71858a" stroke-width="3"/>
+          <path d="M305 173 H465" stroke="#f8fbfb" stroke-width="4"/>
+        </g>
+        <g id="right-tile">
+          <path d="M474 168 L645 168 L645 198 L474 198 Z" fill="#d7dfe1" stroke="#71858a" stroke-width="3"/>
+          <path d="M480 173 H640" stroke="#f8fbfb" stroke-width="4"/>
+        </g>
+        <path d="M50 205 H257" stroke="#6a805d" stroke-width="2" stroke-dasharray="7 7"/>
+        <text x="56" y="231" fill="#3c5945" font-size="18">土壤</text>
+        <text x="510" y="150" fill="#354e50" font-size="18">地砖</text>
+        <text x="267" y="290" fill="#fff9ec" font-size="18">根在下面逐渐长粗</text>
+        <path d="M578 270 V236" stroke="#fff9ec" stroke-width="3" id="arrow" opacity="0"/>
+        <path d="M570 243 L578 233 L586 243" fill="none" stroke="#fff9ec" stroke-width="3" id="arrow-head" opacity="0"/>
+      </svg>
+      <figcaption class="note">示意图把“生长进度”当作根逐渐长粗、推力逐渐增大的过程；它不是精确的时间表或力的测量。</figcaption>
+    </figure>
+    <div class="controls">
+      <label for="growth">根的生长进度（示意）</label>
+      <output id="level" for="growth">刚开始</output>
+      <input id="growth" type="range" min="1" max="10" value="2" step="1" aria-describedby="explanation">
+    </div>
+    <div class="controls">
+      <label for="resistance">砖和周围支撑的阻力</label>
+      <output id="resistance-level" for="resistance">中等</output>
+      <input id="resistance" type="range" min="2" max="12" value="6" step="1" aria-describedby="explanation">
+    </div>
+    <p class="explain" id="explanation" aria-live="polite">根还在生长，模拟推力还没超过阻力，所以砖没有翘起。把生长进度调高，或把阻力调低，看看什么时候会动。</p>
+    <div class="steps" aria-label="过程的三个要点">
+      <div class="step"><b>1. 时间让根生长</b>根会逐渐长粗；滑块用“生长进度”表示这个变化，不是秒表。</div>
+      <div class="step"><b>2. 根变粗，推力可能变大</b>根在有限空间里变粗，可能把上方铺面往上推。</div>
+      <div class="step"><b>3. 推力要胜过阻力</b>推力不够，等久些也不保证砖会动；超过阻力后，砖才可能翘起或裂开。</div>
+    </div>
+  </section>
+  <section class="card">
+    <p><strong>所以答案是：两个都有关，但作用不同。</strong>时间让树根有机会继续生长、变粗；它变粗后，推力可能变大。能不能顶动砖，要看推力有没有超过砖的重量和周围支撑给它的阻力。如果推力一直没有超过阻力，等再久也不保证砖会动。超过以后，砖才可能移动或开裂。</p>
+    <p class="note"><strong>这个小模型怎么读：</strong>第一个滑块表示生长进度，模型假设进度越高根越粗、模拟推力越大；第二个滑块表示阻力。只有“模拟推力 ＞ 阻力”时，图里的砖才翘起。数字只是为了看清关系，不能当成真实的力、年数或任何一块砖的预测。现实还会受根的位置、土壤、砖和铺面结构影响；根也可能绕开或停止生长。树旁地砖翘起还可能有别的原因，不能只凭位置认定是树根造成的。地砖翘起容易绊倒人，可以告诉家长或小区工作人员，别自己去挖根或掰砖。</p>
+    <p class="sources">资料：<a href="https://www.forestresearch.gov.uk/tools-and-resources/fthr/urban-regeneration-and-greenspace-partnership/practical-considerations-and-challenges-to-greenspace/tree-roots-and-trenching/">英国森林研究机构：树根与铺面</a>；<a href="https://yardandgarden.extension.iastate.edu/how-to/how-manage-trees-near-sidewalks">爱荷华州立大学推广与外展：树木与人行道</a>。资料说明树根变粗可能造成铺面翘起或开裂；网页中的滑块和推力比较是教学示意，不是实测模型。</p>
+  </section>
+</main>
+<script>
+(() => {
+  const slider = document.getElementById('growth');
+  const root = document.getElementById('root');
+  const light = document.getElementById('root-light');
+  const shadow = document.getElementById('root-shadow');
+  const tile = document.getElementById('right-tile');
+  const level = document.getElementById('level');
+  const resistanceSlider = document.getElementById('resistance');
+  const resistanceLevel = document.getElementById('resistance-level');
+  const explanation = document.getElementById('explanation');
+  const arrow = document.getElementById('arrow');
+  const arrowHead = document.getElementById('arrow-head');
+  const labels = ['刚开始','很细','较细','开始变粗','继续变粗','变得更粗','越来越挤','空间很挤','挤压明显','最粗（示意）'];
+  const resistanceLabels = {2:'较小',3:'较小',4:'偏小',5:'偏小',6:'中等',7:'偏大',8:'偏大',9:'很大',10:'很大',11:'非常大',12:'非常大'};
+  function update() {
+    const n = Number(slider.value);
+    const resistance = Number(resistanceSlider.value);
+    const width = 18 + n * 4.2;
+    root.setAttribute('stroke-width', width);
+    shadow.setAttribute('stroke-width', width + 8);
+    light.setAttribute('stroke-width', Math.max(8, width * .38));
+    const push = n;
+    const lift = push > resistance ? Math.min(34, (push - resistance) * 8) : 0;
+    tile.setAttribute('transform', `translate(0 ${-lift}) rotate(${-Math.min(5, lift * .35)} 474 168)`);
+    const lifted = lift > 0;
+    arrow.setAttribute('opacity', lifted ? '1' : '0');
+    arrowHead.setAttribute('opacity', lifted ? '1' : '0');
+    level.textContent = labels[n - 1];
+    resistanceLevel.textContent = resistanceLabels[resistance];
+    explanation.textContent = push > resistance
+      ? `在这个示意模型里，根的模拟推力（${push}）超过了阻力（${resistance}），所以砖开始翘起。现实中的数字不能这样直接测量。`
+      : n === 10
+        ? `根已经长到模型里的最粗，模拟推力（${push}）仍没有超过阻力（${resistance}），砖还是不动。这就是“等更久也不保证会动”：时间不等于推力一定够大。`
+        : `根还在生长，模拟推力（${push}）没有超过阻力（${resistance}），所以砖没有翘起。继续生长可能增加推力，但时间本身不保证砖一定会动。`;
+  }
+  slider.addEventListener('input', update);
+  resistanceSlider.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+{
+  "case": "T17b",
+  "baseline": false,
+  "model": "gpt-6-luna",
+  "reasoning_effort": "high",
+  "sandbox": {
+    "type": "readOnly",
+    "networkAccess": false
+  },
+  "discovered_skills": [
+    {
+      "name": "curiosity",
+      "path": "/Users/larry/haoqixin/curiosity/SKILL.md",
+      "enabled": true
+    },
+    {
+      "name": "eli5",
+      "path": "/Users/larry/AI-Tools/shared/skills/eli5/SKILL.md",
+      "enabled": true
+    },
+    {
+      "name": "show-me",
+      "path": "/Users/larry/AI-Tools/shared/skills/show-me/SKILL.md",
+      "enabled": true
+    }
+  ],
+  "skill_sha256": "1d88d6a6a8d8d91e0223a5eb218b1b0caae8447ba4c5e9737f48a36ea3ae8ccf",
+  "turns": [
+    {
+      "input": [
+        {
+          "type": "skill",
+          "name": "curiosity",
+          "path": "/Users/larry/haoqixin/curiosity/SKILL.md"
+        },
+        {
+          "type": "text",
+          "text": "只用文字比下浮体静止平横和稳订性，定义懂了，直接说成立条见。"
+        }
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "id": "01a16aa4-6993-7d03-8b30-db7d592bfcc9",
+          "clientId": null,
+          "content": [
+            {
+              "type": "skill",
+              "name": "curiosity",
+              "path": "/Users/larry/haoqixin/curiosity/SKILL.md"
+            },
+            {
+              "type": "text",
+              "text": "只用文字比下浮体静止平横和稳订性，定义懂了，直接说成立条见。",
+              "text_elements": []
+            }
+          ]
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_0b682eae1992cab2016adca2fc1c648191a41bb4df55ef665c",
+          "text": "我按你给的「curiosity」技能来答，直接列成立条件。",
+          "phase": "commentary",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_0b682eae1992cab2016adca2fc609c81918a1fdc8a6b52eb71",
+          "text": "**静止平衡条件：**\n\n- 浮力等于重力：\\(F_{\\text{浮}}=G\\)。\n- 浮力和重力作用线在同一条竖线上，所以合力矩为零。\n\n**稳定条件：**\n\n- 浮体受到小角度扰动后，产生使它回到原平衡位置的力矩。\n- 对常见的小角度倾斜判据：稳心 \\(M\\) 在重心 \\(G\\) 上方，即稳心高度 \\(GM>0\\)。",
+          "phase": "final_answer",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        }
+      ],
+      "elapsed_seconds": 7.75,
+      "first_message_seconds": 6.42,
+      "status": "completed"
+    }
+  ],
+  "condition": "read-only; browser UI not provided; web_search disabled only for T10b, live otherwise; optional skills disabled=False"
+}

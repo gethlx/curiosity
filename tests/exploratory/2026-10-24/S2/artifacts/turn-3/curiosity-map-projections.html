@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>地球摊平，地图怎么变？</title>
+<style>
+  :root{color-scheme:light;--ink:#172d35;--muted:#536b70;--paper:#f4f7f1;--card:#fff;--line:#d8e2dc;--teal:#087e78;--orange:#d66c3c;--sky:#dcefeb}
+  *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+  main{width:min(960px,100%);margin:auto;padding:28px 20px 42px} h1{font-size:clamp(28px,5vw,42px);line-height:1.15;margin:8px 0 14px;letter-spacing:-.03em} h2{font-size:20px;margin:0 0 8px} p{margin:8px 0} .lead{font-size:18px;max-width:720px;color:#304b51}.eyebrow{font-size:13px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+  .hero{padding:22px 0 24px;border-bottom:1px solid var(--line)} .key{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}.key article,.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}.key strong{display:block;font-size:16px;color:var(--teal);margin-bottom:5px}.key p{font-size:14px;color:var(--muted);margin:0}
+  .route{margin-top:22px}.route-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:6px 0}.swatch{display:inline-block;width:18px;height:4px;border-radius:4px;vertical-align:middle;margin-right:6px}.route-copy{color:var(--muted);font-size:14px}
+  .explore{margin-top:24px}.controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:12px 0 4px;padding:14px 16px;background:#e5f1ec;border-radius:14px}.controls label{font-weight:700}.controls input{flex:1;min-width:180px;accent-color:var(--teal)} output{font-variant-numeric:tabular-nums;font-weight:800;color:var(--teal);min-width:74px} .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.panel h3{margin:0;font-size:18px}.sub{color:var(--muted);font-size:14px;margin:3px 0 8px}.visual{width:100%;height:auto;display:block;background:linear-gradient(#f8fbf9,#eef7f4);border-radius:12px}.metric{display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:9px;margin-top:8px;font-size:14px}.metric b{font-variant-numeric:tabular-nums}.note{font-size:13px;color:var(--muted)} .takeaway{margin:18px 0 0;padding:15px 17px;background:#fff2e8;border-left:4px solid var(--orange);border-radius:8px}.takeaway strong{color:#9a4825}.foot{margin-top:20px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+  @media(max-width:650px){main{padding:20px 15px 32px}.key,.cards{grid-template-columns:1fr}.key{gap:8px}.key article{padding:13px}.lead{font-size:16px}.controls{gap:9px}}
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <div class="eyebrow">从球面到平面</div>
+    <h1>地球摊平，地图怎么变？</h1>
+    <p class="lead">地球是弯的，纸是平的。把球面摊开时，地图投影必须做取舍：有的投影让面积看起来变大，有的尽量保住面积，但会改变形状。</p>
+  </header>
+  <section class="key" aria-label="关键想法">
+    <article><strong>1 · 不能处处不变</strong><p>球面不能无拉伸、无剪切地完整铺成一张平面图。</p></article>
+    <article><strong>2 · 投影决定变法</strong><p>不同投影选了不同的取舍，所以同一块地方大小、形状会不同。</p></article>
+    <article><strong>3 · 地图用途不同</strong><p>看方向、看面积、做导航，适合的地图可能不一样。</p></article>
+  </section>
+  <section class="explore" aria-labelledby="explore-title">
+    <h2 id="explore-title">拖动纬度，看看同一块地会怎样</h2>
+    <p>把赤道附近的一小块正方形土地当作“1份面积”。往高纬度移动，比较两种常见投影画出的格子。</p>
+    <div class="controls">
+      <label for="lat">所在纬度</label>
+      <input id="lat" type="range" min="0" max="75" value="60" step="1" aria-describedby="lat-help">
+      <output id="lat-out" for="lat">北纬 60°</output>
+      <span id="lat-help" class="note">从赤道往北移动；南北对称</span>
+    </div>
+    <div class="cards">
+      <article class="panel">
+        <h3>墨卡托投影</h3>
+        <p class="sub">常见于航海图和在线地图；角度、局部形状较好保留</p>
+        <svg class="visual" viewBox="0 0 360 190" role="img" aria-labelledby="merc-title merc-desc">
+          <title id="merc-title">墨卡托投影下的土地格子</title><desc id="merc-desc">随着纬度升高，格子横向和纵向都放大，面积明显增加。</desc>
+          <path d="M20 158H340M180 15V170" stroke="#d1dfda" stroke-width="1" stroke-dasharray="4 5"/>
+          <text x="180" y="178" text-anchor="middle" font-size="12" fill="#536b70">同一块地，投影后的局部格子</text>
+          <rect id="merc-rect" x="152" y="62" width="56" height="56" rx="5" fill="#f6a26f" stroke="#a84d28" stroke-width="2"/>
+          <text id="merc-label" x="180" y="93" text-anchor="middle" font-size="13" font-weight="700" fill="#5c311f">1 份地</text>
+        </svg>
+        <div class="metric"><span>面积看起来约是</span><b id="merc-area">4.00 倍</b></div>
+        <div class="metric"><span>横向、纵向放大</span><b id="merc-scale">各 2.00 倍</b></div>
+      </article>
+      <article class="panel">
+        <h3>等面积圆柱投影</h3>
+        <p class="sub">一种保面积的投影；格子会变宽、变矮，形状失真</p>
+        <svg class="visual" viewBox="0 0 360 190" role="img" aria-labelledby="equal-title equal-desc">
+          <title id="equal-title">等面积投影下的土地格子</title><desc id="equal-desc">格子横向拉宽、纵向压扁，但面积保持为一份。</desc>
+          <path d="M20 158H340M180 15V170" stroke="#d1dfda" stroke-width="1" stroke-dasharray="4 5"/>
+          <text x="180" y="178" text-anchor="middle" font-size="12" fill="#536b70">宽度增加，纵向高度相应缩小</text>
+          <rect id="equal-rect" x="152" y="62" width="56" height="56" rx="5" fill="#74c8b8" stroke="#087e78" stroke-width="2"/>
+          <text id="equal-label" x="180" y="93" text-anchor="middle" font-size="13" font-weight="700" fill="#154f4a">1 份地</text>
+        </svg>
+        <div class="metric"><span>面积看起来约是</span><b>1.00 倍</b></div>
+        <div class="metric"><span>横向放大 / 纵向缩小</span><b id="equal-scale">2.00 / 0.50 倍</b></div>
+      </article>
+    </div>
+    <div class="takeaway" aria-live="polite"><strong id="summary-title">北纬 60°：同一块土地</strong><div id="summary">墨卡托图上的面积约放大 4 倍；等面积图仍保留面积，但格子被拉宽压扁。</div></div>
+    <p class="note">这是在一个小区域上的比例示意，不是整张地图。简化模型：墨卡托的横、纵局部比例约为 1/cos(纬度)，面积约为其平方；此处的等面积圆柱投影保住面积，用横向放大与纵向缩小互相抵消。</p>
+  </section>
+  <section class="panel route" aria-labelledby="route-title">
+    <h2 id="route-title">“直线最短”要看在哪个表面上</h2>
+    <p>数学课说的线段最短，是在平面上比较。飞机如果沿地球表面飞，最短路线通常沿着一个经过地心的大圆走，叫<strong>大圆航线</strong>。下面把同一对地点画在墨卡托地图上：</p>
+    <div class="route-legend"><span><i class="swatch" style="background:#087e78"></i>大圆航线：球面上的最短路</span><span><i class="swatch" style="background:#d66c3c"></i>恒定罗盘方向：墨卡托图上的直线</span></div>
+    <svg class="visual" viewBox="0 0 400 240" role="img" aria-labelledby="route-svg-title route-svg-desc">
+      <title id="route-svg-title">球面最短路线和墨卡托直线路线</title>
+      <desc id="route-svg-desc">从西经60度、北纬30度到东经60度、北纬30度。大圆航线在墨卡托图上向北弯曲，恒定罗盘方向的路线是图上的直线。</desc>
+      <g id="route-grid" fill="none" stroke="#cddbd5" stroke-width="1"></g>
+      <path id="great-circle" fill="none" stroke="#087e78" stroke-width="4" stroke-linecap="round"/>
+      <path id="rhumb-line" fill="none" stroke="#d66c3c" stroke-width="3" stroke-dasharray="7 5"/>
+      <circle id="route-a" r="5" fill="#172d35"/><circle id="route-b" r="5" fill="#172d35"/>
+      <text x="200" y="16" text-anchor="middle" font-size="12" fill="#536b70">墨卡托地图（示意）</text>
+    </svg>
+    <p class="route-copy">橙色直线在纸面上更短，但它代表“一直保持同一个罗盘方向”；绿色弯线对应球面上的最短路。球面上的最短路线投到这张地图后会弯起来。这个例子只是说明路线关系，真实航班还会考虑风、天气和空域。</p>
+  </section>
+  <footer class="foot">要点：地图不是把地球各处用同一个比例直接缩小，而是先选“怎么投影”到平面。投影的选择改变了地图呈现的大小和形状。</footer>
+</main>
+<script>
+  const slider = document.querySelector('#lat');
+  const latOut = document.querySelector('#lat-out');
+  const mercRect = document.querySelector('#merc-rect');
+  const equalRect = document.querySelector('#equal-rect');
+  const fmt = n => n.toFixed(2);
+  function drawRoutes(){
+    const x = lon => 48 + (lon + 75) * 304 / 150;
+    const mercY = lat => Math.log(Math.tan(Math.PI/4 + lat*Math.PI/360));
+    const y = lat => 190 - mercY(lat) * 145 / mercY(65);
+    const grid = document.querySelector('#route-grid');
+    const latitudes = [0,30,50,60], longitudes = [-60,0,60];
+    grid.innerHTML = latitudes.map(lat => `<path d="M48 ${y(lat)} H352"/><text x="8" y="${y(lat)+4}" fill="#536b70" stroke="none" font-size="11">${lat}°</text>`).join('') +
+      longitudes.map(lon => `<path d="M${x(lon)} 35 V190" stroke-dasharray="3 5"/><text x="${x(lon)}" y="207" text-anchor="middle" fill="#536b70" stroke="none" font-size="11">${lon===0?'0°':(lon<0?'西经 ':'东经 ')+Math.abs(lon)+'°'}</text>`).join('');
+    const toVector = (lon,lat) => { const a=lon*Math.PI/180,b=lat*Math.PI/180; return [Math.cos(b)*Math.cos(a),Math.cos(b)*Math.sin(a),Math.sin(b)]; };
+    const a=toVector(-60,30), b=toVector(60,30), dot=a.reduce((s,v,i)=>s+v*b[i],0), omega=Math.acos(dot), pts=[];
+    for(let i=0;i<=80;i++){
+      const t=i/80, A=Math.sin((1-t)*omega)/Math.sin(omega), B=Math.sin(t*omega)/Math.sin(omega);
+      const v=a.map((q,k)=>A*q+B*b[k]), lon=Math.atan2(v[1],v[0])*180/Math.PI, lat=Math.atan2(v[2],Math.hypot(v[0],v[1]))*180/Math.PI;
+      pts.push(`${i?'L':'M'}${x(lon).toFixed(2)} ${y(lat).toFixed(2)}`);
+    }
+    document.querySelector('#great-circle').setAttribute('d',pts.join(' '));
+    document.querySelector('#rhumb-line').setAttribute('d',`M${x(-60)} ${y(30)} L${x(60)} ${y(30)}`);
+    for(const [id,lon] of [['route-a',-60],['route-b',60]]){ const p=document.querySelector('#'+id); p.setAttribute('cx',x(lon)); p.setAttribute('cy',y(30)); }
+  }
+  function update(){
+    const deg = Number(slider.value), rad = deg * Math.PI / 180;
+    const sec = 1 / Math.cos(rad), cos = Math.cos(rad), area = sec * sec;
+    const mercSize = 36 * sec, equalW = 36 * sec, equalH = 36 * cos;
+    mercRect.setAttribute('width', mercSize); mercRect.setAttribute('height', mercSize);
+    mercRect.setAttribute('x', 180 - mercSize/2); mercRect.setAttribute('y', 90 - mercSize/2);
+    equalRect.setAttribute('width', equalW); equalRect.setAttribute('height', equalH);
+    equalRect.setAttribute('x', 180 - equalW/2); equalRect.setAttribute('y', 90 - equalH/2);
+    document.querySelector('#merc-label').setAttribute('y', 95);
+    document.querySelector('#equal-label').setAttribute('y', 95);
+    const loc = deg === 0 ? '赤道' : `北纬 ${deg}°`;
+    latOut.value = loc;
+    document.querySelector('#merc-area').textContent = `${fmt(area)} 倍`;
+    document.querySelector('#merc-scale').textContent = `各 ${fmt(sec)} 倍`;
+    document.querySelector('#equal-scale').textContent = `${fmt(sec)} / ${fmt(cos)} 倍`;
+    document.querySelector('#summary-title').textContent = `${loc}：同一块土地`;
+    document.querySelector('#summary').textContent = `墨卡托图上的面积约放大 ${fmt(area)} 倍；等面积图仍保留面积，但格子被拉宽压扁。`;
+  }
+  slider.addEventListener('input', update); update(); drawRoutes();
+</script>
+</body>
+</html>

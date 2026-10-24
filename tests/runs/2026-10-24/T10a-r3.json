@@ -1,0 +1,506 @@
+{
+  "case": "T10a",
+  "baseline": false,
+  "model": "gpt-6-luna",
+  "reasoning_effort": "high",
+  "sandbox": {
+    "type": "readOnly",
+    "networkAccess": false
+  },
+  "discovered_skills": [
+    {
+      "name": "curiosity",
+      "path": "/Users/larry/haoqixin/curiosity/SKILL.md",
+      "enabled": true
+    },
+    {
+      "name": "eli5",
+      "path": "/Users/larry/AI-Tools/shared/skills/eli5/SKILL.md",
+      "enabled": true
+    },
+    {
+      "name": "show-me",
+      "path": "/Users/larry/AI-Tools/shared/skills/show-me/SKILL.md",
+      "enabled": true
+    }
+  ],
+  "skill_sha256": "14e4a5c064bf1ec566d3d1467e0641d155840c5dee06a71ae737d9dc12ab4bc4",
+  "turns": [
+    {
+      "input": [
+        {
+          "type": "skill",
+          "name": "curiosity",
+          "path": "/Users/larry/haoqixin/curiosity/SKILL.md"
+        },
+        {
+          "type": "text",
+          "text": "蓝鲸有多长？"
+        }
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "id": "01a16aa3-3232-7600-ba1b-b50587b2990c",
+          "clientId": null,
+          "content": [
+            {
+              "type": "skill",
+              "name": "curiosity",
+              "path": "/Users/larry/haoqixin/curiosity/SKILL.md"
+            },
+            {
+              "type": "text",
+              "text": "蓝鲸有多长？",
+              "text_elements": []
+            }
+          ]
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_0dd6022059f09258016adca2ab74908191a264ca7498ee9023",
+          "text": "我按“好奇心”技能直接回答这个单一事实问题，并核对一个可靠来源。",
+          "phase": "commentary",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        },
+        {
+          "type": "webSearch",
+          "id": "exec-d3d5e30e-beff-4dc9-a319-5d3b39fa9801",
+          "query": "blue whale length adult typical National Oceanic Atmospheric Administration",
+          "action": {
+            "type": "search",
+            "query": "blue whale length adult typical National Oceanic Atmospheric Administration",
+            "queries": null
+          },
+          "results": [
+            {
+              "type": "text_result",
+              "domain": "nammco.no",
+              "ref_id": "turn0search0",
+              "snippet": "It is listed as ‘Vulnerable’ on the Norwegian, Greenlandic and Icelandic national red lists. ... At least three subspecies: B. musculus intermedia (found in Antarctic",
+              "title": "Blue whale - NAMMCO",
+              "url": "https://nammco.no/blue-whale/"
+            },
+            {
+              "type": "text_result",
+              "domain": "us.whales.org",
+              "ref_id": "turn0search1",
+              "snippet": "Famous for their sheer mass, blue whales glide effortlessly through the ocean, dwarfing all else in their path. ... The calf of a blue whale",
+              "title": "Blue whale - Whale & Dolphin Conservation USA",
+              "url": "https://us.whales.org/whales-dolphins/species-guide/blue-whale/"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.fisheries.noaa.gov",
+              "ref_id": "turn0search2",
+              "snippet": "Overview Conservation & Management Science Resources ... Length ... Image: Blue whale swimming in the ocean. ... Today, blue whales are listed as endangered under",
+              "title": "Blue Whale | NOAA Fisheries",
+              "url": "https://www.fisheries.noaa.gov/species/blue-whale"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.whalingmuseum.org",
+              "ref_id": "turn0search3",
+              "snippet": "Length as an adult: Southern Hemisphere reaches lengths of 90 – 100 feet (27 – 30 meters). ... Weight as an adult: A male adult",
+              "title": "Blue Whale - New Bedford Whaling Museum",
+              "url": "https://www.whalingmuseum.org/research/research-resources/whale-science/biology/about-whales/species-of-local-interest/blue-whale/"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.montereybayaquarium.org",
+              "ref_id": "turn0search4",
+              "snippet": "This massive and majestic marine mammal has a heart as large as a small car, and a tongue weighing two to four tons. ... The",
+              "title": "Blue whale | Monterey Bay Aquarium",
+              "url": "https://www.montereybayaquarium.org/animals-the-ocean/animals-a-to-z/blue-whale"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.doc.govt.nz",
+              "ref_id": "turn0search5",
+              "snippet": "There are two sub-species of blue whales in the Southern Hemisphere, the Antarctic (or true) blue whale and the pygmy blue whale. ... A female",
+              "title": "Blue whales: Marine mammals",
+              "url": "https://www.doc.govt.nz/nature/native-animals/marine-mammals/whales/blue-whales/"
+            },
+            {
+              "type": "text_result",
+              "domain": "repository.library.noaa.gov",
+              "ref_id": "turn0search12",
+              "snippet": "BLUE WHALE ... Atlantic length 28 m (92 ft). ... Black-and-white map of the eastern North America / western North Atlantic region with shaded distribution",
+              "title": "BLUE WHALE\n\n*Balaenoptera musculus*  \nFamily: Bala",
+              "url": "https://repository.library.noaa.gov/view/noaa/35695/noaa_35695_DS1.pdf"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.marinemammalcenter.org",
+              "ref_id": "turn0search6",
+              "snippet": "As the largest animal on Earth, blue whales are about the length of three school buses, their heart alone is the size of a small",
+              "title": "Blue Whale | The Marine Mammal Center",
+              "url": "https://www.marinemammalcenter.org/animal-care/learn-about-marine-mammals/cetaceans/blue-whale"
+            },
+            {
+              "type": "text_result",
+              "domain": "npolar.no",
+              "ref_id": "turn0search7",
+              "snippet": "The blue whale is the largest animal ever to have lived on earth. ... Calves measure six to seven metres in length when they are",
+              "title": "Blue whale – Norsk Polarinstitutt",
+              "url": "https://npolar.no/en/species/blue-whale/"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.animaldiversity.org",
+              "ref_id": "turn0search8",
+              "snippet": "Species | Balaenoptera musculus blue whale ... Blue whales live in the open ocean. ... Average head-body length in adult males is 25 m; in",
+              "title": "Balaenoptera musculus (blue whale) | INFORMATION | Animal Diversity Web",
+              "url": "https://www.animaldiversity.org/accounts/Balaenoptera_musculus/"
+            },
+            {
+              "type": "text_result",
+              "domain": "mammal.org.uk",
+              "ref_id": "turn0search9",
+              "snippet": "Home / British mammals / Blue whale ... Flippers are long (up to 15% of total body length), slim, underside and tips white or pale",
+              "title": "Blue Whale — Mammal Society",
+              "url": "https://mammal.org.uk/british-mammals/blue-whale"
+            },
+            {
+              "type": "text_result",
+              "domain": "uk.whales.org",
+              "ref_id": "turn0search10",
+              "snippet": "The gentle giant of the sea, the blue whale is instantly recognisable with a long, streamlined shape, mottled blue or grey back and pale underbelly.",
+              "title": "Blue whale | Whale and Dolphin Conservation",
+              "url": "https://uk.whales.org/whales-dolphins/species-guide/blue-whale/"
+            },
+            {
+              "type": "text_result",
+              "domain": "animaldiversity.org",
+              "ref_id": "turn0search11",
+              "snippet": "Species | Balaenoptera musculus blue whale ... Blue whales live in the open ocean. ... Average head-body length in adult males is 25 m; in",
+              "title": "Balaenoptera musculus (blue whale) | INFORMATION | Animal Diversity Web",
+              "url": "https://animaldiversity.org/accounts/Balaenoptera_musculus/"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.nepa.navy.mil",
+              "ref_id": "turn0search13",
+              "snippet": "It is the largest animal ever known to have lived on Earth: adults in the Antarctic have reached a maximum body length of about 33",
+              "title": "4.2.1 **Blue Whale**",
+              "url": "https://www.nepa.navy.mil/Portals/20/Documents/surtass-lfa/2018/02/SURTASS-LFA_BO_2015-2016.pdf"
+            },
+            {
+              "type": "text_result",
+              "domain": "media.fisheries.noaa.gov",
+              "ref_id": "turn0search14",
+              "snippet": "surfacing or diving, and the length of dive times ... Size and condition of the whaleYou can report whales ... arrive.Gray whale (Eschrichtius robustus) 39-46",
+              "title": "NATIONAL OCEANIC AND ATMOSPHERIC ADMINISTRATION",
+              "url": "https://media.fisheries.noaa.gov/dam-migration/wcr-nmfs_2019_entanglement_report_final-508_5-11-2020_rev.pdf"
+            },
+            {
+              "type": "text_result",
+              "domain": "repository.library.noaa.gov",
+              "ref_id": "turn0search15",
+              "snippet": "This dearth in our understanding of how animals find food in patchy oceanic habitat is particularly evident at the largest scale, where blue whales (*Balaenoptera",
+              "title": "Oceanic giants dance to atmospheric rhythms: Ephemeral wind‐driven resource tracking by blue whales",
+              "url": "https://repository.library.noaa.gov/view/noaa/50669/noaa_50669_DS1.pdf"
+            },
+            {
+              "type": "text_result",
+              "domain": "arbordalepublishing.com",
+              "ref_id": "turn0search16",
+              "snippet": "This information was obtained from the National Oceanic and Atmospheric Administration (NOAA) Fisheries Species Directory. ... Which adult whale has a length closest to your",
+              "title": "Whale Sizes",
+              "url": "https://arbordalepublishing.com/ForCreativeMinds/ToothBaleen_FCM.pdf"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.boem.gov",
+              "ref_id": "turn0search17",
+              "snippet": "Length of Adult Humpback Whales ... 2006 | | | Location of | | “Typical” whale by | | Length (m) 12.83 | 12.83 |",
+              "title": "Title",
+              "url": "https://www.boem.gov/environment/boem-2018-065"
+            },
+            {
+              "type": "text_result",
+              "domain": "time.com",
+              "ref_id": "turn0news22",
+              "snippet": "Federal officials on Tuesday said they plan to make another attempt at rescuing a blue whale that has been entangled in a net in the",
+              "title": "Second Rescue Mission Underway for Entangled Blue Whale",
+              "url": "https://time.com/4386774/blue-whale-entangled-rescue/"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.livescience.com",
+              "ref_id": "turn0news25",
+              "snippet": "There's evidence of males using their songs to attract females and communicate with other males, said study lead author John Ryan, a biological oceanographer at",
+              "thumbnail_url": "https://cdn.mos.cms.futurecdn.net/hiYnpoSjvwcfSQ5P6XaEhA-1280-80.jpg",
+              "title": "No, blue whales aren't going silent off California. Here's why.",
+              "url": "https://www.livescience.com/animals/whales/no-blue-whales-arent-going-silent-off-california-heres-why"
+            }
+          ]
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_0dd6022059f09258016adca2afa80c8191a684b9eaae272e80",
+          "text": "成年蓝鲸通常长 **24–28 米**；南极蓝鲸有记录达到约 **32.6 米**。[北大西洋海洋哺乳动物委员会（NAMMCO）](https://nammco.no/blue-whale/)",
+          "phase": "final_answer",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        }
+      ],
+      "elapsed_seconds": 10.31,
+      "first_message_seconds": 5.76,
+      "status": "completed"
+    },
+    {
+      "input": [
+        {
+          "type": "text",
+          "text": "真的吗？"
+        }
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "id": "01a16aa3-51de-7280-95e9-ca12a9374613",
+          "clientId": null,
+          "content": [
+            {
+              "type": "text",
+              "text": "真的吗？",
+              "text_elements": []
+            }
+          ]
+        },
+        {
+          "type": "webSearch",
+          "id": "exec-92dd7108-0beb-4e08-a569-c41dcc13fa36",
+          "query": "site:fisheries.noaa.gov blue whale 30 meters length 100 feet ...",
+          "action": {
+            "type": "search",
+            "query": null,
+            "queries": [
+              "site:fisheries.noaa.gov blue whale 30 meters length 100 feet",
+              "blue whale maximum length measured 33 meters scientific source"
+            ]
+          },
+          "results": [
+            {
+              "type": "text_result",
+              "domain": "www.canada.ca",
+              "ref_id": "turn1search0",
+              "snippet": "The blue whale, Balaenoptera musculus (Linnaeus 1758) is the largest animal known to have lived on Earth with a maximum reported length of 33.6m (110ft)",
+              "title": "COSEWIC assessment and update status report on the Blue Whale in Canada 2002 - Canada.ca",
+              "url": "https://www.canada.ca/en/environment-climate-change/services/species-risk-public-registry/cosewic-assessments-status-reports/blue-whale-2002.html"
+            },
+            {
+              "type": "text_result",
+              "domain": "wildlife-species.canada.ca",
+              "ref_id": "turn1search12",
+              "snippet": "Three subspecies have been designated (Rice 1977, 1998): what has been considered the largest *B.m. intermedia* is found in Antarctic waters; *B.m. musculus* in the",
+              "title": "Blue Whale (Balaenoptera musculus)",
+              "url": "https://wildlife-species.canada.ca/species-risk-registry/virtual_sara/files/cosewic/sr_blue_whale_e.pdf"
+            },
+            {
+              "type": "text_result",
+              "domain": "pmc.ncbi.nlm.nih.gov",
+              "ref_id": "turn1search1",
+              "snippet": "### Largest Mysticete, Largest Cetacean, Largest Mammal, Largest Metazoan: Blue Whale, Balaenoptera musculus (Linnaeus, 1758) ... Guinness Records places the largest individual as a female",
+              "title": "Sizing ocean giants: patterns of intraspecific size variation in marine megafauna - PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4304853/"
+            },
+            {
+              "type": "text_result",
+              "domain": "pmc.ncbi.nlm.nih.gov",
+              "ref_id": "turn1search2",
+              "snippet": "Accordingly, the longest reliably measured blue whale was a female 33.26 m long (109.12 feet long; see Risting, 1928). ... For the purposes of this",
+              "title": "Downsizing a heavyweight: factors and methods that revise weight estimates of the giant fossil whale Perucetus colossus - PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10909350/"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.fisheries.noaa.gov",
+              "ref_id": "turn1search3",
+              "snippet": "The blue whale may be the largest animal ever to inhabit the earth.Blue whales can grow up to 31 meters (100 feet)—roughly the length of",
+              "title": "Fun Facts About Wonderful Whales | NOAA Fisheries",
+              "url": "https://www.fisheries.noaa.gov/national/outreach-and-education/fun-facts-about-wonderful-whales"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.montereybayaquarium.org",
+              "ref_id": "turn1search4",
+              "snippet": "Average maximum length is 88 feet (27 m); the largest measured 110 feet (33 m), 200 tons (181 kg) ... With an average length of",
+              "title": "Blue whale | Monterey Bay Aquarium",
+              "url": "https://www.montereybayaquarium.org/animals-the-ocean/animals-a-to-z/blue-whale"
+            },
+            {
+              "type": "text_result",
+              "domain": "mmru.ubc.ca",
+              "ref_id": "turn1search13",
+              "snippet": "Blue whale: Growth curves were obtained from Lockyer (1981a).The longest reported female measured was 33.58 m ... The maximum length of a male was assumed",
+              "title": "894                                                                 Can. J. Zool. Vol. 76, 1998",
+              "url": "https://mmru.ubc.ca/wp-content/pdfs/TritesPauly1998-bodymass.pdf"
+            },
+            {
+              "type": "text_result",
+              "domain": "doi.org",
+              "ref_id": "turn1search5",
+              "snippet": "For all these reasons, the reported measurement of 33 m is not credible for the maximum size of the blue whale. ... For example, one",
+              "title": "Trimming down Perucetus",
+              "url": "https://doi.org/10.26879%2F1435"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.guinnessworldrecords.com",
+              "ref_id": "turn1search6",
+              "snippet": "Heaviest: A female blue whale weighing 190 tonnes (418,878 lb) and measuring 27.6 m (90 ft 6 in) in length was caught in the Southern",
+              "title": "Largest whale | Guinness World Records",
+              "url": "https://www.guinnessworldrecords.com/world-records/69467-largest-whale"
+            },
+            {
+              "type": "text_result",
+              "domain": "ask.ifas.ufl.edu",
+              "ref_id": "turn1search14",
+              "snippet": "Scientific Name: *Balaenoptera musculus* ... Maximum Length: A blue whale 108 feet (33 meters) long was reported in waters near Antarctica.",
+              "title": "Blue Whale\n\nCommon Name: Blue whale  \nScientific N",
+              "url": "https://ask.ifas.ufl.edu/publication/VM228.pdf"
+            },
+            {
+              "type": "text_result",
+              "domain": "wwhandbook.iwc.int",
+              "ref_id": "turn1search7",
+              "snippet": "The largest animals ever to have lived on the planet (surpassing even dinosaurs), blue whales inspire awe and wonder with all the records they break:",
+              "title": "Blue Whale | Whale Watching Handbook",
+              "url": "https://wwhandbook.iwc.int/en/species/blue-whale"
+            },
+            {
+              "type": "text_result",
+              "domain": "us.whales.org",
+              "ref_id": "turn1search8",
+              "snippet": "Maximum length | 30.5m | 7m ... Commanding awe, they grow up to 33 meters long (around 108ft) – twice as along as a T-Rex",
+              "title": "Blue whale - Whale & Dolphin Conservation USA",
+              "url": "https://us.whales.org/whales-dolphins/species-guide/blue-whale/"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.guinnessworldrecords.com",
+              "ref_id": "turn1search9",
+              "snippet": "Based on the Norwegian fot (or \"fod\") being equivalent to 313.74 mm (as of 1824), this gives a length of 33.57 m (110 ft 1.6",
+              "title": "Largest animal | Guinness World Records",
+              "url": "https://www.guinnessworldrecords.com/world-records/115537-largest-animal"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.saj.usace.army.mil",
+              "ref_id": "turn1search15",
+              "snippet": "Maximum body length in the North Atlantic was about 88.5 feet (27 m) and the largest blue whale reported from the North Pacific was about",
+              "title": "3.10 Blue Whale (*Balaenoptera musculus*)",
+              "url": "https://www.saj.usace.army.mil/Portals/44/docs/FUDS/Quality%20Assurance%20Project%20Plan_Cayo%20del%20Agua_Nov%202016.pdf"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.mass.gov",
+              "ref_id": "turn1search10",
+              "snippet": "The blue whale has a long, mottled, blue-gray body, which appears a light blue color under water (NOAA 2025). ... Blue whales are reported to",
+              "title": "Blue Whale | Mass.gov",
+              "url": "https://www.mass.gov/info-details/blue-whale"
+            },
+            {
+              "type": "text_result",
+              "domain": "uk.whales.org",
+              "ref_id": "turn1search11",
+              "snippet": "Maximum length | 29m | 33m | 7m ... The gentle giant of the sea, the blue whale is instantly recognisable with a long, streamlined",
+              "title": "Blue whale | Whale and Dolphin Conservation",
+              "url": "https://uk.whales.org/whales-dolphins/species-guide/blue-whale/"
+            },
+            {
+              "type": "text_result",
+              "domain": "palaeo-electronica.org",
+              "ref_id": "turn1search16",
+              "snippet": "are modest at worst.of 33 m is not credible for the maximum size of the ... whales ever recorded measured 29.5 m in length ...",
+              "title": "Palaeontologia Electronica",
+              "url": "https://palaeo-electronica.org/content/pdfs/1435.pdf"
+            },
+            {
+              "type": "text_result",
+              "domain": "fisherybulletin.nmfs.noaa.gov",
+              "ref_id": "turn1search17",
+              "snippet": "blue whale vocalizations being recorded ... smaller (maximum length = 27 m), and ... The IWC Scientific Committee ... 09, 33 p., submitted to Rep.",
+              "title": "The Blue Whale,",
+              "url": "https://fisherybulletin.nmfs.noaa.gov/sites/default/files/pdf-content/mfr6114_0.pdf"
+            },
+            {
+              "type": "text_result",
+              "domain": "en.wikipedia.org",
+              "ref_id": "turn1search18",
+              "snippet": "Scientific classification ... Length measurements of blue whales in the Gulf of California suggest a mean length of 20.49 m (67.2 ft) and a maximum",
+              "title": "Blue whale",
+              "url": "https://en.wikipedia.org/wiki/Blue_whale"
+            },
+            {
+              "type": "text_result",
+              "domain": "en.wikipedia.org",
+              "ref_id": "turn1search19",
+              "snippet": "The maximum recorded weight was 190 tonnes for a specimen measuring 27.6 metres (91 ft), whereas longer ones, up to 33.6 metres (110 ft), have",
+              "title": "Largest and heaviest animals",
+              "url": "https://en.wikipedia.org/wiki/Largest_and_heaviest_animals"
+            },
+            {
+              "type": "text_result",
+              "domain": "en.wikipedia.org",
+              "ref_id": "turn1search20",
+              "snippet": "* The largest whale (and largest mammal, as well as the largest animal known ever to have existed) is the blue whale, a baleen whale",
+              "title": "List of largest mammals",
+              "url": "https://en.wikipedia.org/wiki/List_of_largest_mammals"
+            },
+            {
+              "type": "text_result",
+              "domain": "en.wikipedia.org",
+              "ref_id": "turn1search21",
+              "snippet": "Clockwise from top left: an African bush elephant, the largest extant terrestrial animal; a blue whale, the largest animal ever to exist; and a colossal",
+              "title": "Largest organisms",
+              "url": "https://en.wikipedia.org/wiki/Largest_organisms"
+            },
+            {
+              "type": "text_result",
+              "domain": "en.wikipedia.org",
+              "ref_id": "turn1search22",
+              "snippet": "Maximum reported figures are 25 m (82 ft) for males and 27.3 m (90 ft) for females, while the longest measured by Mackintosh and Wheeler",
+              "title": "Southern fin whale",
+              "url": "https://en.wikipedia.org/wiki/Southern_fin_whale"
+            },
+            {
+              "type": "text_result",
+              "domain": "en.wikipedia.org",
+              "ref_id": "turn1search23",
+              "snippet": "It is an intermediate-sized rorqual that is usually about the same size as the Eden's whale, although few adults have been reliably measured to date.",
+              "title": "Rice's whale",
+              "url": "https://en.wikipedia.org/wiki/Rice%27s_whale"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.reddit.com",
+              "ref_id": "turn1reddit24",
+              "snippet": "lindsay nikole doing her best to rectify this common misunderstanding of scientific claims' confidence levels ... That challenges all of our perception when the blue",
+              "title": "How do we know that the blue whale is the largest animal of all time?",
+              "url": "https://www.reddit.com/r/Paleontology/comments/1bh7utv/how_do_we_know_that_the_blue_whale_is_the_largest/"
+            }
+          ]
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_0dd6022059f09258016adca2b6b4dc8191b4ca3c05afa4aac2",
+          "text": "**是真的，不过我刚才把最大值说得太肯定了。**成年蓝鲸常见长度约 **24–28 米**；NOAA 给出的最大长度是 **31 米**。更长的历史记录约 **33 米**，但这类记录是否测量可靠存在争议。[NOAA](https://www.fisheries.noaa.gov/national/outreach-and-education/fun-facts-about-wonderful-whales)；[加拿大政府的评估报告](https://www.canada.ca/en/environment-climate-change/services/species-risk-public-registry/cosewic-assessments-status-reports/blue-whale-2002.html)",
+          "phase": "final_answer",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        }
+      ],
+      "elapsed_seconds": 7.72,
+      "first_message_seconds": 7.7,
+      "status": "completed"
+    }
+  ],
+  "condition": "read-only; browser UI not provided; web_search disabled only for T10b, live otherwise; optional skills disabled=False"
+}

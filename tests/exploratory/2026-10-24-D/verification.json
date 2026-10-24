@@ -1,0 +1,112 @@
+{
+  "candidate": "D",
+  "random_draw_reproduced": true,
+  "frozen_hashes_unchanged": true,
+  "new_persona_messages": 16,
+  "targeted_messages": 3,
+  "sessions": [
+    {
+      "id": "P1",
+      "kind": "new_persona",
+      "user_messages": 3,
+      "all_turns_completed": true,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "evidence": "P1/transcript.md"
+    },
+    {
+      "id": "P2",
+      "kind": "new_persona",
+      "user_messages": 3,
+      "all_turns_completed": true,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "evidence": "P2/transcript.md"
+    },
+    {
+      "id": "P3",
+      "kind": "new_persona",
+      "user_messages": 3,
+      "all_turns_completed": true,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "evidence": "P3/transcript.md"
+    },
+    {
+      "id": "P4",
+      "kind": "new_persona",
+      "user_messages": 4,
+      "all_turns_completed": true,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "evidence": "P4/transcript.md"
+    },
+    {
+      "id": "P5",
+      "kind": "new_persona",
+      "user_messages": 3,
+      "all_turns_completed": true,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "evidence": "P5/transcript.md"
+    },
+    {
+      "id": "P6",
+      "kind": "targeted_regression",
+      "user_messages": 2,
+      "all_turns_completed": true,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "evidence": "P6/transcript.md"
+    },
+    {
+      "id": "P7",
+      "kind": "targeted_regression",
+      "user_messages": 1,
+      "all_turns_completed": true,
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "evidence": "P7/transcript.md"
+    }
+  ],
+  "final_page_static_resource_scan": [
+    {
+      "file": "P2/artifacts/turn-3/curiosity-history-sources.html",
+      "external_resources": [],
+      "possible_network_calls": [],
+      "ordinary_source_links": 2
+    },
+    {
+      "file": "P3/artifacts/turn-3/framing-demo.html",
+      "external_resources": [],
+      "possible_network_calls": [],
+      "ordinary_source_links": 3
+    },
+    {
+      "file": "P4/artifacts/turn-4/curiosity-room-bass.html",
+      "external_resources": [],
+      "possible_network_calls": [],
+      "ordinary_source_links": 2
+    },
+    {
+      "file": "P5/artifacts/turn-3/curiosity-soap-bubble.html",
+      "external_resources": [],
+      "possible_network_calls": [],
+      "ordinary_source_links": 5
+    },
+    {
+      "file": "P6/artifacts/turn-2/curiosity-tree-roots.html",
+      "external_resources": [],
+      "possible_network_calls": [],
+      "ordinary_source_links": 2
+    },
+    {
+      "file": "P7/artifacts/turn-1/curiosity-衣物褪色.html",
+      "external_resources": [],
+      "possible_network_calls": [],
+      "ordinary_source_links": 3
+    }
+  ],
+  "browser_verification": "Actual Computer use actions and states are recorded in REPORT.md; scan is not disconnected-network proof or a full accessibility audit.",
+  "overall": "completed_with_unresolved_automatic_sync_finding"
+}

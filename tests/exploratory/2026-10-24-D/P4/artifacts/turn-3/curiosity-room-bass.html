@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>房间里的低音：为什么走几步就变了？</title>
+<style>
+:root{color-scheme:dark;--bg:#10151c;--panel:#19222d;--ink:#edf3f8;--muted:#aab8c6;--cyan:#63d4dd;--orange:#ffb45f;--line:#344454;--pink:#ed7eae}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 10% 0%,#1d3441 0,transparent 36%),var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1050px;margin:auto;padding:34px 20px 52px}h1{font-size:clamp(1.8rem,4vw,3rem);line-height:1.1;margin:.2em 0 .35em;letter-spacing:-.035em}h2{font-size:1.25rem;margin:0 0 .55em}p{margin:.45em 0}.lead{font-size:1.08rem;color:#dce8ef;max-width:850px}.badge{font-size:.76rem;border:1px solid #46616e;color:#b7d5dc;padding:3px 9px;border-radius:99px;display:inline-block}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}.card{background:linear-gradient(145deg,#1c2733,#161e28);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 14px 35px #0003}.wide{grid-column:1/-1}.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}.control{background:#111922;border:1px solid #2c3a47;border-radius:12px;padding:10px 12px}.control label{display:flex;justify-content:space-between;gap:12px;font-size:.92rem}.control output{color:var(--cyan);font-variant-numeric:tabular-nums;white-space:nowrap}input[type=range]{width:100%;accent-color:var(--cyan);margin:10px 0 2px}button{background:#233440;border:1px solid #49606c;color:var(--ink);padding:8px 12px;border-radius:10px;font:inherit;cursor:pointer}button[aria-pressed=true]{background:#643b51;border-color:var(--pink)}button:focus-visible,input:focus-visible{outline:3px solid var(--orange);outline-offset:3px}.toggles{display:flex;gap:9px;flex-wrap:wrap;margin:10px 0}.readout{padding:12px 14px;border-left:3px solid var(--orange);background:#20252b;border-radius:0 10px 10px 0;margin-top:12px}.readout strong{color:#fff}.math{font-variant-numeric:tabular-nums;color:#d2e5eb}.viz{width:100%;display:block;background:#0d131a;border:1px solid #344452;border-radius:12px}.caption,.small{font-size:.88rem;color:var(--muted)}.key{display:flex;gap:14px;flex-wrap:wrap;font-size:.84rem;color:var(--muted);margin-top:8px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}.takeaway{font-size:1.02rem}.formula{font-size:1.08rem;color:#c9e7ec}.sources{border-top:1px solid var(--line);margin-top:24px;padding-top:12px;color:var(--muted);font-size:.85rem}.sources a{color:#87dfe6}.pill{color:var(--orange);font-weight:650}
+@media(max-width:720px){main{padding:22px 14px 38px}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.controls{grid-template-columns:1fr}.card{padding:16px}}
+</style>
+</head>
+<body><main>
+<span class="badge">从叠加走到房间声场</span>
+<h1>为什么低音走几步就变了？</h1>
+<p class="lead">音箱没动，变的是你所在位置的<strong>声压</strong>。每个位置收到的波，都带着不同的传播距离、相位和墙面反射；这些压力起伏在空气里相加，所以有些点更响，有些点更轻。</p>
+<div class="grid">
+<section class="card wide" aria-labelledby="twoTitle">
+<h2 id="twoTitle">① 两只音箱：路程差改变相位</h2>
+<p>先只算两只音箱的<strong>直达声</strong>，暂时不算墙面反射。点地图任意位置当作耳朵位置；亮处是两路声压相加较大，暗处较小。</p>
+<div class="controls">
+<div class="control"><label for="freq">低音频率 <output id="freqOut"></output></label><input id="freq" type="range" min="35" max="180" value="70" step="1"></div>
+<div class="control"><label for="sep">音箱间距 <output id="sepOut"></output></label><input id="sep" type="range" min="0.5" max="4" value="2" step="0.1"></div>
+<div class="control"><label for="phase">音箱 2 的电相位 <output id="phaseOut"></output></label><input id="phase" type="range" min="-180" max="180" value="0" step="5"></div>
+<div class="control"><div>音箱状态</div><div class="toggles"><button id="spk1" aria-pressed="true">音箱 1：开</button><button id="spk2" aria-pressed="true">音箱 2：开</button></div></div>
+</div>
+<canvas id="field" class="viz" width="820" height="380" role="img" aria-label="两音箱直达声的相干叠加示意图"></canvas>
+<div class="key"><span><i class="dot" style="background:#44c5d0"></i>声压合成较小</span><span><i class="dot" style="background:#efaa4f"></i>声压合成较大</span><span>图中房间范围约 8 × 4 米；音箱位置固定在下方两点</span></div>
+<div class="readout" id="directExplain"></div>
+</section>
+<section class="card">
+<h2>② 一个人走动，怎么会遇到“谷”？</h2>
+<p>看相消要看<strong>到达耳朵时的总相位差</strong>：音箱发声时的相位差，加上传播路程带来的相位变化。</p>
+<p class="formula">Δφ到达 = Δφ音箱 − 360° × Δr/λ</p>
+<p class="formula">波长 λ = 声速 c ÷ 频率 f</p>
+<p class="math" id="wavelength"></p>
+<div class="readout" id="phaseRelation"></div>
+<p class="small">Δr 定义为“音箱 2 到耳朵的距离 − 音箱 1 到耳朵的距离”，所以它可以为正或负。相消最强还要求两路到达该处的振幅相等；振幅不等时只会部分抵消。一般房间里还会叠加墙面反射。</p>
+<div class="readout"><strong>为什么关掉一只会变？</strong><br>两路之间的相加/相消不再发生，剩下单只音箱的空间分布。原先的“谷”可能填起来，也可能因为房间反射仍留着；这不是一个固定答案，要看位置、频率和墙面。</div>
+</section>
+<section class="card">
+<h2>③ 房间自己也会“挑位置”</h2>
+<p>低音撞到墙会反射。入射声和反射声叠加，在某些频率上形成稳定的高压、低压区域，称为<strong>房间模态</strong>；这是房间尺寸与频率共同决定的。</p>
+<div class="control"><label for="room">沿这个方向的房间长度 <output id="roomOut"></output></label><input id="room" type="range" min="3" max="8" value="5" step="0.1"></div>
+<div class="control"><label for="modeFreq">播放频率 <output id="modeFreqOut"></output></label><input id="modeFreq" type="range" min="30" max="180" value="68.6" step="0.1"></div>
+<canvas id="mode" class="viz" width="720" height="210" role="img" aria-label="理想刚性墙面之间声压驻波示意"></canvas>
+<p class="small" id="modeExplain"></p>
+</section>
+<section class="card wide">
+<h2>把观察连成一句话</h2>
+<p class="takeaway"><span class="pill">音箱位置固定</span>，但你移动时，耳朵处两路声与反射声的<strong>相位关系</strong>在变。相位接近时声压加强，接近反相时减弱；两只音箱既会彼此干涉，也会一起激发房间的共振分布。关掉一只改变了声场的驱动组合，因此“响点”和“轻点”会重排。</p>
+<p class="small">模型边界：上图是二维自由场点声源的简化示意，没有加入墙、家具、音箱指向性、扬声器间的时间延迟或真实房间混响；下图是一个方向、两端理想刚性墙的驻波示意，不等于你房间的实测图。真实结果还受音箱位置与相位、房间长宽高、墙体/门窗、分频与听音位置影响。</p>
+</section>
+</div>
+<div class="sources">依据：波的叠加与路程差导致的相长/相消，见 <a href="https://openstax.org/books/university-physics-volume-1/pages/17-4-normal-modes-of-a-standing-sound-wave">OpenStax：Normal Modes of a Standing Sound Wave</a>；房间共振会出现声压节点与腹点，见 <a href="https://english.ioa.cas.cn/psk/200907/t20090708_22104.html">中国科学院声学研究所：Driving room modes & source location</a>。数值图为本页简化模型，不是现场测量。</div>
+</main>
+<script>
+const $=s=>document.querySelector(s), c=343;
+const freq=$('#freq'),sep=$('#sep'),phase=$('#phase'),room=$('#room'),modeFreq=$('#modeFreq');
+function fmt(n,d=1){return Number(n).toFixed(d)}
+function hsv(h,s,v){let f=(n,k=(n+h/60)%6)=>v-v*s*Math.max(Math.min(k,4-k,1),0);return [f(5),f(3),f(1)].map(x=>Math.round(x*255))}
+function drawField(){let cv=$('#field'),ctx=cv.getContext('2d'),w=cv.width,h=cv.height,f=+freq.value,sp=+sep.value,ph=+phase.value*Math.PI/180,lam=c/f;
+let img=ctx.createImageData(w,h);for(let y=0;y<h;y++)for(let x=0;x<w;x++){let X=(x/w-.5)*8,Y=(y/h)*4;let x1=-sp/2,x2=sp/2,sy=1.75;let r1=Math.hypot(X-x1,Y-sy),r2=Math.hypot(X-x2,Y-sy);let re=0,im=0;if($('#spk1').getAttribute('aria-pressed')==='true'){let t=2*Math.PI*r1/lam;re+=Math.cos(t)/(0.42+r1);im+=Math.sin(t)/(0.42+r1)}if($('#spk2').getAttribute('aria-pressed')==='true'){let t=2*Math.PI*r2/lam+ph;re+=Math.cos(t)/(0.42+r2);im+=Math.sin(t)/(0.42+r2)}let norm=Math.min(1,Math.hypot(re,im)*1.2);let col=hsv(190-150*norm,.76,.15+.83*norm),i=(y*w+x)*4;img.data[i]=col[0];img.data[i+1]=col[1];img.data[i+2]=col[2];img.data[i+3]=255}ctx.putImageData(img,0,0);
+ctx.strokeStyle='#ffffff45';ctx.lineWidth=1;ctx.strokeRect(.5,.5,w-1,h-1);let px=(x)=>((x/8)+.5)*w,py=(y)=>(y/4)*h;for(const [x,n,color] of [[-sp/2,'1','#63d4dd'],[sp/2,'2','#ffb45f']]){ctx.beginPath();ctx.arc(px(x),py(1.75),10,0,2*Math.PI);ctx.fillStyle=color;ctx.fill();ctx.strokeStyle='#fff';ctx.stroke();ctx.fillStyle='#10151c';ctx.font='bold 12px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(n,px(x),py(1.75))}
+let phaseDeg=Math.round(ph*180/Math.PI);$('#freqOut').textContent=`${f} Hz`;$('#sepOut').textContent=`${fmt(sp)} m`;$('#phaseOut').textContent=`${phaseDeg}°`;$('#wavelength').textContent=`按 c ≈ 343 m/s，${f} Hz 的 λ ≈ ${fmt(lam,2)} m。`;
+let phaseExample=Math.abs(phaseDeg)===180?'等路程（Δr=0）时，到达相位差为 180°，两路抵消；路程差为半个波长时，传播再带来 180°变化，到达时反而同相。':phaseDeg===0?'等路程（Δr=0）时，到达相位差为 0°，两路加强；路程差为半个波长时，到达相位差变成 180°，两路抵消。':`等路程（Δr=0）时，到达相位差是 ${phaseDeg}°；路程差为半个波长时，到达相位差是 ${phaseDeg>0?phaseDeg-180:phaseDeg+180}°。这两个位置通常都不是完全相消。`;
+$('#phaseRelation').innerHTML=`<strong>当前相位设置：音箱 2 为 ${phaseDeg}°。</strong><br>相消条件：到达相位差为 180°（或其奇数倍）。${phaseExample}<br>判断是否相消，要把音箱相位差和路程差一起代入上面的公式。`;
+let state1=$('#spk1').getAttribute('aria-pressed')==='true',state2=$('#spk2').getAttribute('aria-pressed')==='true';$('#directExplain').innerHTML=`<strong>当前设置：</strong>${state1&&state2?'两只都开，地图上是直达声的相干叠加。':state1||state2?'只开一只，音箱间干涉已消失；图中仍会随位置变色，因为点声源声压随距离变化。':'两只都关，地图只剩计算底色。'}${state1&&state2?' 音箱 2 额外相位为 '+Math.round(ph*180/Math.PI)+'°。':''}`;
+}
+function drawMode(){let cv=$('#mode'),ctx=cv.getContext('2d'),w=cv.width,h=cv.height,L=+room.value,f=+modeFreq.value,lam=c/f;ctx.clearRect(0,0,w,h);ctx.fillStyle='#0d131a';ctx.fillRect(0,0,w,h);let cy=90,amp=54;ctx.strokeStyle='#526979';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(22,22);ctx.lineTo(22,178);ctx.moveTo(w-22,22);ctx.lineTo(w-22,178);ctx.stroke();ctx.fillStyle='#aab8c6';ctx.font='13px system-ui';ctx.textAlign='center';ctx.fillText('墙',22,17);ctx.fillText('墙',w-22,17);let x0=38,x1=w-38;ctx.strokeStyle='#394c5a';ctx.beginPath();ctx.moveTo(x0,cy);ctx.lineTo(x1,cy);ctx.stroke();let k=2*Math.PI/lam;ctx.beginPath();for(let i=0;i<=500;i++){let x=x0+(x1-x0)*i/500,met=L*i/500,val=Math.cos(k*met);let y=cy-amp*val;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)}ctx.strokeStyle='#ffb45f';ctx.lineWidth=3;ctx.stroke();ctx.fillStyle='#b9c9d2';ctx.textAlign='left';ctx.fillText('声压起伏（示意）',x0,cy+76);ctx.fillText('0 m',x0,cy+98);ctx.textAlign='right';ctx.fillText(`${fmt(L)} m`,x1,cy+98);let n=Math.round((2*L*f/c));let f1=c/(2*L);$('#roomOut').textContent=`${fmt(L)} m`;$('#modeFreqOut').textContent=`${fmt(f)} Hz`;
+let nearest=Math.round(f/f1),res=c*nearest/(2*L),delta=Math.abs(f-res);$('#modeExplain').textContent=`这个方向的第一阶理想共振约 ${fmt(f1,1)} Hz（半波长塞进房间长度）；其整数倍也可能对应更高阶模态。当前图画的是频率 ${fmt(f)} Hz 的压力起伏：墙边为压力腹点的理想模型。${delta<1.2?` 当前接近第 ${nearest} 阶（约 ${fmt(res,1)} Hz），空间起伏较明显。`:'当前频率不正好落在这个方向的整数阶共振上。'}真实房间的门窗、吸声和形状会改变峰谷的强弱与位置。`;
+}
+[freq,sep,phase].forEach(e=>e.addEventListener('input',drawField));[room,modeFreq].forEach(e=>e.addEventListener('input',drawMode));['spk1','spk2'].forEach(id=>$('#'+id).addEventListener('click',e=>{let on=e.currentTarget.getAttribute('aria-pressed')==='true';e.currentTarget.setAttribute('aria-pressed',String(!on));e.currentTarget.textContent=`音箱 ${id.slice(-1)}：${on?'关':'开'}`;drawField()}));drawField();drawMode();
+</script></body></html>

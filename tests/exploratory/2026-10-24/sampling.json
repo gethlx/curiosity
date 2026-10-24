@@ -1,0 +1,67 @@
+{
+  "seed": 12977376108882928853,
+  "method": "random.Random(seed).sample(observation_pool,5), no rejection or redraw",
+  "observation_pool": [
+    "车停在旁边时轮子明明在转，手机视频里却像在倒着转",
+    "一首歌明明忘了歌词，听到前奏又会接着唱",
+    "冰箱拿出来的杯子外面有水，没看到杯子漏水",
+    "天阴时有的云很白，有的云一大块黑乎乎",
+    "同一张照片放大后会变糊，另一张却还能看清",
+    "摸起来一样凉的木桌和金属勺，刚碰上去感觉不一样",
+    "两个人听完同一个故事，记住的重点完全不同",
+    "切苹果放一会变色，泡在水里的那块变化不一样",
+    "小区树根把地砖顶起来了，树根看着也不是很硬",
+    "几个朋友越商量越敢冒险，一个人时却不想这么做",
+    "地图上看着差不多大的地方，换张地图大小又不同",
+    "房间里说话有回音，挂上窗帘和铺上毯子以后就变了",
+    "洗好的衣服摊开更快干，叠成一团就很慢",
+    "明明没买过一件东西，广告看多了以后觉得它很熟悉",
+    "久不见的朋友声音还是熟悉，照片却觉得变化很大",
+    "太阳晒过的衣服颜色会慢慢变淡，放柜子里的好像不会"
+  ],
+  "profiles": [
+    {
+      "id": "S1",
+      "persona": "10岁小学生",
+      "language": "短句、生活词汇，提问容易跳跃",
+      "knowledge": "能描述观察，不主动使用专业概念",
+      "patience": "看到回答中的陌生词才追问，不假装理解",
+      "random_observation": "小区树根把地砖顶起来了，树根看着也不是很硬"
+    },
+    {
+      "id": "S2",
+      "persona": "14岁初中生",
+      "language": "能描述对照与自己的猜测",
+      "knowledge": "有学校常识，跨领域术语不熟",
+      "patience": "关心为什么与自己观察不一致",
+      "random_observation": "地图上看着差不多大的地方，换张地图大小又不同"
+    },
+    {
+      "id": "S3",
+      "persona": "成人跨领域初学者",
+      "language": "表达流利、平视口吻",
+      "knowledge": "没有该题领域基础，不知道该搜什么词",
+      "patience": "愿意探索，但不愿意先填水平问卷",
+      "random_observation": "太阳晒过的衣服颜色会慢慢变淡，放柜子里的好像不会"
+    },
+    {
+      "id": "S4",
+      "persona": "有工程背景的成年人",
+      "language": "直接，希望有效率",
+      "knowledge": "工程常识较强，随机题的领域未必熟悉",
+      "patience": "先从观察问起，只有确实重复已知才提出跳过",
+      "random_observation": "天阴时有的云很白，有的云一大块黑乎乎"
+    },
+    {
+      "id": "S5",
+      "persona": "家长陪伴7岁孩子",
+      "language": "转述孩子原话，寻找能一起理解的解释",
+      "knowledge": "日常经验，不替孩子专业纠错",
+      "patience": "孩子可能凭图形或现象继续联想",
+      "random_observation": "摸起来一样凉的木桌和金属勺，刚碰上去感觉不一样"
+    }
+  ],
+  "skill_sha256": "d26bcbf818841ddcfd5d7534d73569bc5ce213dc54b4ff000696ad7c3fc2f624",
+  "followups": "not prewritten; produced after reading the actual reply in UI",
+  "model_receives": "only Skill and actual user messages; no persona labels, pool, rubric, or expected concepts"
+}

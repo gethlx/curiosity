@@ -1,0 +1,33 @@
+{
+  "candidate": "C",
+  "date": "2026-10-24",
+  "files": {
+    "curiosity/SKILL.md": "d26bcbf818841ddcfd5d7534d73569bc5ce213dc54b4ff000696ad7c3fc2f624",
+    "curiosity/references/page-spec.md": "cfcf9ba1c94815c42054c230ad0b28989b8a671cacad53558bbd5238ef440da6",
+    "samples/curiosity-buoyancy.html": "cd7ff161960f4a7498576124ff13e133f7c27a0f57475690b1fb3c985cc35c2e",
+    "samples/curiosity-shadow.html": "3577236c35c3b5b83e494f970e03bb438c6091abc83c93fcd61514400e571648"
+  },
+  "note": "C removed duplicated generic safety instructions and the extra human approval gate; project routing unchanged and A/B evidence retained. The later exploratory run tested C with five simulated profiles and 17 actual UI-entered user messages; see ../../exploratory/2026-10-24/REPORT.md. Known findings remain; do not label M3 fully accepted.",
+  "previous_candidate": {
+    "candidate": "B",
+    "date": "2026-10-24",
+    "files": {
+      "curiosity/SKILL.md": "4681512cd256f490cfc5a3b18ff1ac3316f35af9a35798cdec1d7dda75b32f45",
+      "curiosity/references/page-spec.md": "cfcf9ba1c94815c42054c230ad0b28989b8a671cacad53558bbd5238ef440da6",
+      "samples/curiosity-buoyancy.html": "cd7ff161960f4a7498576124ff13e133f7c27a0f57475690b1fb3c985cc35c2e",
+      "samples/curiosity-shadow.html": "3577236c35c3b5b83e494f970e03bb438c6091abc83c93fcd61514400e571648"
+    },
+    "note": "B only clarifies physics quantity, equilibrium and motion. T2 and T1b rerun. Other valid A records retained after impact review; safety, routing, retrieval, delivery and adaptation rules unchanged.",
+    "previous_candidate": {
+      "candidate": "A",
+      "date": "2026-10-24",
+      "files": {
+        "curiosity/SKILL.md": "0774a91d76d92e4a8a54430ea7b915f6aaaa8fbed2e53e03f039f9fa7866ba2e",
+        "curiosity/references/page-spec.md": "cfcf9ba1c94815c42054c230ad0b28989b8a671cacad53558bbd5238ef440da6",
+        "samples/curiosity-buoyancy.html": "cd7ff161960f4a7498576124ff13e133f7c27a0f57475690b1fb3c985cc35c2e",
+        "samples/curiosity-shadow.html": "3577236c35c3b5b83e494f970e03bb438c6091abc83c93fcd61514400e571648"
+      },
+      "note": "Frozen after discovery, units and retrieval wording fixes. New holdouts self-authored with independence discount."
+    }
+  }
+}

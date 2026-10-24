@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>同一笔折扣，两种说法</title>
+<style>
+:root{--ink:#17251f;--muted:#5c6d65;--paper:#f5f2e9;--card:#fffdf7;--green:#176b4a;--lime:#d8ed9d;--orange:#e88b54;--line:#d8ddd3;--shadow:0 16px 44px #21372b12}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:900px;margin:auto;padding:48px 24px 60px}.eyebrow{color:var(--green);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.intro{max-width:680px}h1{font-size:clamp(34px,6vw,58px);line-height:1.04;letter-spacing:-.045em;margin:12px 0 18px}.intro p{font-size:18px;color:var(--muted);margin:0 0 26px}.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:clamp(20px,4vw,34px);box-shadow:var(--shadow)}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:end}.control label{display:block;font-weight:700;margin-bottom:8px}.money{display:flex;align-items:center;border:1px solid var(--line);border-radius:14px;background:white;padding:0 14px}.money span{font-size:20px;color:var(--muted)}input[type=number]{width:100%;border:0;outline:0;padding:13px 8px;font:inherit;font-size:20px;color:var(--ink);background:transparent}input[type=range]{width:100%;accent-color:var(--green)}.small{font-size:13px;color:var(--muted);margin:7px 0 0}
+.promo{margin-top:28px;background:#eaf1e6;border-radius:20px;padding:22px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}.tag{display:inline-block;font-size:12px;font-weight:800;color:var(--green);background:#dcebd3;border-radius:99px;padding:5px 10px;margin-bottom:8px}.headline{font-size:clamp(24px,4vw,36px);font-weight:850;line-height:1.12;letter-spacing:-.035em}.price{font-size:36px;font-weight:850;color:var(--green);white-space:nowrap}.toggle{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}.toggle button{border:1px solid var(--line);border-radius:99px;background:white;padding:11px 16px;font:inherit;font-weight:700;color:var(--ink);cursor:pointer}.toggle button[aria-pressed=true]{background:var(--green);border-color:var(--green);color:white}.toggle button:focus-visible,input:focus-visible{outline:3px solid #e88b54;outline-offset:3px}.explain{margin-top:20px;border-left:3px solid var(--orange);padding:4px 0 4px 16px;color:var(--muted)}.explain strong{color:var(--ink)}
+.math{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px}.math div{border:1px solid var(--line);border-radius:16px;padding:16px;background:white}.math span{display:block;color:var(--muted);font-size:13px}.math b{font-size:22px}.fine{color:var(--muted);font-size:13px;margin-top:18px}.note{font-size:14px;color:var(--muted);margin-top:25px}.source{font-size:12px;color:var(--muted);margin-top:32px;border-top:1px solid var(--line);padding-top:16px}.source a{color:var(--green)}
+@media(max-width:600px){main{padding:30px 16px 44px}.controls{grid-template-columns:1fr}.promo{grid-template-columns:1fr;gap:8px}.price{font-size:30px}.math{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<main>
+  <header class="intro">
+    <div class="eyebrow">一个日常判断的小实验</div>
+    <h1>同一笔折扣，<br>两种说法</h1>
+    <p>“省下30%”和“只付70%”在同一原价、同一条件下，算出来是一样的。换个说法，注意力却可能落在不同地方。</p>
+  </header>
+  <section class="card" aria-label="折扣说法互动演示">
+    <div class="controls">
+      <div class="control"><label for="original">商品原价</label><div class="money"><span>¥</span><input id="original" type="number" min="1" max="100000" step="10" value="100" inputmode="decimal"></div></div>
+      <div class="control"><label for="discount">折扣幅度：<span id="pct">30</span>%</label><input id="discount" type="range" min="5" max="80" value="30"><p class="small">拖动滑块，比较两种表达</p></div>
+    </div>
+    <div class="promo" aria-live="polite">
+      <div><span class="tag" id="tag">把目光放在省下的钱</span><div class="headline" id="headline">省下 30%</div></div>
+      <div class="price" id="amount">省 ¥30</div>
+    </div>
+    <div class="toggle" role="group" aria-label="选择广告说法">
+      <button type="button" id="saveBtn" aria-pressed="true">省下 30%</button>
+      <button type="button" id="payBtn" aria-pressed="false">只付 70%</button>
+    </div>
+    <div class="explain" id="explain"><strong>这句话突出获得感：</strong>眼前先看到“少花了多少”。</div>
+    <div class="math">
+      <div><span>按原价计算，省下</span><b id="saved">¥30</b></div>
+      <div><span>最后实际支付</span><b id="paid">¥70</b></div>
+    </div>
+    <p class="fine">这只是金额演示。它不测量哪句更能说服你，也不代表所有人都会偏爱同一种说法。</p>
+  </section>
+  <p class="note">所以，这通常不是“算错账”，而是<strong>框架效应</strong>：事实大体相同，表达方式改变了我们先注意到、先感受到的部分。省下多少像一笔收获；要付多少则像一笔支出。哪种更有吸引力，会受人和情境影响。</p>
+  <p class="note">判断广告时，可以把话翻译成同一张账单：原价是多少？折扣后多少钱？运费、期限和适用条件是否也相同？如果这几项不一致，那就不只是换了说法。</p>
+  <section class="card" style="margin-top:18px;box-shadow:none" aria-label="框架效应与损失厌恶的区别">
+    <div class="eyebrow">两个有关但不同的概念</div>
+    <div class="math">
+      <div><span>框架效应</span><b>说法改变注意角度</b><p class="small">范围较广：表达可以改变人先看到或比较的部分。</p></div>
+      <div><span>损失厌恶</span><b>损失比同等收益更重</b><p class="small">更具体：要先有一个参照点，才谈得上什么算“损失”。</p></div>
+    </div>
+    <p class="small" style="margin-top:16px">买 ¥70 的东西确实少了 ¥70 现金，但也得到了商品；如果本来就不打算买，“少付 ¥30”未必等于赚到 ¥30。单靠这句广告，分不清你是被“省钱”吸引、被支付金额提醒，还是在回避某种损失。</p>
+  </section>
+  <footer class="source">概念依据：Tversky 与 Kahneman 对“框架如何影响选择”的经典研究；消费信息中关于“省下”与“避免损失”表达的研究。它们支持表达可能影响判断，不证明这两句广告对每个人都有固定效果。<br><a href="https://stanford.edu/class/psych205/papers/Tversky-Kahneman-1981.pdf">Tversky & Kahneman, 1981, Science</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7367006/">Consumer responses to savings message framing</a></footer>
+</main>
+<script>
+const original=document.querySelector('#original'), discount=document.querySelector('#discount');
+const pct=document.querySelector('#pct'), headline=document.querySelector('#headline'), amount=document.querySelector('#amount'), saved=document.querySelector('#saved'), paid=document.querySelector('#paid'), tag=document.querySelector('#tag'), explain=document.querySelector('#explain');
+const saveBtn=document.querySelector('#saveBtn'), payBtn=document.querySelector('#payBtn'); let frame='save';
+function money(n){return '¥'+new Intl.NumberFormat('zh-CN',{maximumFractionDigits:2}).format(n)}
+function update(){let price=Number(original.value); if(!Number.isFinite(price)||price<0) price=0; const p=Number(discount.value), s=price*p/100, due=price-s; pct.textContent=p; saveBtn.textContent=`省下 ${p}%`; payBtn.textContent=`只付 ${100-p}%`; saved.textContent=money(s); paid.textContent=money(due); if(frame==='save'){tag.textContent='把目光放在省下的钱';headline.textContent=`省下 ${p}%`;amount.textContent=`省 ${money(s)}`;explain.innerHTML='<strong>这句话突出获得感：</strong>眼前先看到“少花了多少”。';}else{tag.textContent='把目光放在最后支付金额';headline.textContent=`只付 ${100-p}%`;amount.textContent=`付 ${money(due)}`;explain.innerHTML='<strong>这句话突出支出：</strong>眼前先看到“最后要付多少”。';} saveBtn.setAttribute('aria-pressed',frame==='save');payBtn.setAttribute('aria-pressed',frame==='pay');}
+saveBtn.addEventListener('click',()=>{frame='save';update()});payBtn.addEventListener('click',()=>{frame='pay';update()});original.addEventListener('input',update);discount.addEventListener('input',update);update();
+</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>影子有多长？｜光线角度交互图解</title>
+  <style>
+    :root{--ink:#182a32;--muted:#587078;--paper:#f7f6f0;--card:#fffefa;--line:#d9e2dc;--sun:#e5a934;--ray:#d77948;--shadow:#416b81;--accent:#146b64;--soft:#e8f2ed}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC",sans-serif}
+    main{width:min(1040px,100%);margin:auto;padding:34px 24px 48px}
+    header{max-width:760px;margin-bottom:24px}
+    .eyebrow{margin:0 0 8px;color:var(--accent);font-size:.82rem;font-weight:750;letter-spacing:.08em}
+    h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.13;letter-spacing:-.04em;margin:0 0 14px}
+    .intro{font-size:1.08rem;color:#3d565d;max-width:690px;margin:0}
+    .layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.8fr);gap:18px;align-items:stretch}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 8px 28px #29473c0b}
+    h2{font-size:1.12rem;margin:0 0 12px;letter-spacing:-.015em}
+    .diagram-card{display:flex;flex-direction:column;min-width:0}
+    .diagram-wrap{border-radius:14px;background:#f1f5f0;overflow:hidden;min-height:235px;display:grid;place-items:center}
+    svg{display:block;width:100%;height:260px}
+    .key{display:flex;flex-wrap:wrap;gap:8px 18px;margin:14px 0 0;color:var(--muted);font-size:.9rem}
+    .key span{display:flex;align-items:center;gap:7px}
+    .swatch{width:17px;height:4px;border-radius:4px;background:var(--ray)}.swatch.shadow{background:var(--shadow)}.swatch.pole{width:4px;height:17px;background:var(--accent)}
+    .diagram-note{font-size:.84rem;color:var(--muted);margin:9px 0 0}
+    .controls{display:flex;flex-direction:column;gap:20px}
+    .angle-readout{display:flex;align-items:baseline;gap:8px;margin:2px 0 7px}
+    output{font-size:2.4rem;line-height:1;font-weight:760;letter-spacing:-.05em;font-variant-numeric:tabular-nums;color:var(--accent)}
+    label{font-weight:680}
+    input[type=range]{display:block;width:100%;margin:17px 0 4px;accent-color:var(--accent);cursor:pointer;min-height:28px}
+    input[type=range]:focus-visible{outline:3px solid #87bcb5;outline-offset:5px;border-radius:8px}
+    .range-labels{display:flex;justify-content:space-between;color:var(--muted);font-size:.84rem}
+    .result{background:var(--soft);border-radius:14px;padding:16px}
+    .result-label{font-size:.88rem;color:#4d6668;margin:0 0 2px}
+    .result-value{font-size:2rem;line-height:1.2;font-weight:760;font-variant-numeric:tabular-nums;letter-spacing:-.04em;margin:0;color:var(--ink)}
+    .result-value small{font-size:1rem;font-weight:600;letter-spacing:0;color:#4d6668}
+    .explain{margin:10px 0 0;color:#345059;font-size:.94rem}
+    .math{margin-top:18px}
+    .equation{border-left:3px solid var(--sun);padding:2px 0 2px 14px;font-size:1.1rem;font-weight:680;line-height:1.5}
+    .equation small{display:block;font-size:.92rem;font-weight:450;color:var(--muted)}
+    .bottom{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+    .bottom p{margin:0;color:#3d565d}
+    .limits{border-top:1px solid var(--line);margin-top:14px;padding-top:13px;font-size:.9rem;color:var(--muted)}
+    .sources{margin-top:18px;color:var(--muted);font-size:.84rem}
+    .sources p{margin:4px 0}
+    @media(max-width:760px){main{padding:26px 16px 34px}.layout{grid-template-columns:1fr}.diagram-wrap{min-height:205px}svg{height:230px}.controls{gap:15px}.bottom{grid-template-columns:1fr}.card{padding:19px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">从一根竖直的小杆开始</p>
+    <h1>光线角度一变，影子会怎样？</h1>
+    <p class="intro">看地上的影子，可以把光线、杆和地面拼成一个直角三角形。拖动角度，观察同一根杆的影长如何变化。</p>
+  </header>
+
+  <section class="layout" aria-label="影长互动图解">
+    <article class="card diagram-card">
+      <h2>把光线和影子画出来</h2>
+      <div class="diagram-wrap">
+        <svg id="diagram" viewBox="0 0 500 260" role="img" aria-labelledby="svgTitle svgDesc">
+          <title id="svgTitle">竖直杆、平行光线与地面影子的直角三角形</title>
+          <desc id="svgDesc">杆高一米，光线与水平地面的夹角会随滑块改变，影长按同一比例绘制。</desc>
+          <defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse"><path d="M0,0 L7,3.5 L0,7" fill="none" stroke="#416b81" stroke-width="1.4"/></marker></defs>
+          <circle cx="90" cy="44" r="17" fill="#f5d989"/>
+          <path id="lightRay" d="" fill="none" stroke="#d77948" stroke-width="3" stroke-linecap="round"/>
+          <path id="triangle" d="" fill="#416b81" opacity=".12"/>
+          <line id="ground" x1="0" y1="0" x2="0" y2="0" stroke="#738a7b" stroke-width="3" stroke-linecap="round"/>
+          <line id="pole" x1="0" y1="0" x2="0" y2="0" stroke="#146b64" stroke-width="7" stroke-linecap="round"/>
+          <line id="shadowLine" x1="0" y1="0" x2="0" y2="0" stroke="#416b81" stroke-width="5" stroke-linecap="round"/>
+          <line id="shadowMeasure" x1="0" y1="0" x2="0" y2="0" stroke="#416b81" stroke-width="1.7" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+          <path id="angleArc" d="" fill="none" stroke="#146b64" stroke-width="2.5"/>
+          <text id="alphaLabel" fill="#146b64" font-size="16" font-weight="700">α</text>
+        </svg>
+      </div>
+      <div class="key" aria-label="图例">
+        <span><i class="swatch pole"></i>竖直杆：1 米</span>
+        <span><i class="swatch"></i>光线</span>
+        <span><i class="swatch shadow"></i>影长 L</span>
+      </div>
+      <p class="diagram-note">图中长度按同一比例绘制；小角度时影子会很长，图也会相应变宽。</p>
+    </article>
+
+    <article class="card controls">
+      <section aria-labelledby="control-title">
+        <h2 id="control-title">改变光线仰角</h2>
+        <label for="angle">光线与地面的夹角 α</label>
+        <div class="angle-readout"><output id="angleOut" for="angle">45°</output><span>仰角</span></div>
+        <input id="angle" type="range" min="5" max="85" step="1" value="45" aria-describedby="rangeHelp">
+        <div class="range-labels" id="rangeHelp"><span>5° 更贴近地面</span><span>85° 更接近竖直</span></div>
+      </section>
+      <section class="result" aria-live="polite" aria-atomic="true">
+        <p class="result-label">这时影长约为</p>
+        <p class="result-value"><span id="lengthOut">1.00</span> <small>米</small></p>
+        <p class="explain" id="explain">光线与地面成 45°。角度越大，影子越短。</p>
+      </section>
+      <section class="math">
+        <h2>为什么会这样？</h2>
+        <div class="equation">tan(α) = 杆高 ÷ 影长<small>所以：影长 L = 杆高 h ÷ tan(α)</small></div>
+        <p class="explain">正切 tan(α) 描述这个直角三角形里“竖直高度”和“水平长度”的比例。杆高固定，角度变大时，这个比例变大，影长就变短。</p>
+      </section>
+    </article>
+  </section>
+
+  <section class="bottom">
+    <article class="card">
+      <h2>读图的关键</h2>
+      <p>角 α 是从<strong>水平地面</strong>量到光线的角，不是从竖直杆量。杆高 h 是对边，影长 L 是邻边；它们和 α 组成直角三角形。</p>
+    </article>
+    <article class="card">
+      <h2>这个小模型假设</h2>
+      <p>杆笔直地立在水平地面上；阳光看作彼此平行的光线。这里只研究角度改变时的几何影长，不模拟太阳的完整运动、光线散开或模糊的影子边缘。</p>
+      <p class="limits">角度只设在 5°–85°：完全贴着地面的 0° 会让公式没有有限影长；90° 的理想影长为 0。两端都不作为滑块值。</p>
+    </article>
+  </section>
+
+  <footer class="sources">
+    <p>关系依据：OpenStax《Algebra and Trigonometry 2e》，第 7.2 节“Right Triangle Trigonometry”。</p>
+    <p>教材地址（供核对）：https://openstax.org/books/algebra-and-trigonometry-2e/pages/7-2-right-triangle-trigonometry</p>
+    <p>页面数值和图形是基于上述直角三角形关系的教学模型。</p>
+  </footer>
+</main>
+<script>
+(() => {
+  const slider = document.getElementById('angle');
+  const angleOut = document.getElementById('angleOut');
+  const lengthOut = document.getElementById('lengthOut');
+  const explain = document.getElementById('explain');
+  const diagram = document.getElementById('diagram');
+  const ray = document.getElementById('lightRay');
+  const triangle = document.getElementById('triangle');
+  const ground = document.getElementById('ground');
+  const pole = document.getElementById('pole');
+  const shadow = document.getElementById('shadowLine');
+  const measure = document.getElementById('shadowMeasure');
+  const arc = document.getElementById('angleArc');
+  const alpha = document.getElementById('alphaLabel');
+  const h = 1;
+  const scale = 100;
+  function update() {
+    const degrees = Number(slider.value);
+    const radians = degrees * Math.PI / 180;
+    const L = h / Math.tan(radians);
+    const x0 = 72, yGround = 199, yTop = yGround - scale;
+    const xTip = x0 + L * scale;
+    const width = xTip + 54;
+    diagram.setAttribute('viewBox', `0 0 ${width} 260`);
+    ground.setAttribute('x1', '25'); ground.setAttribute('x2', String(width - 18)); ground.setAttribute('y1', String(yGround)); ground.setAttribute('y2', String(yGround));
+    pole.setAttribute('x1', String(x0)); pole.setAttribute('x2', String(x0)); pole.setAttribute('y1', String(yTop)); pole.setAttribute('y2', String(yGround));
+    shadow.setAttribute('x1', String(x0)); shadow.setAttribute('x2', String(xTip)); shadow.setAttribute('y1', String(yGround)); shadow.setAttribute('y2', String(yGround));
+    measure.setAttribute('x1', String(x0 + 5)); measure.setAttribute('x2', String(xTip - 5)); measure.setAttribute('y1', String(yGround + 24)); measure.setAttribute('y2', String(yGround + 24));
+    ray.setAttribute('d', `M ${x0} ${yTop} L ${xTip} ${yGround}`);
+    triangle.setAttribute('d', `M ${x0} ${yTop} L ${xTip} ${yGround} L ${x0} ${yGround} Z`);
+    const arcR = 31;
+    const arcStartX = xTip - arcR, arcStartY = yGround;
+    const arcEndX = xTip - arcR * Math.cos(radians), arcEndY = yGround - arcR * Math.sin(radians);
+    arc.setAttribute('d', `M ${arcStartX} ${arcStartY} A ${arcR} ${arcR} 0 0 0 ${arcEndX} ${arcEndY}`);
+    alpha.setAttribute('x', String(xTip - 46)); alpha.setAttribute('y', String(yGround - 11));
+    angleOut.value = `${degrees}°`; angleOut.textContent = `${degrees}°`;
+    lengthOut.textContent = L.toFixed(2);
+    explain.textContent = `光线与地面成 ${degrees}°。杆高保持 1 米；角度越大，影子越短。`;
+    document.getElementById('svgDesc').textContent = `竖直杆高一米，光线与地面的夹角为${degrees}度，影长约${L.toFixed(2)}米；图形长度按同一比例绘制。`;
+  }
+  slider.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+{
+  "case": "T13a",
+  "baseline": false,
+  "model": "gpt-6-luna",
+  "reasoning_effort": "high",
+  "sandbox": {
+    "type": "readOnly",
+    "networkAccess": false
+  },
+  "discovered_skills": [
+    {
+      "name": "curiosity",
+      "path": "/Users/larry/haoqixin/curiosity/SKILL.md"
+    },
+    {
+      "name": "eli5",
+      "path": "/Users/larry/AI-Tools/shared/skills/eli5/SKILL.md"
+    },
+    {
+      "name": "show-me",
+      "path": "/Users/larry/AI-Tools/shared/skills/show-me/SKILL.md"
+    }
+  ],
+  "skill_sha256": "39dc5fa69172572aadaf60c0286c7d9655f06613f161f03f1288dc38604dbd02",
+  "turns": [
+    {
+      "input": [
+        {
+          "type": "skill",
+          "name": "curiosity",
+          "path": "/Users/larry/haoqixin/curiosity/SKILL.md"
+        },
+        {
+          "type": "text",
+          "text": "给 AI 补一句背景后它讲出新东西，这叫什么？"
+        }
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "id": "01a16a9f-c4a6-7c51-b967-22fc164a9e46",
+          "clientId": null,
+          "content": [
+            {
+              "type": "skill",
+              "name": "curiosity",
+              "path": "/Users/larry/haoqixin/curiosity/SKILL.md"
+            },
+            {
+              "type": "text",
+              "text": "给 AI 补一句背景后它讲出新东西，这叫什么？",
+              "text_elements": []
+            }
+          ]
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_0235eac6a6d43344016adca1cb99e88191b29e061c04ae5a73",
+          "text": "我先给这个现象一个常用说法，再区分一个容易混淆的术语。",
+          "phase": "commentary",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_0235eac6a6d43344016adca1cbcb24819198a40bc0c9b02dee",
+          "text": "常叫**补充上下文**，也可以说**上下文提示**：你补了一句背景，AI 就能据此调整理解和回答。\n\n如果它因此讲出新东西，不一定是 AI 学会了新知识；更可能是背景帮它找到了更相关的信息或推理方向。**上下文学习**是相关术语，但通常特指模型根据当前对话中的示例或指令调整回答方式。",
+          "phase": "final_answer",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        }
+      ],
+      "elapsed_seconds": 7.01,
+      "first_message_seconds": 5.93,
+      "status": "completed"
+    },
+    {
+      "input": [
+        {
+          "type": "text",
+          "text": "它们是先后关系还是各管一部分？"
+        }
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "id": "01a16a9f-d9b8-7ef1-8a0b-ecf85b8e687e",
+          "clientId": null,
+          "content": [
+            {
+              "type": "text",
+              "text": "它们是先后关系还是各管一部分？",
+              "text_elements": []
+            }
+          ]
+        },
+        {
+          "type": "webSearch",
+          "id": "exec-ba230241-886a-4f83-bae4-2d484e1f6fc9",
+          "query": "GPT-3 paper in-context learning examples prompt context official arxiv",
+          "action": {
+            "type": "search",
+            "query": "GPT-3 paper in-context learning examples prompt context official arxiv",
+            "queries": null
+          },
+          "results": [
+            {
+              "type": "text_result",
+              "domain": "aclanthology.org",
+              "ref_id": "turn0search12",
+              "snippet": "¹Duke University ²Microsoft Dynamics 365 AI ³Meta AI ⁴Microsoft Research ... In this work, we investigate whether there are more effective strategies for judiciously selecting",
+              "title": "What Makes Good In-Context Examples for GPT-3?",
+              "url": "https://aclanthology.org/2022.deelio-1.pdf"
+            },
+            {
+              "type": "text_result",
+              "domain": "aclanthology.org",
+              "ref_id": "turn0search0",
+              "snippet": "In this work, we investigate whether there are more effective strategies for judiciously selecting in-context examples (relative to random sampling) that better leverage GPT-3’s in-context",
+              "title": "What Makes Good In-Context Examples for GPT-3? - ACL Anthology",
+              "url": "https://aclanthology.org/2022.deelio-1.10/"
+            },
+            {
+              "type": "text_result",
+              "domain": "huggingface.co",
+              "ref_id": "turn0search1",
+              "snippet": "arxiv:2609.03213 ... Large language models (LLMs) exhibit in-context learning capabilities, where they can learn new tasks from prompt contexts without weight updates.We compare the learning",
+              "title": "Paper page - LLMs Learn Better In-Context from Rules than from Examples",
+              "url": "https://huggingface.co/papers/2609.03213"
+            },
+            {
+              "type": "text_result",
+              "domain": "arxiv.org",
+              "ref_id": "turn0academia13",
+              "snippet": "GPT-$3$ has attracted lots of attention due to its superior performance across a wide range of NLP tasks, especially with its powerful and versatile in-context",
+              "title": "What Makes Good In-Context Examples for GPT-$3$?",
+              "url": "https://arxiv.org/abs/2101.06804"
+            },
+            {
+              "type": "text_result",
+              "domain": "pure.kaust.edu.sa",
+              "ref_id": "turn0search14",
+              "snippet": "What Makes Good In-Context Examples for GPT-3? ... 3Microsoft Research ... impressive “in-context” few-shot learning ability. ... arXiv:2101.06804v1 [cs.CL] 17 Jan 2021 ... mulate its",
+              "title": "What Makes Good In-Context Examples for GPT-3?",
+              "url": "https://pure.kaust.edu.sa/ws/portalfiles/portal/42205881/2101.06804v1.pdf"
+            },
+            {
+              "type": "text_result",
+              "domain": "openai.com",
+              "ref_id": "turn0search2",
+              "snippet": "Read paper(opens in a new window) ... While typically task-agnostic in architecture, this method still requires task-specific fine-tuning datasets of thousands or tens of thousands",
+              "title": "Language models are few-shot learners | OpenAI",
+              "url": "https://openai.com/index/language-models-are-few-shot-learners/"
+            },
+            {
+              "type": "text_result",
+              "domain": "aclanthology.org",
+              "ref_id": "turn0search15",
+              "snippet": "B In-context Learning Details for GPT-3 ... ⁸ Examples for each task are included in Figure 5 to 8. ... Figure 5: Example GPT-3 prompt",
+              "title": "B  In-context Learning Details for GPT-3",
+              "url": "https://aclanthology.org/2023.findings-acl.770.pdf"
+            },
+            {
+              "type": "text_result",
+              "domain": "openai.com",
+              "ref_id": "turn0search3",
+              "snippet": "Read paper(opens in a new window)View model card(opens in a new window) ... We’ve trained language models that are much better at following user intentions",
+              "title": "Aligning language models to follow instructions | OpenAI",
+              "url": "https://openai.com/index/instruction-following/?_hsmi=202743306"
+            },
+            {
+              "type": "text_result",
+              "domain": "searcharxiv.org",
+              "ref_id": "turn0search4",
+              "snippet": "In this paper, we show that ground truth demonstrations are in fact not required -- randomly replacing labels in the demonstrations barely hurts performance on",
+              "title": "Rethinking the Role of Demonstrations: What Makes In-Context Learning Work? | Search arXiv",
+              "url": "https://searcharxiv.org/abs/2202.12837"
+            },
+            {
+              "type": "text_result",
+              "domain": "ai.stanford.edu",
+              "ref_id": "turn0search5",
+              "snippet": "Large language models (LMs) such as GPT-3 ^{3} are trained on internet-scale text data to predict the next token given the preceding text. ... In-context",
+              "title": "How does in-context learning work? A framework for understanding the differences from traditional supervised learning | SAIL Blog",
+              "url": "https://ai.stanford.edu/blog/understanding-incontext/"
+            },
+            {
+              "type": "text_result",
+              "domain": "that-mathevs.github.io",
+              "ref_id": "turn0search6",
+              "snippet": "A plain-English, hover-to-explain guide to Brown, Mann, Ryder, Subbiah and 27 co-authors at OpenAI (2020), the paper that showed a large enough language model can",
+              "title": "GPT-3: Language Models are Few-Shot Learners, Annotated",
+              "url": "https://that-mathevs.github.io/ai-primer/papers/gpt-3.html"
+            },
+            {
+              "type": "text_result",
+              "domain": "arxiv.org",
+              "ref_id": "turn0academia16",
+              "snippet": "In this paper, we show that ground truth demonstrations are in fact not required -- randomly replacing labels in the demonstrations barely hurts performance on",
+              "title": "Rethinking the Role of Demonstrations: What Makes In-Context Learning Work?",
+              "url": "https://arxiv.org/abs/2202.12837"
+            },
+            {
+              "type": "text_result",
+              "domain": "ai.stanford.edu",
+              "ref_id": "turn0search7",
+              "snippet": "Yet, as headlined in the title of the original paper by OpenAI, “Language Models are Few-Shot Learners”, arguably the most intriguing finding is the emergent",
+              "title": "Extrapolating to Unnatural Language Processing with GPT-3’s In-context Learning: The Good, the Bad, and the Mysterious | SAIL Blog",
+              "url": "https://ai.stanford.edu/blog/in-context-learning/"
+            },
+            {
+              "type": "text_result",
+              "domain": "www.cs.toronto.edu",
+              "ref_id": "turn0search17",
+              "snippet": "GPT-3: In context learning + ... prompting ... prompt ... In addition to the task description, the model sees a few examples of the task.",
+              "title": "GPT-3: In context learning + ... prompting",
+              "url": "https://www.cs.toronto.edu/~raeidsaqur/csc401/lectures/6_Transformers.pdf"
+            },
+            {
+              "type": "text_result",
+              "domain": "arxiv.org",
+              "ref_id": "turn0academia18",
+              "snippet": "In-context learning (ICL, also known as few-shot prompting) has been the standard method of adapting LLMs to downstream tasks, by learning from a few input-output",
+              "title": "In-Context Principle Learning from Mistakes",
+              "url": "https://arxiv.org/abs/2402.05403"
+            },
+            {
+              "type": "text_result",
+              "domain": "doi.org",
+              "ref_id": "turn0search8",
+              "snippet": "View a PDF of the paper titled A Survey to Recent Progress Towards Understanding In-Context Learning, by Haitao Mao and 5 other authors> Abstract:In-Context Learning",
+              "title": "[2402.02212] A Survey to Recent Progress Towards Understanding In-Context Learning",
+              "url": "https://doi.org/10.48550/arXiv.2402.02212"
+            },
+            {
+              "type": "text_result",
+              "domain": "huggingface.co",
+              "ref_id": "turn0search9",
+              "snippet": "arxiv:2111.02080 ... Large language models (LMs) such as GPT-3 have the surprising ability to do in-context learning, where the model learns to do a downstream",
+              "title": "Paper page - An Explanation of In-context Learning as Implicit Bayesian Inference",
+              "url": "https://huggingface.co/papers/2111.02080"
+            },
+            {
+              "type": "text_result",
+              "domain": "dreasysnail.github.io",
+              "ref_id": "turn0search10",
+              "snippet": "# What Makes Good In-Context Examples for GPT-3Published in ArXiv preprint, 2022 ... 📄 Paper",
+              "title": "What Makes Good In-Context Examples for GPT-3 - Yizhe Zhang",
+              "url": "https://dreasysnail.github.io/publication/2022-12-01-What-Makes-Good-In-Context-Examples-for-GPT-3"
+            },
+            {
+              "type": "text_result",
+              "domain": "bibbase.org",
+              "ref_id": "turn0search11",
+              "snippet": "{\"_id\":\"L6ERDnM3Civ4eaSpd\",\"bibbaseid\":\"liu-shen-zhang-dolan-carin-chen-whatmakesgoodincontextexamplesforgpt3-2021\",\"author_short\":[\"Liu, J.\",\"Shen, D.\",\"Zhang, Y.\",\"Dolan, B.\",\"Carin, L.\",\"Chen, W.\"]",
+              "title": "What Makes Good In-Context Examples for GPT-$3$?",
+              "url": "https://bibbase.org/network/publication/liu-shen-zhang-dolan-carin-chen-whatmakesgoodincontextexamplesforgpt3-2021"
+            },
+            {
+              "type": "text_result",
+              "domain": "arxiv.org",
+              "ref_id": "turn0academia19",
+              "snippet": "Large language models (LMs) such as GPT-3 have the surprising ability to do in-context learning, where the model learns to do a downstream task simply",
+              "title": "An Explanation of In-context Learning as Implicit Bayesian Inference",
+              "url": "https://arxiv.org/abs/2111.02080"
+            }
+          ]
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_0235eac6a6d43344016adca1d470488191b1c8713806f06213",
+          "text": "它们是**各管一部分**，不是先后两个阶段：\n\n- **补充上下文**：你提供背景，这是输入做法。\n- **上下文学习**：模型利用对话里的信息调整回答，这是模型表现。这个术语通常用于模型从提示里的指令或示例中学会怎么完成任务。 [OpenAI 对 GPT-3 的介绍](https://openai.com/index/language-models-are-few-shot-learners/)\n\n所以，你补一句背景后 AI 讲得更贴题，可以说它**利用了补充的上下文**；若它还从你给的例子里学会一种新答题方式，更典型地叫**上下文学习**。",
+          "phase": "final_answer",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        }
+      ],
+      "elapsed_seconds": 8.95,
+      "first_message_seconds": 8.93,
+      "status": "completed"
+    }
+  ],
+  "condition": "read-only filesystem; browser UI not provided; web_search disabled only for T10b, live otherwise"
+}

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>光线角度与影长</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172b36;
+      --muted: #526872;
+      --paper: #f5f4ed;
+      --card: #fffefa;
+      --line: #d7ded8;
+      --sun: #d8683c;
+      --blue: #287b91;
+      --shadow: #bd6c42;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 16px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main { width: min(900px, calc(100% - 32px)); margin: 0 auto; padding: 38px 0 54px; }
+    header { max-width: 720px; margin-bottom: 24px; }
+    .eyebrow { margin: 0 0 8px; color: var(--blue); font-size: .78rem; font-weight: 750; letter-spacing: .12em; }
+    h1 { margin: 0; font-size: clamp(2rem, 6vw, 3.3rem); line-height: 1.08; letter-spacing: -.045em; }
+    header p:last-child { margin: 14px 0 0; max-width: 640px; color: var(--muted); font-size: 1.05rem; }
+    .panel { background: var(--card); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 12px 30px #243c3610; }
+    .controls { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 20px; padding: 22px 24px 18px; }
+    label { display: block; margin-bottom: 10px; font-weight: 700; }
+    input[type="range"] { display: block; width: 100%; accent-color: var(--blue); cursor: pointer; }
+    input[type="range"]:focus-visible { outline: 3px solid #287b9160; outline-offset: 5px; border-radius: 4px; }
+    .range-ends { display: flex; justify-content: space-between; color: var(--muted); font-size: .82rem; margin-top: 5px; }
+    .angle-readout { min-width: 102px; text-align: right; font-size: 1.8rem; font-weight: 750; font-variant-numeric: tabular-nums; }
+    .diagram-wrap { padding: 0 16px 8px; }
+    svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .ground { stroke: #697d7b; stroke-width: 2; }
+    .grid { stroke: #e5e9e4; stroke-width: 1; }
+    .tick { stroke: #899793; stroke-width: 1.5; }
+    .rod { stroke: #287b91; stroke-width: 8; stroke-linecap: round; }
+    .ray { stroke: #d8683c; stroke-width: 2.5; stroke-dasharray: 8 7; }
+    .shadow { stroke: #bd6c42; stroke-width: 7; stroke-linecap: round; }
+    .dimension { stroke: #287b91; stroke-width: 1.5; }
+    .angle-arc { fill: none; stroke: #d8683c; stroke-width: 2; }
+    .svg-label { fill: #526872; font: 13px system-ui, sans-serif; }
+    .svg-strong { fill: #172b36; font: 700 14px system-ui, sans-serif; }
+    .sun { fill: #f4bd62; stroke: #d8683c; stroke-width: 2; }
+    .result { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center; padding: 20px 24px; border-top: 1px solid var(--line); }
+    .result-number { min-width: 150px; color: var(--shadow); font-size: clamp(1.7rem, 5vw, 2.4rem); font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+    .result-number small { display: block; margin-top: 7px; color: var(--muted); font-size: .75rem; font-weight: 650; }
+    .result p { margin: 0; }
+    .explain { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+    .note { padding: 20px 22px; }
+    .note h2 { margin: 0 0 8px; font-size: 1rem; }
+    .note p { margin: 0; color: var(--muted); }
+    .formula { color: var(--ink); font: 650 1.1rem ui-monospace, SFMono-Regular, Menlo, monospace; }
+    footer { padding: 18px 4px 0; color: var(--muted); font-size: .82rem; }
+    footer p { margin: 5px 0; }
+    @media (max-width: 560px) {
+      main { width: min(100% - 20px, 900px); padding-top: 25px; }
+      .controls { padding: 18px 16px 14px; gap: 12px; }
+      .angle-readout { min-width: 76px; font-size: 1.55rem; }
+      .diagram-wrap { padding: 4px 8px 5px; }
+      .result { grid-template-columns: 1fr; gap: 9px; padding: 18px 16px; }
+      .result-number { min-width: 0; }
+      .explain { grid-template-columns: 1fr; gap: 10px; }
+      .note { padding: 17px 18px; }
+      .svg-label { font-size: 15px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">一个角度，改变影长</p>
+      <h1>光线越贴近地面，<br>影子为什么越长？</h1>
+      <p>拖动下面的角度滑块，观察同一根竖直杆投下的影子。这里的角度是光线与地面的夹角。</p>
+    </header>
+
+    <section class="panel" aria-label="影长互动示意图">
+      <div class="controls">
+        <div>
+          <label for="angle">改变光线与地面的角度</label>
+          <input id="angle" type="range" min="5" max="85" step="1" value="45" aria-describedby="range-help">
+          <div class="range-ends" id="range-help"><span>5° 更贴近地面</span><span>85° 更接近垂直</span></div>
+        </div>
+        <div class="angle-readout" id="angle-readout" aria-hidden="true">45°</div>
+      </div>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 720 250" role="img" aria-labelledby="diagram-title diagram-desc">
+          <title id="diagram-title">光线照射一米高竖直杆的影长示意图</title>
+          <desc id="diagram-desc">光线和地面夹角45度，竖直杆高1米，影长1米。图中采用固定比例尺。</desc>
+          <g aria-hidden="true">
+            <line class="grid" x1="66" y1="145" x2="666" y2="145" />
+            <line class="grid" x1="66" y1="195" x2="666" y2="195" />
+            <line class="ground" x1="48" y1="198" x2="680" y2="198" />
+            <g id="ticks"></g>
+            <line id="ray" class="ray" x1="116" y1="148" x2="166" y2="198" />
+            <line class="rod" x1="66" y1="198" x2="66" y2="148" />
+            <circle cx="66" cy="148" r="5" fill="#287b91" />
+            <line id="shadow" class="shadow" x1="66" y1="198" x2="116" y2="198" />
+            <line class="dimension" x1="47" y1="148" x2="47" y2="198" />
+            <line class="dimension" x1="42" y1="148" x2="52" y2="148" />
+            <line class="dimension" x1="42" y1="198" x2="52" y2="198" />
+            <text class="svg-strong" x="14" y="178">1 m</text>
+            <path id="angle-arc" class="angle-arc" d="M90 198 A24 24 0 0 1 83 181" />
+            <text id="angle-label" class="svg-strong" x="100" y="178">45°</text>
+            <circle class="sun" cx="555" cy="45" r="15" />
+            <g stroke="#d8683c" stroke-width="2" aria-hidden="true">
+              <line x1="555" y1="20" x2="555" y2="13"/><line x1="555" y1="77" x2="555" y2="70"/>
+              <line x1="530" y1="45" x2="523" y2="45"/><line x1="587" y1="45" x2="580" y2="45"/>
+              <line x1="537" y1="27" x2="532" y2="22"/><line x1="578" y1="68" x2="573" y2="63"/>
+            </g>
+            <text class="svg-label" x="581" y="49">平行光</text>
+            <text class="svg-label" x="50" y="226">杆脚</text>
+            <text id="shadow-end-label" class="svg-label" x="116" y="226" text-anchor="middle">影子末端</text>
+            <text class="svg-label" x="500" y="226">地面距离（米）</text>
+          </g>
+        </svg>
+      </div>
+      <div class="result" aria-live="polite" aria-atomic="true">
+        <div class="result-number"><span id="length">1.00</span> m<small>影长</small></div>
+        <p id="explanation">光线与地面成45°，影长和杆高相同。</p>
+      </div>
+    </section>
+
+    <div class="explain">
+      <section class="panel note">
+        <h2>关键关系</h2>
+        <p class="formula">tan(角度) = 杆高 ÷ 影长</p>
+        <p style="margin-top:8px">所以影长 = 杆高 ÷ tan(角度)。杆高固定时，角度越小，影子就越长。</p>
+      </section>
+      <section class="panel note">
+        <h2>想想看</h2>
+        <p>低角度的光要斜着走很远，才会从杆顶落到地面；角度变大，光线更陡，落地点就靠近杆脚。</p>
+      </section>
+    </div>
+    <footer>
+      <p>模型假设：杆高 1 m、地面水平、光线彼此平行；不模拟太阳大小、散射和半影。5°–85°之间展示，避开平行地面的无限影长与垂直入射的理想极限。</p>
+      <p>关系依据：OpenStax《Algebra and Trigonometry 2e》7.2，Right Triangle Trigonometry。</p>
+    </footer>
+  </main>
+  <script>
+    (() => {
+      const slider = document.getElementById('angle');
+      const lengthOutput = document.getElementById('length');
+      const angleReadout = document.getElementById('angle-readout');
+      const explanation = document.getElementById('explanation');
+      const ray = document.getElementById('ray');
+      const shadow = document.getElementById('shadow');
+      const arc = document.getElementById('angle-arc');
+      const angleLabel = document.getElementById('angle-label');
+      const endLabel = document.getElementById('shadow-end-label');
+      const desc = document.getElementById('diagram-desc');
+      const ticks = document.getElementById('ticks');
+      const originX = 66, groundY = 198, topY = 148, pxPerMeter = 50;
+
+      [0, 2, 4, 6, 8, 10, 12].forEach((meter) => {
+        const x = originX + meter * pxPerMeter;
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('class', 'tick'); line.setAttribute('x1', x); line.setAttribute('x2', x);
+        line.setAttribute('y1', groundY); line.setAttribute('y2', groundY + 6); ticks.appendChild(line);
+        const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        label.setAttribute('class', 'svg-label'); label.setAttribute('x', x); label.setAttribute('y', groundY + 22);
+        label.setAttribute('text-anchor', 'middle'); label.textContent = meter; ticks.appendChild(label);
+      });
+
+      function update() {
+        const degrees = Number(slider.value);
+        const radians = degrees * Math.PI / 180;
+        const length = 1 / Math.tan(radians);
+        const endX = originX + length * pxPerMeter;
+        const radius = Math.min(23, Math.max(3, (endX - originX) * 0.72));
+        const arcEndX = endX - radius * Math.cos(radians);
+        const arcEndY = groundY - radius * Math.sin(radians);
+        const labelX = Math.max(94, Math.min(endX - 62, 636));
+        const labelY = Math.max(130, groundY - 27 - 20 * Math.sin(radians));
+
+        lengthOutput.textContent = length.toFixed(2);
+        angleReadout.textContent = `${degrees}°`;
+        ray.setAttribute('x1', endX); ray.setAttribute('y1', groundY);
+        ray.setAttribute('x2', originX); ray.setAttribute('y2', topY);
+        shadow.setAttribute('x2', endX);
+        arc.setAttribute('d', `M ${endX - radius} ${groundY} A ${radius} ${radius} 0 0 1 ${arcEndX} ${arcEndY}`);
+        angleLabel.setAttribute('x', labelX); angleLabel.setAttribute('y', labelY);
+        angleLabel.textContent = `${degrees}°`;
+        endLabel.setAttribute('x', Math.max(endX, originX + 50));
+        endLabel.setAttribute('y', groundY + 47);
+        endLabel.setAttribute('text-anchor', 'start');
+        desc.textContent = `光线和地面夹角${degrees}度，竖直杆高1米，影长${length.toFixed(2)}米。图中采用固定比例尺。`;
+
+        if (degrees === 45) explanation.textContent = '光线与地面成45°，影长和杆高相同。';
+        else if (degrees < 45) explanation.textContent = `角度比45°小，光线更贴近地面；影长是杆高的${length.toFixed(1)}倍。`;
+        else explanation.textContent = `角度比45°大，光线更陡；影长缩短到杆高的${length.toFixed(2)}倍。`;
+      }
+      slider.addEventListener('input', update);
+      update();
+    })();
+  </script>
+</body>
+</html>

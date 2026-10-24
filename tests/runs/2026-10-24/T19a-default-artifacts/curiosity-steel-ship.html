@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>钢铁船还能装多少？</title>
+<style>
+  :root { color-scheme: light; --ink:#172d3c; --muted:#526b79; --sea:#2589a5; --sea-light:#b8e3e9; --hull:#4d5c6c; --accent:#d46a3d; --paper:#f5f8f7; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.55 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; }
+  main { max-width:900px; margin:0 auto; padding:32px 20px 44px; }
+  h1 { font-size:clamp(1.8rem,5vw,2.65rem); line-height:1.15; margin:0 0 12px; letter-spacing:-.03em; }
+  .intro { color:var(--muted); max-width:690px; margin:0 0 25px; }
+  .panel { background:#fff; border:1px solid #dbe6e5; border-radius:18px; padding:20px; box-shadow:0 8px 28px #1c3c4d0b; }
+  .controls { display:grid; grid-template-columns:1fr auto; align-items:center; gap:8px 18px; }
+  label { font-weight:700; }
+  output { font-variant-numeric:tabular-nums; font-size:1.35rem; font-weight:750; color:#a94727; }
+  input[type=range] { grid-column:1/-1; width:100%; accent-color:var(--accent); min-height:30px; cursor:pointer; }
+  input[type=range]:focus-visible { outline:3px solid #197da2; outline-offset:4px; border-radius:6px; }
+  .ends { display:flex; justify-content:space-between; color:var(--muted); font-size:.88rem; margin-top:-6px; }
+  .scene { margin:12px 0 0; }
+  svg { display:block; width:100%; height:auto; max-height:365px; }
+  .readout { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:6px; }
+  .metric { background:#f3f7f6; padding:12px 14px; border-radius:12px; }
+  .metric span { display:block; color:var(--muted); font-size:.88rem; }
+  .metric strong { display:block; font-size:1.25rem; font-variant-numeric:tabular-nums; }
+  .status { margin:14px 0 0; padding:12px 14px; border-radius:12px; background:#e8f5f5; }
+  .status.edge { background:#fff1e7; }
+  .explain { margin:22px 2px 0; max-width:740px; }
+  .explain p { margin:9px 0; }
+  .model { font-size:.92rem; color:var(--muted); border-top:1px solid #dbe6e5; padding-top:14px; margin-top:19px; }
+  @media (max-width:560px) { main { padding:23px 14px 32px; } .panel { padding:15px; border-radius:15px; } .readout { grid-template-columns:1fr 1fr; } .metric:last-child { grid-column:1/-1; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>钢铁船还能装多少？</h1>
+  <p class="intro">加货后，船会下沉一点，排开更多水，浮力随之增大，直到再次托住船和货物的总重量。拖动滑块，看看“下沉一点”怎样逐渐逼近船口。</p>
+  <section class="panel" aria-label="钢铁船载货量示意">
+    <div class="controls">
+      <label for="cargo">再装多少货物</label>
+      <output id="cargoOut" for="cargo">300 kg</output>
+      <input id="cargo" type="range" min="0" max="1000" step="10" value="300" aria-describedby="rangeEnds">
+      <div class="ends" id="rangeEnds"><span>0 kg</span><span>1000 kg</span></div>
+    </div>
+    <figure class="scene">
+      <svg viewBox="0 0 640 350" role="img" aria-labelledby="svgTitle svgDesc">
+        <title id="svgTitle">货物增加时船体吃水变化</title>
+        <desc id="svgDesc">剖面示意图显示船体、水面和船口。载货量增加时水面相对船体升高。</desc>
+        <rect x="22" y="40" width="596" height="278" rx="16" fill="#f7fbfa"/>
+        <line x1="58" y1="112" x2="58" y2="286" stroke="#78909a" stroke-width="2"/>
+        <line x1="52" y1="112" x2="64" y2="112" stroke="#78909a" stroke-width="2"/>
+        <line x1="52" y1="286" x2="64" y2="286" stroke="#78909a" stroke-width="2"/>
+        <text x="44" y="108" text-anchor="end" font-size="13" fill="#526b79">船口</text>
+        <text x="44" y="291" text-anchor="end" font-size="13" fill="#526b79">船底</text>
+        <rect id="water" x="72" y="196" width="526" height="110" fill="#b8e3e9" opacity=".72"/>
+        <line id="waterline" x1="72" y1="196" x2="598" y2="196" stroke="#2589a5" stroke-width="4"/>
+        <path d="M202 112 V286 H438 V112" fill="#4d5c6c" stroke="#263d4e" stroke-width="4"/>
+        <path d="M214 121 L426 121" stroke="#95a5ac" stroke-width="3"/>
+        <g id="cargoStack" fill="#e4a45a" stroke="#915a28" stroke-width="2">
+          <rect x="269" y="82" width="48" height="29" rx="3"/><rect x="321" y="82" width="48" height="29" rx="3"/>
+          <rect x="295" y="51" width="48" height="27" rx="3"/>
+        </g>
+        <line id="draftLine" x1="470" y1="112" x2="470" y2="196" stroke="#a94727" stroke-width="2" stroke-dasharray="5 5"/>
+        <text id="draftLabel" x="479" y="160" font-size="14" fill="#873d24">吃水 0.25 m</text>
+        <text x="320" y="337" text-anchor="middle" font-size="13" fill="#526b79">水面升高 = 船体浸入更深</text>
+      </svg>
+    </figure>
+    <div class="readout" aria-live="polite" aria-atomic="true">
+      <div class="metric"><span>船和货物总质量</span><strong id="totalOut">500 kg</strong></div>
+      <div class="metric"><span>吃水（船底到水面）</span><strong id="draftOut">0.25 m</strong></div>
+      <div class="metric"><span>船口还高出水面</span><strong id="marginOut">0.25 m</strong></div>
+    </div>
+    <p class="status" id="status">此时船仍有船口高出水面；静止时，浮力托住船和货物的总重量。</p>
+  </section>
+  <section class="explain">
+    <p><strong>为什么会下沉？</strong>货物让总重量变大。船要多排开一些水，浮力才能重新与总重量平衡，所以水线会沿船身向上移。</p>
+    <p><strong>到哪里算到边界？</strong>这个示意船的船口高出船底 0.50 m。水面到船口时，船已到达敞口进水边界；不能再把它当作稳定漂浮来算。真实船的安全载荷还取决于船体形状、稳性、波浪、货物分布等，这里没有模拟那些因素。</p>
+    <p class="model">这是简化的静态模型：长方形、直立、刚性且不漏水的敞口船；忽略波浪、侧翻、变形和进水后的运动。设水密度 1000 kg/m³，船底面积 2 m²，船体自重 200 kg。吃水按 d = 总质量 ÷（水密度 × 船底面积）计算。边界总质量是 1000 kg；对应货物 800 kg。数字是教学设定，不代表真实钢铁船载重。</p>
+    <p class="model">浮体平衡关系参考：<span>得克萨斯大学浮体平衡讲义</span>。本页几何尺寸与数值为自拟示意。</p>
+  </section>
+</main>
+<script>
+(() => {
+  const rho = 1000, area = 2, hullMass = 200, height = 0.5;
+  const cargo = document.getElementById('cargo');
+  const cargoOut = document.getElementById('cargoOut');
+  const totalOut = document.getElementById('totalOut');
+  const draftOut = document.getElementById('draftOut');
+  const marginOut = document.getElementById('marginOut');
+  const status = document.getElementById('status');
+  const water = document.getElementById('water');
+  const waterline = document.getElementById('waterline');
+  const draftLine = document.getElementById('draftLine');
+  const draftLabel = document.getElementById('draftLabel');
+  const minY = 112, maxY = 286;
+  function update() {
+    const cargoKg = Number(cargo.value);
+    const totalKg = hullMass + cargoKg;
+    const rawDraft = totalKg / (rho * area);
+    const atOrPastEdge = rawDraft >= height;
+    const shownDraft = Math.min(rawDraft, height);
+    const y = maxY - (shownDraft / height) * (maxY - minY);
+    const draftText = `${shownDraft.toFixed(2)} m`;
+    cargoOut.value = `${cargoKg} kg`;
+    cargoOut.textContent = `${cargoKg} kg`;
+    totalOut.textContent = `${totalKg} kg`;
+    draftOut.textContent = atOrPastEdge ? '到达船口' : draftText;
+    marginOut.textContent = atOrPastEdge ? '0 m' : `${(height - rawDraft).toFixed(2)} m`;
+    water.setAttribute('y', y);
+    water.setAttribute('height', 306 - y);
+    waterline.setAttribute('y1', y); waterline.setAttribute('y2', y);
+    draftLine.setAttribute('y1', maxY);
+    draftLine.setAttribute('y2', y);
+    draftLabel.setAttribute('y', Math.max(132, (maxY + y) / 2));
+    draftLabel.textContent = atOrPastEdge ? '水面到达船口' : `吃水 ${draftText}`;
+    status.classList.toggle('edge', atOrPastEdge);
+    if (rawDraft < height) {
+      status.textContent = '此时船仍有船口高出水面；静止时，浮力托住船和货物的总重量。';
+      document.getElementById('svgDesc').textContent = `船体吃水约${draftText}，船口仍高出水面${(height - rawDraft).toFixed(2)}米。`;
+    } else if (rawDraft === height) {
+      status.textContent = '水面刚到船口，已到达敞口进水边界；模型不再给出稳定漂浮结论。';
+      document.getElementById('svgDesc').textContent = '水面刚到船口，达到敞口进水边界。';
+    } else {
+      status.textContent = '按简化模型，所需吃水已超过船口高度；船会到达进水边界，不能再用稳定漂浮公式外推实际状态。';
+      document.getElementById('svgDesc').textContent = '计算需求超过船口高度，示意图把水线停在船口，不表示进水后的实际状态。';
+    }
+    cargo.setAttribute('aria-valuetext', `${cargoKg} 千克货物`);
+  }
+  cargo.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>

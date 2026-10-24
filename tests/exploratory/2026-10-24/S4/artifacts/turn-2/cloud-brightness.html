@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>云为什么有白有灰？</title>
+<style>
+:root{color-scheme:light;--ink:#182535;--muted:#526579;--blue:#dcecf5;--line:#c8d5df;--gold:#e8a82d}
+*{box-sizing:border-box}body{margin:0;background:#f3f7fa;color:var(--ink);font:16px/1.55 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:850px;margin:0 auto;padding:28px 18px 38px}h1{font-size:clamp(1.7rem,5vw,2.5rem);line-height:1.15;margin:0 0 12px}h2{font-size:1.15rem;margin:0 0 8px}.intro{font-size:1.08rem;color:#30465a;max-width:70ch}.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:18px;box-shadow:0 8px 24px #18334c0a}.scene{display:block;width:100%;height:auto;border-radius:12px;background:#dbeaf2}.controls{display:grid;grid-template-columns:1fr auto;gap:6px 14px;align-items:center;margin-top:14px}.controls label{font-weight:650}.controls output{font-variant-numeric:tabular-nums;color:#314b60;font-weight:700}input[type=range]{grid-column:1/-1;width:100%;accent-color:#2479a4;min-height:32px}.hint{font-size:.94rem;color:var(--muted);margin:8px 0 0}.readout{padding:12px 14px;border-radius:10px;background:#edf5f8;margin-top:12px}.readout strong{display:block}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.grid section{padding:12px;border:1px solid var(--line);border-radius:12px;background:#fbfdfe}.grid p{margin:4px 0 0;color:#405469}.small{font-size:.9rem;color:var(--muted)}.source{font-size:.88rem;color:var(--muted);margin-top:18px}.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem;color:#405469;margin-top:8px}.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:-1px}.focus:focus-visible,input:focus-visible{outline:3px solid #155e85;outline-offset:3px}
+@media(max-width:520px){main{padding:22px 14px 30px}.panel{padding:14px}.grid{grid-template-columns:1fr}.intro{font-size:1rem}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<h1>云为什么有白有灰？</h1>
+<p class="intro">你说得对：水滴本身基本透明。云的颜色差异，主要看<strong>有多少光被云散射到你眼里</strong>，以及<strong>到达云底和地面的光还剩多少</strong>。下面拖动光学厚度，观察同一束日光的去向。</p>
+<div class="panel">
+<h2>调节云的光学厚度</h2>
+<p class="small">光学厚度可以理解为：光沿这段云层路径遇到散射、被移出原方向的总程度。它不只等于云的几何高度，也受含水量和水滴分布影响。</p>
+<svg class="scene" viewBox="0 0 760 350" role="img" aria-labelledby="svgtitle svgdesc">
+<title id="svgtitle">阳光照在云上，部分向上散射，较少光穿到云底</title><desc id="svgdesc">示意图不是按真实比例绘制。云顶收到阳光后向各方向散射；云越厚，直达云底的光通常越少，云底下方看起来越暗。</desc>
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#b9d9e9"/><stop offset="1" stop-color="#edf4f6"/></linearGradient><linearGradient id="cloud" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#a9b3bc"/></linearGradient><marker id="arrowSun" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#d88919"/></marker><marker id="arrowOut" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#3e7795"/></marker></defs>
+<rect width="760" height="350" rx="12" fill="url(#sky)"/><circle cx="80" cy="62" r="23" fill="#ffd36f"/><text x="116" y="67" font-size="16" fill="#30465a">太阳光</text>
+<path d="M130 80L306 141" stroke="#d88919" stroke-width="5" marker-end="url(#arrowSun)"/>
+<path d="M232 119L190 45M260 130L260 57M284 140L327 70" stroke="#3e7795" stroke-width="3" marker-end="url(#arrowOut)" opacity=".85"/>
+<path id="cloudShape" d="M175 167 C145 161 145 126 176 120 C180 91 220 81 241 105 C264 76 311 87 319 119 C353 106 381 128 375 154 C405 171 390 203 358 205 L190 205 C166 205 156 185 175 167Z" fill="url(#cloud)" stroke="#8797a4" stroke-width="2"/>
+<text x="238" y="177" font-size="16" fill="#394957">云滴：多次散射</text>
+<path id="downRay" d="M278 205L278 289" stroke="#e2a63b" stroke-width="6" marker-end="url(#arrowSun)" opacity=".55"/>
+<path id="sideRay" d="M355 171L453 204" stroke="#3e7795" stroke-width="3" marker-end="url(#arrowOut)"/>
+<rect x="0" y="292" width="760" height="58" fill="#b6c2c8"/><text x="24" y="326" font-size="16" fill="#31475a">地面 / 观察者</text>
+<text id="svgState" x="474" y="157" font-size="15" fill="#31475a">一部分光散射出去</text>
+<text id="underState" x="474" y="276" font-size="15" fill="#31475a">云底下仍有较多光</text>
+</svg>
+<div class="legend"><span><i class="dot" style="background:#e2a63b"></i>入射 / 向下的光</span><span><i class="dot" style="background:#3e7795"></i>被散射到别的方向</span></div>
+<div class="controls"><label for="tau">光学厚度（示意）</label><output id="tauOut" for="tau">中等</output><input id="tau" type="range" min="1" max="9" step="1" value="4" aria-describedby="sliderHint"><p id="sliderHint" class="hint">数值越大，更多光离开原来的向下路径。真实云中的散射会多次发生；这个滑块只展示“直达光”如何衰减。</p></div>
+<div class="readout" aria-live="polite"><strong id="reading">直达光透过率：约 2%</strong><span id="explain">云底获得的直达日光很少，因此在亮天空或亮云旁边显得灰暗。</span></div>
+</div>
+<div class="grid">
+<section><h2>白，怎么来的？</h2><p>常见液态云滴的半径约 5–10 μm；可见光波长约 0.4–0.7 μm。也就是说，云滴直径通常是波长的十几到几十倍，并非同一量级。这个尺寸范围下，水滴会把可见光各颜色较接近地散射，所以云顶或受光面显白。</p></section>
+<section><h2>灰黑，怎么来的？</h2><p>厚云把光反复散射，很多光从云顶或侧面离开，云底和下方收到的光变少。人从下面看，云底就显灰；“黑”通常是相对暗，不是云滴变成黑色。</p></section>
+</div>
+<div class="panel"><h2>τ 由哪些量决定？</h2><p>沿光路的定义是 <strong>τ<sub>λ</sub> = ∫ ds ∫ n(r,s) Q<sub>ext</sub>(r,λ) πr² dr</strong>。这里 n 是不同半径水滴的数浓度分布，πr² 是几何截面积，Q<sub>ext</sub> 是无量纲消光效率；下标 λ 表示它也随光波长变。这个积分把光路长度、滴数和大小分布都算进来。</p><p>对可见光、近似球形液滴，云滴远大于波长时 Q<sub>ext</sub> 约为 2。若用液态水路径 LWP（每平方米上方的液态水总质量）和有效半径 r<sub>e</sub> 概括整层，可近似写成 <strong>τ ≈ 3 LWP / (2 ρ<sub>w</sub> r<sub>e</sub>)</strong>。所以：LWP 越大，τ 越大；在相同 LWP 下，滴越小、总投影面积越大，τ 越大。单有云的几何高度不能定出 τ；高度只有通过水滴沿路径的累计量起作用。斜着穿过同一层云时，光路更长，τ 也会增加。</p><p class="small">这条简式假设液滴近似球形且 Q<sub>ext</sub>≈2；有冰晶、粒径随高度变化或明显斜视时，应回到积分定义或使用完整辐射传输模型。</p></div>
+<p class="source">还要看光从哪里来：另一片云的阴影、太阳角度和周围亮度对比也会让局部变暗。因此灰黑不能简单等同于“含水量更多”或“一定要下雨”。示意仅计算未被散射出原方向的直达光比例，使用 T = e<sup>−τ</sup>；它不等于真实云底总照度或云的完整亮度。</p>
+<p class="source">依据：美国国家气象局介绍云的散射与观感；世界气象组织《国际云图》对云光学厚度的说明；NASA ISCCP 给出常见云滴半径约 5–10 μm；NOAA GOES-R 云光学产品算法文档给出光学厚度的粒径分布积分定义与液态水路径关系。数值范围用于典型量级说明，不代表所有云滴。</p>
+</main>
+<script>
+const slider=document.querySelector('#tau'), out=document.querySelector('#tauOut'), reading=document.querySelector('#reading'), explain=document.querySelector('#explain'), down=document.querySelector('#downRay'), cloud=document.querySelector('#cloudShape'), svgState=document.querySelector('#svgState'), under=document.querySelector('#underState');
+function update(){const t=Number(slider.value), trans=Math.exp(-t), pct=Math.round(trans*100);let label=t<=2?'薄':t<=5?'中等':'厚';out.value=label;out.textContent=label;reading.textContent=`直达光透过率：约 ${pct}%`;const dim=.12+.72*trans;down.setAttribute('opacity',String(dim));cloud.setAttribute('opacity',String(.74+.026*t));svgState.textContent=t<3?'云层较薄，较多光能穿过':'云层较厚，更多光在途中散射';under.textContent=t<3?'云底下仍有较多光':t<7?'云底下收到的直达光较少':'云底下的直达光很少';explain.textContent=t<3?'不少光仍沿原方向穿过；云的亮暗还取决于受光面和背景。':t<7?'云底获得的直达日光变少，因此在亮天空或亮云旁边显得灰暗。':'大部分直达光已被散射出原方向；云顶仍可很亮，云底却可能显得很暗。'}
+slider.addEventListener('input',update);update();
+</script>
+</body>
+</html>

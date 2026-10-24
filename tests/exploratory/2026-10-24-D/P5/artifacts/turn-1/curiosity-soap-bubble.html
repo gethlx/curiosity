@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>泡泡里的彩色从哪来？</title>
+<style>
+:root{color-scheme:light;--ink:#183044;--muted:#506778;--line:#d8e5e9;--blue:#247da4;--paper:#f7fbfa;--accent:#f2b84b}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#eff9f8,#f8f6ef 60%,#eef5fb);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC",sans-serif}
+main{max-width:900px;margin:0 auto;padding:28px 18px 40px}header{padding:10px 4px 18px}h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.2;margin:8px 0 12px;letter-spacing:.01em}.eyebrow{color:#39768a;font-weight:700;letter-spacing:.08em;font-size:.83rem}.lead{max-width:720px;color:#314c5e;font-size:1.12rem;margin:0}.card{background:#ffffffd9;border:1px solid var(--line);border-radius:20px;padding:20px;margin:14px 0;box-shadow:0 10px 28px #24485b0b}.card h2{font-size:1.2rem;margin:0 0 8px}.visual{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:center}.bubble-wrap{min-height:290px;display:grid;place-items:center;background:radial-gradient(ellipse at center,#e6f5f3 0,#f5faf8 64%,#fff 100%);border-radius:16px;overflow:hidden}.bubble{width:min(74vw,290px);aspect-ratio:1;border-radius:50%;position:relative;background:radial-gradient(circle at 38% 28%,#ffffffdf 0 2%,transparent 12%),radial-gradient(ellipse at 30% 73%,#58d9c58c 0 7%,transparent 36%),radial-gradient(ellipse at 75% 55%,#ed83be88 0 8%,transparent 37%),radial-gradient(ellipse at 62% 24%,#ffdc678c 0 8%,transparent 40%),radial-gradient(ellipse at 48% 45%,#89a9fa70 0 15%,#bde8e6a6 40%,#fff9 70%);border:2px solid #ffffffd9;box-shadow:inset -14px -10px 32px #4691aa20,inset 12px 12px 28px #fff,0 18px 42px #35768b1c}
+.bubble:after{content:"";position:absolute;inset:9%;border-radius:50%;border:1px solid #ffffffa8;transform:rotate(-28deg) scaleY(.3);top:61%;height:28%}.bubble:before{content:"";position:absolute;width:47%;height:12%;border-radius:50%;background:#fff9;filter:blur(5px);top:16%;left:20%;transform:rotate(-32deg)}
+.explainer p{margin:.45em 0}.tag{display:inline-block;border-radius:999px;padding:3px 10px;background:#e4f3f4;color:#28657b;font-weight:700;font-size:.87rem}.steps{display:grid;gap:10px;margin-top:14px}.step{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}.num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#eaf4f5;color:#24657b;font-weight:800}.diagram{width:100%;height:auto;border:1px solid var(--line);border-radius:14px;background:#fcfefd;margin-top:10px}.controls{margin-top:20px;padding:16px;border-radius:14px;background:#f4f9f8}.controlhead{display:flex;justify-content:space-between;gap:12px;align-items:baseline}.controlhead label{font-weight:750}.nm{font-size:1.25rem;font-weight:800;color:#256f8d;font-variant-numeric:tabular-nums}input[type=range]{width:100%;accent-color:#287e9c;margin:12px 0 2px;min-height:28px}input:focus-visible{outline:3px solid #e8ad43;outline-offset:3px;border-radius:5px}.ends{display:flex;justify-content:space-between;color:var(--muted);font-size:.86rem}.swatchline{display:flex;gap:12px;align-items:center;margin-top:8px}.swatch{width:54px;height:38px;border:1px solid #8095a0;border-radius:8px;background:#fff;flex:none}.note{font-size:.91rem;color:var(--muted)}.prompt{border-left:4px solid var(--accent);padding:8px 12px;background:#fffaf0;border-radius:0 10px 10px 0;margin-top:12px}.footer{font-size:.88rem;color:var(--muted);padding:0 4px}.footer a{color:#236d87;overflow-wrap:anywhere}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:650px){main{padding:20px 13px 30px}.card{padding:16px;border-radius:16px}.visual{grid-template-columns:1fr;gap:12px}.bubble-wrap{min-height:240px}.bubble{width:min(65vw,245px)}.explainer{padding:0 2px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="eyebrow">一起观察 · 光的秘密</div>
+<h1>泡泡里的彩色从哪来？</h1>
+<p class="lead">你猜得很合理：颜色像是从泡泡里冒出来的。其实肥皂水可以是透明的，彩色主要是<strong>光在一层很薄的泡膜上“相遇”</strong>后形成的。</p>
+</header>
+<section class="card visual" aria-labelledby="why">
+<div class="bubble-wrap" role="img" aria-label="带有彩色光泽的泡泡示意图"><div class="bubble"></div></div>
+<div class="explainer">
+<span class="tag">关键想法：两束反射光会叠加</span>
+<h2 id="why">泡膜像一扇特别薄的透明窗</h2>
+<div class="steps">
+<div class="step"><span class="num">1</span><div>白光照到泡泡，一部分光从泡膜<strong>外面</strong>弹回来。</div></div>
+<div class="step"><span class="num">2</span><div>另一部分钻进薄薄的膜里，从<strong>里面</strong>弹回来。</div></div>
+<div class="step"><span class="num">3</span><div>两束光碰在一起。有些颜色的光波互相帮忙变亮，有些互相抵消变暗，于是我们看见颜色。</div></div>
+</div>
+<p>这叫<strong>薄膜干涉</strong>。“干涉”在这里就是光波相遇后，有的加强、有的减弱。</p>
+</div>
+</section>
+<section class="card" aria-labelledby="try">
+<h2 id="try">拖动滑块，看看“膜厚”会改变什么</h2>
+<p>这里挑出一小块泡膜，假设它厚度处处相同。试试从很薄慢慢变厚：反射出来的颜色会变，因为每种颜色的光波相遇时，错开的距离不同。</p>
+<svg class="diagram" viewBox="0 0 620 230" role="img" aria-labelledby="svgtitle svgdesc">
+<title id="svgtitle">光在泡膜两面反射的示意图</title><desc id="svgdesc">一束白光到达透明薄膜。一部分在外表面反射，另一部分进入薄膜后在内表面反射，两束反射光离开时叠加。</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#38596a"/></marker><linearGradient id="film" x2="0" y2="1"><stop stop-color="#8dd4da" stop-opacity=".48"/><stop offset="1" stop-color="#c5ebd7" stop-opacity=".58"/></linearGradient></defs>
+<rect x="78" y="103" width="470" height="54" rx="8" fill="url(#film)" stroke="#5b9aa7" stroke-width="2"/><text x="312" y="137" text-anchor="middle" fill="#244d5c" font-size="16">透明泡膜（厚度由滑块表示）</text>
+<path d="M70 34L184 103" stroke="#e7aa37" stroke-width="5" marker-end="url(#arrow)"/><text x="48" y="25" fill="#384f5b" font-size="15">白光</text>
+<path d="M184 102L300 35" stroke="#5281dd" stroke-width="4" marker-end="url(#arrow)"/><text x="307" y="35" fill="#38596a" font-size="14">表面反射光</text>
+<path d="M184 104L276 145L365 53" fill="none" stroke="#39a992" stroke-width="4" marker-end="url(#arrow)"/><text x="370" y="54" fill="#38596a" font-size="14">里面反射后出来的光</text>
+<path d="M184 102L185 185" stroke="#38596a" stroke-width="1.5"/><path d="M179 110L191 110M179 149L191 149" stroke="#38596a" stroke-width="1.5"/><text x="200" y="181" fill="#38596a" font-size="14">两束光叠在一起</text>
+</svg>
+<div class="controls">
+<div class="controlhead"><label for="thickness">泡膜厚度（示意）</label><output class="nm" id="readout" for="thickness">250 纳米</output></div>
+<input id="thickness" type="range" min="0" max="700" value="250" step="5" aria-describedby="rangehelp">
+<div class="ends"><span>极薄</span><span>较厚</span></div>
+<div class="swatchline"><span class="swatch" id="swatch" aria-hidden="true"></span><span id="colorname" aria-live="polite">这一厚度下，示意的反射颜色</span></div>
+<p class="note" id="rangehelp">纳米是非常非常小的长度单位。滑块只表示泡膜厚薄，不是泡泡整体大小。</p>
+<p class="prompt"><strong>可以和孩子一起试：</strong>把泡泡放在明亮但不刺眼的光线前，慢慢转一转、等一等。不同位置的泡膜厚度不一样，颜色就会一块块变化；泡膜慢慢变薄，颜色也会跟着变，最后可能出现发暗的区域。</p>
+</div>
+</section>
+<section class="card">
+<h2>所以，颜色从哪里来？</h2>
+<p><strong>不是肥皂藏了颜料，而是白光里本来就有许多颜色。</strong>泡膜的厚薄和观察角度会改变光波相遇的方式，让某些颜色更容易反射到眼睛里。</p>
+<p>肥皂泡的颜色和油膜上的彩色光泽有相似原因。它也不同于彩虹：彩虹主要是水滴把不同颜色的光分开；泡泡的彩色主要来自薄膜两面的反射光互相影响。</p>
+<p class="note">本页用简化模型展示“厚度改变，反射颜色随之改变”。真实泡泡还会受光线方向、观看角度、膜的流动和环境反射影响；示意色块不预测某个真实泡泡的精确颜色。</p>
+</section>
+<footer class="footer">依据：<a href="https://openstax.org/books/college-physics/pages/27-7-thin-film-interference" target="_blank" rel="noreferrer">OpenStax：Thin Film Interference</a>（泡泡颜色来自薄膜内外表面反射光的干涉）；<a href="https://edu.rsc.org/feature/why-are-there-colours-in-soap-bubbles/3007551.article" target="_blank" rel="noreferrer">英国皇家化学学会：Why are there colours in soap bubbles?</a>。图示和颜色块是教学示意。</footer>
+</main>
+<script>
+const slider=document.querySelector('#thickness'),readout=document.querySelector('#readout'),swatch=document.querySelector('#swatch'),name=document.querySelector('#colorname');
+function wavelengthRGB(w){let r=0,g=0,b=0;if(w>=380&&w<440){r=-(w-440)/60;b=1}else if(w<490){g=(w-440)/50;b=1}else if(w<510){g=1;b=-(w-510)/20}else if(w<580){r=(w-510)/70;g=1}else if(w<645){r=1;g=-(w-645)/65}else if(w<=700){r=1}let f=w<420?.3+.7*(w-380)/40:w>645?.3+.7*(700-w)/55:1;return [r*f,g*f,b*f].map(v=>Math.round(255*Math.pow(Math.max(0,v),.8)))}
+function mixColor(d){let n=1.33, samples=[];for(let w=380;w<=700;w+=2){let phase=4*Math.PI*n*d/w, a=(1-n)/(1+n), b=(n-1)/(n+1), c=Math.cos(phase),s=Math.sin(phase);let nr=a+b*c,ni=b*s,dr=1+a*b*c,di=a*b*s;let I=(nr*nr+ni*ni)/(dr*dr+di*di);samples.push([w,I,wavelengthRGB(w)])}let max=Math.max(...samples.map(x=>x[1]),.0001),rgb=[0,0,0];for(const [,i,c] of samples){let weight=Math.pow(i/max,1.5);for(let k=0;k<3;k++)rgb[k]+=c[k]*weight}rgb=rgb.map(v=>Math.round(Math.min(255,v/samples.length*2.35)));return `rgb(${rgb.join(',')})`}
+function update(){const d=Number(slider.value);readout.value=`${d} 纳米`;readout.textContent=`${d} 纳米`;const color=mixColor(d);swatch.style.backgroundColor=color;name.textContent=d<20?'非常薄时，许多反射颜色会变弱，泡膜可能显暗。':`这一厚度下，示意的反射颜色：${color}`}
+slider.addEventListener('input',update);update();
+</script>
+</body>
+</html>

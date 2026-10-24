@@ -1,0 +1,72 @@
+{
+  "case": "T18a",
+  "baseline": false,
+  "model": "gpt-6-luna",
+  "reasoning_effort": "high",
+  "sandbox": {
+    "type": "readOnly",
+    "networkAccess": false
+  },
+  "discovered_skills": [
+    {
+      "name": "curiosity",
+      "path": "/Users/larry/haoqixin/curiosity/SKILL.md"
+    },
+    {
+      "name": "eli5",
+      "path": "/Users/larry/AI-Tools/shared/skills/eli5/SKILL.md"
+    },
+    {
+      "name": "show-me",
+      "path": "/Users/larry/AI-Tools/shared/skills/show-me/SKILL.md"
+    }
+  ],
+  "skill_sha256": "39dc5fa69172572aadaf60c0286c7d9655f06613f161f03f1288dc38604dbd02",
+  "turns": [
+    {
+      "input": [
+        {
+          "type": "skill",
+          "name": "curiosity",
+          "path": "/Users/larry/haoqixin/curiosity/SKILL.md"
+        },
+        {
+          "type": "text",
+          "text": "船再装更多货会怎样？只用文字。"
+        }
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "id": "01a16aa0-f6c1-7380-97a3-b4e11a9d3b23",
+          "clientId": null,
+          "content": [
+            {
+              "type": "skill",
+              "name": "curiosity",
+              "path": "/Users/larry/haoqixin/curiosity/SKILL.md"
+            },
+            {
+              "type": "text",
+              "text": "船再装更多货会怎样？只用文字。",
+              "text_elements": []
+            }
+          ]
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_032ac312d81f5bf6016adca218d6288191a802ddd14ffd1872",
+          "text": "船装上更多货物后会更重，船身就会下沉得更深。船排开更多水，水向上的浮力也随之增大，直到托住船和货物的总重量。\n\n但船能下沉的幅度有限：船沿水面露出的部分叫“干舷”，它留得越少，海浪越容易涌上甲板。货物如果堆得太高或放得不均匀，船也会变得不稳，可能倾斜甚至翻覆。再继续加货，水可能漫进船里，最终导致沉没。",
+          "phase": "final_answer",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        }
+      ],
+      "elapsed_seconds": 6.02,
+      "first_message_seconds": 5.99,
+      "status": "completed"
+    }
+  ],
+  "condition": "read-only filesystem; browser UI not provided; web_search disabled only for T10b, live otherwise"
+}

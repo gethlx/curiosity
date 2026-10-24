@@ -1,0 +1,160 @@
+{
+  "case": "T1a",
+  "baseline": true,
+  "model": "gpt-6-luna",
+  "reasoning_effort": "high",
+  "sandbox": {
+    "type": "readOnly",
+    "networkAccess": false
+  },
+  "discovered_skills": [
+    {
+      "name": "eli5",
+      "path": "/Users/larry/AI-Tools/shared/skills/eli5/SKILL.md",
+      "enabled": true
+    },
+    {
+      "name": "show-me",
+      "path": "/Users/larry/AI-Tools/shared/skills/show-me/SKILL.md",
+      "enabled": true
+    }
+  ],
+  "skill_sha256": "39dc5fa69172572aadaf60c0286c7d9655f06613f161f03f1288dc38604dbd02",
+  "turns": [
+    {
+      "input": [
+        {
+          "type": "text",
+          "text": "船那么重，为什么没沉？"
+        }
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "id": "01a16aa1-e0a6-7630-8828-13d8bc666393",
+          "clientId": null,
+          "content": [
+            {
+              "type": "text",
+              "text": "船那么重，为什么没沉？",
+              "text_elements": []
+            }
+          ]
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_036fe0c729468cb3016adca25439548191a4fa83148cd5c73a",
+          "text": "船虽然很重，但它的船身是中空的，里面装着大量空气。把船和船里的空气一起算，整体平均密度比水小。\n\n船会把一部分水挤开；被挤开的水越多，水向上托船的浮力就越大。当浮力刚好托住船的重量时，船就浮着。要是船进水太多，整体变得比水密，它就会沉下去。",
+          "phase": "final_answer",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        }
+      ],
+      "elapsed_seconds": 5.88,
+      "first_message_seconds": 5.88,
+      "status": "completed"
+    },
+    {
+      "input": [
+        {
+          "type": "text",
+          "text": "继续"
+        }
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "id": "01a16aa1-eeb8-78e2-9dcd-32ae3103b319",
+          "clientId": null,
+          "content": [
+            {
+              "type": "text",
+              "text": "继续",
+              "text_elements": []
+            }
+          ]
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_036fe0c729468cb3016adca25756c481918db8d2b439ae3b1d",
+          "text": "我用一个小图把“水为什么能托住船”接着讲清楚。",
+          "phase": "commentary",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        },
+        {
+          "type": "commandExecution",
+          "id": "exec-568897fc-0307-44a1-b454-97de478632bb",
+          "pluginId": null,
+          "scriptPath": null,
+          "command": "/bin/zsh -lc 'cat /Users/larry/.codex/skills/show-me/SKILL.md'",
+          "cwd": "/var/folders/5j/b8_rzdwn3219tg2qxzk54n2m0000gn/T/curiosity-eval-dp_lb65p",
+          "processId": "38314",
+          "source": "unifiedExecStartup",
+          "status": "completed",
+          "commandActions": [
+            {
+              "type": "read",
+              "command": "cat /Users/larry/.codex/skills/show-me/SKILL.md",
+              "name": "SKILL.md",
+              "path": "/Users/larry/.codex/skills/show-me/SKILL.md"
+            }
+          ],
+          "exitCode": 0,
+          "durationMs": 0,
+          "output_sha256": "bea6da70a58096730b9aeb0bae293ddf4726103a98efc9ce13c481619942a810",
+          "output_note": "命令输出正文未入库，保留命令、退出状态及哈希。"
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_036fe0c729468cb3016adca25a09d08191a66dc99673aae1f2",
+          "text": "```text\n          船的重量 ↓\n       ┌───────────┐\n~~~~~~~│           │~~~~~~~ 水面\n       └───────────┘\n          水的浮力 ↑\n```\n\n船往下压水，水就向上托船。船越重，通常就要压开更多水。比如一艘重 **100 吨**的船，漂浮时大约排开 **100 吨水**；这时向上的浮力正好托住船的重量。\n\n船壳中空，能排开很多水，却不用让船本身变成一整块实心钢铁。所以整艘船连同里面的空气，平均起来没有水那么密。",
+          "phase": "final_answer",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        }
+      ],
+      "elapsed_seconds": 6.3,
+      "first_message_seconds": 2.43,
+      "status": "completed"
+    },
+    {
+      "input": [
+        {
+          "type": "text",
+          "text": "先到这"
+        }
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "id": "01a16aa2-073f-77e1-a8e9-f8c2d7d114d3",
+          "clientId": null,
+          "content": [
+            {
+              "type": "text",
+              "text": "先到这",
+              "text_elements": []
+            }
+          ]
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_036fe0c729468cb3016adca25e05188191a3b956fee6bc797f",
+          "text": "好，先到这里。",
+          "phase": "final_answer",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        }
+      ],
+      "elapsed_seconds": 2.61,
+      "first_message_seconds": 2.61,
+      "status": "completed"
+    }
+  ],
+  "condition": "read-only; browser UI not provided; web_search disabled only for T10b, live otherwise; optional skills disabled=False"
+}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>衣服晒褪色：光降解和光氧化怎么重叠？</title>
+<style>
+:root{color-scheme:light;--ink:#202b37;--muted:#586777;--paper:#f7f5ef;--card:#fff;--line:#d9dedf;--sun:#efb74f;--blue:#246b8a;--green:#286e55;--red:#9b493f}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:850px;margin:auto;padding:36px 22px 56px}header{margin-bottom:22px}.eyebrow{color:var(--blue);font-weight:700;letter-spacing:.06em;font-size:.86rem}h1{font-size:clamp(1.6rem,4vw,2.35rem);line-height:1.25;margin:.35em 0}p{margin:.55em 0}.lead{font-size:1.08rem;color:#334353}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 6px 22px #2233440a}.answer{border-left:5px solid var(--blue)}.answer strong{color:#123e55}.diagram{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:12px;margin:18px 0}.node{padding:14px 10px;border-radius:14px;background:#f2f5f4;text-align:center;font-weight:650}.node.sun{background:#fff4d8}.arrow{font-size:1.5rem;color:var(--muted)}.controls{display:grid;gap:12px}.control{display:flex;align-items:flex-start;gap:12px;padding:13px;border:1px solid var(--line);border-radius:12px;cursor:pointer}.control input{width:22px;height:22px;accent-color:var(--blue);flex:none;margin:2px 0 0}.control span{display:block}.hint{font-size:.9rem;color:var(--muted)}.results{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.badge{border-radius:13px;padding:14px;background:#f1f3f4;border:1px solid var(--line);opacity:.63}.badge.active{opacity:1;border-color:currentColor;background:#f5fbf8}.badge strong{display:block;font-size:1.08rem}.badge.photo.active{color:var(--blue)}.badge.degrade.active{color:var(--green)}.explain{margin-top:12px;padding:14px;background:#f6f8fa;border-radius:12px;min-height:68px}.oxygen{font-size:.92rem;color:var(--muted)}.key{display:grid;grid-template-columns:1fr 1fr;gap:14px}.key div{padding:12px;border-top:3px solid var(--blue)}.key div+div{border-color:var(--green)}h2{font-size:1.25rem;margin:0 0 10px}ul{padding-left:1.25em;margin:.5em 0}li{margin:.35em 0}.sources{font-size:.9rem;color:var(--muted)}a{color:#155e7a;overflow-wrap:anywhere}footer{font-size:.88rem;color:var(--muted);margin:20px 2px}
+:focus-visible{outline:3px solid #167ba0;outline-offset:3px}
+@media(max-width:520px){main{padding:25px 15px 40px}.card{padding:17px}.diagram{grid-template-columns:1fr;gap:4px}.arrow{transform:rotate(90deg);justify-self:center}.key,.results{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<header><div class="eyebrow">从衣物褪色看两个术语</div><h1>光降解和光氧化，是什么关系？</h1><p class="lead">它们不是互斥的两种过程：一个强调“光引发了氧化”，另一个强调“分子被光化学作用拆成更小碎片”。同一反应可以同时符合两种描述。</p></header>
+<section class="card answer"><h2>先回答你的猜想</h2><p><strong>如果阳光引发了染料氧化，而且这个过程把染料分解成更小的分子碎片，那么可以同时叫“光氧化”和“光降解”。</strong></p><p>但仅凭“颜色变了”还不能断定发生了分子分解。染料的结构可能改变、褪色，也可能只是暂时换了吸光方式；要知道具体是哪种，需要分析反应产物。</p></section>
+<section class="card"><h2>把条件拆开试试看</h2><p>勾选某个过程确实发生，看看两个名称各自看什么。这里是术语示意，不是在模拟某种特定染料。</p>
+<div class="diagram" aria-hidden="true"><div class="node sun">☀ 光照</div><div class="arrow">→</div><div class="node">染料发生化学变化</div><div class="arrow">→</div><div class="node">颜色可能改变</div></div>
+<div class="controls">
+<label class="control"><input id="light" type="checkbox" checked><span><b>光参与了反应</b><span class="hint">这是“光”氧化或“光”降解的前提。</span></span></label>
+<label class="control"><input id="oxidation" type="checkbox" checked><span><b>发生了氧化</b><span class="hint">氧化可涉及失去电子，也常表现为与氧气相关的反应；有氧气不自动证明发生了氧化。</span></span></label>
+<label class="control"><input id="fragments" type="checkbox"><span><b>分子被拆成更小碎片</b><span class="hint">这是 IUPAC 对“光降解”定义强调的结果；仅仅颜色变化不能证明这一点。</span></span></label>
+</div>
+<div class="results" aria-live="polite"><div class="badge photo" id="photoBadge"><strong>光氧化</strong><span>光引发了氧化反应</span></div><div class="badge degrade" id="degradeBadge"><strong>光降解</strong><span>光化学作用使分子变成更小碎片</span></div></div>
+<div class="explain" id="explain" role="status"></div>
+<p class="oxygen"><b>氧气提示：</b>氧气常参与染料的光氧化，但氧气是否在场不是这两个名称的唯一判据。术语看的是实际反应；有些光化学降解路径并不依赖氧气。</p>
+</section>
+<section class="card"><h2>记住它们各自强调什么</h2><div class="key"><div><b>光氧化：看反应类型</b><p>光把氧化反应带动起来。氧化反应不一定把整个染料分子切碎。</p></div><div><b>光降解：看分子结果</b><p>光化学作用让分子变成更小的碎片。这个过程常常是氧化，但“降解”描述的重点是分子被拆解。</p></div></div><p>在衣服上看到的“褪色”是肉眼观察到的结果；它提示染料的吸光性质改变了，却不能单独告诉我们反应机理。</p></section>
+<section class="card sources"><h2>依据</h2><ul><li>IUPAC《Gold Book》：<a href="https://goldbook.iupac.org/terms/view/P04595">photodegradation（光降解）</a>，光化学作用使分子转化为更低分子量碎片，通常是氧化过程。</li><li>IUPAC 光化学术语汇编：<a href="https://publications.iupac.org/pac-2007/2007/pdf/7903x0293.pdf">photooxidation（光氧化）</a>，包括光诱发的氧化反应，例如受光影响下与氧气反应。</li><li>Groeneveld 等，<a href="https://doi.org/10.1016/j.dyepig.2022.110999">染料和颜料光降解参数综述</a>（2023）：染料褪色途径取决于染料结构、光照与环境；氧气可改变反应途径，但不能把所有染料概括成同一种机制。</li></ul></section>
+<footer>交互中的勾选只展示术语逻辑，不代表已经测定任何衣物或染料的真实反应。</footer>
+</main>
+<script>
+const light=document.querySelector('#light'), oxidation=document.querySelector('#oxidation'), fragments=document.querySelector('#fragments');
+const pb=document.querySelector('#photoBadge'), db=document.querySelector('#degradeBadge'), explain=document.querySelector('#explain');
+function update(){
+ const photo=light.checked&&oxidation.checked;
+ const degrade=light.checked&&fragments.checked;
+ pb.classList.toggle('active',photo); db.classList.toggle('active',degrade);
+ let msg;
+ if(photo&&degrade) msg='两项都亮起：这就是重叠情形——光引发氧化，同时染料被拆成更小碎片，所以两个名称都适用。';
+ else if(photo) msg='只有“光氧化”亮起：光引发了氧化，但目前设定没有分子碎片证据。颜色可能改变，仍不能据此称为光降解。';
+ else if(degrade) msg='只有“光降解”亮起：光使分子变成小碎片，但设定没有氧化。光化学降解不必总是氧化。';
+ else if(!light.checked) msg='没有光参与时，即使发生氧化或分子断裂，也不按这里的定义叫“光”氧化或“光”降解。';
+ else msg='只有颜色变化还不足以点亮任一术语：需要知道光是否引发了氧化，或分子是否被拆成更小碎片。';
+ explain.textContent=msg;
+}
+[light,oxidation,fragments].forEach(x=>x.addEventListener('change',update)); update();
+</script>
+</body>
+</html>

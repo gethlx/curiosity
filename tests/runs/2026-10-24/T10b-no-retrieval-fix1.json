@@ -1,0 +1,118 @@
+{
+  "case": "T10b",
+  "baseline": false,
+  "model": "gpt-6-luna",
+  "reasoning_effort": "high",
+  "sandbox": {
+    "type": "readOnly",
+    "networkAccess": false
+  },
+  "discovered_skills": [
+    {
+      "name": "curiosity",
+      "path": "/Users/larry/haoqixin/curiosity/SKILL.md",
+      "enabled": true
+    },
+    {
+      "name": "eli5",
+      "path": "/Users/larry/AI-Tools/shared/skills/eli5/SKILL.md",
+      "enabled": true
+    },
+    {
+      "name": "show-me",
+      "path": "/Users/larry/AI-Tools/shared/skills/show-me/SKILL.md",
+      "enabled": true
+    }
+  ],
+  "skill_sha256": "0774a91d76d92e4a8a54430ea7b915f6aaaa8fbed2e53e03f039f9fa7866ba2e",
+  "turns": [
+    {
+      "input": [
+        {
+          "type": "skill",
+          "name": "curiosity",
+          "path": "/Users/larry/haoqixin/curiosity/SKILL.md"
+        },
+        {
+          "type": "text",
+          "text": "蓝鲸有多长？"
+        }
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "id": "01a16aa4-ba5d-72e2-b94d-fda3948b5f5b",
+          "clientId": null,
+          "content": [
+            {
+              "type": "skill",
+              "name": "curiosity",
+              "path": "/Users/larry/haoqixin/curiosity/SKILL.md"
+            },
+            {
+              "type": "text",
+              "text": "蓝鲸有多长？",
+              "text_elements": []
+            }
+          ]
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_04905bbbabd89869016adca310ea308191aca8595e31b67185",
+          "text": "成年蓝鲸通常长约 **24—30 米**，雌性一般比雄性大。",
+          "phase": "final_answer",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        }
+      ],
+      "elapsed_seconds": 7.52,
+      "first_message_seconds": 7.51,
+      "status": "completed"
+    },
+    {
+      "input": [
+        {
+          "type": "text",
+          "text": "真的吗？"
+        }
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "id": "01a16aa4-ccb4-7092-82ed-8f6fb4d1074a",
+          "clientId": null,
+          "content": [
+            {
+              "type": "text",
+              "text": "真的吗？",
+              "text_elements": []
+            }
+          ]
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_04905bbbabd89869016adca3144ab081918815c50544d573db",
+          "text": "我核对一下这个范围的依据，重点看可靠来源说的是“通常长度”还是“最大记录”。",
+          "phase": "commentary",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_04905bbbabd89869016adca31c60188191b12d9149f473fa33",
+          "text": "大体没错，但我刚才说得不够严谨：**24—30 米是成年蓝鲸的大致范围，30 米属于特别大的个体**，不能理解成蓝鲸通常都接近 30 米。我这轮无法联网核对具体来源，所以这个范围先当作概数。",
+          "phase": "final_answer",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        }
+      ],
+      "elapsed_seconds": 11.98,
+      "first_message_seconds": 3.48,
+      "status": "completed"
+    }
+  ],
+  "condition": "read-only; browser UI not provided; web_search disabled only for T10b, live otherwise; optional skills disabled=False"
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>同一场战争，怎样知道哪种说法更可靠？</title>
+<style>
+:root{--ink:#172c35;--muted:#52686e;--paper:#f5f2ea;--card:#fffdf8;--teal:#176b63;--gold:#b66a2b;--line:#d9ded5;--pale:#e7f1eb;--rose:#faeee4}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}main{max-width:950px;margin:auto;padding:32px 20px 56px}header{padding:12px 0 18px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--teal);font-weight:700;letter-spacing:.08em;font-size:.82rem}h1{font-size:clamp(1.8rem,5vw,3rem);line-height:1.15;max-width:760px;margin:.5rem 0 1rem}h2{font-size:1.25rem;margin:0 0 10px}p{margin:.5rem 0}.lead{color:var(--muted);max-width:750px;font-size:1.05rem}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:22px 0}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}.tag{display:inline-block;color:var(--teal);background:var(--pale);border-radius:99px;padding:3px 10px;font-size:.78rem;font-weight:700;margin-bottom:8px}.quote{font-size:1.06rem;font-weight:650}.small{font-size:.9rem;color:var(--muted)}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.step{padding:14px;border-top:3px solid var(--teal);background:#ffffff8c;border-radius:8px}.step b{display:block;margin-bottom:5px}.interactive{background:#eaf0ea;border-radius:18px;padding:20px;margin:25px 0}.choices{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}.choices button{font:inherit;color:var(--ink);background:var(--card);border:1px solid #aabbb3;padding:9px 13px;border-radius:11px;cursor:pointer}.choices button:hover{border-color:var(--teal)}.choices button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:white}.choices button:focus-visible{outline:3px solid #d39249;outline-offset:3px}.result{background:white;border-left:4px solid var(--gold);border-radius:8px;padding:15px;min-height:102px}.result strong{display:block;margin-bottom:4px}.caveat{background:var(--rose);border-radius:12px;padding:15px;margin:18px 0}.sources{font-size:.87rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:28px}.sources a{color:#125d57}@media(max-width:620px){main{padding:22px 15px 40px}.grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.card{padding:16px}.choices button{flex:1 1 100%;text-align:left}}
+</style>
+</head>
+<body><main>
+<header><div class="eyebrow">从“谁写得好听”到“证据能说明什么”</div><h1>同一场战争，怎样知道哪种说法更接近事实？</h1><p class="lead">事情确实只发生过一次。但我们接触到的不是那场战争本身，而是后来留下的文字、物品和痕迹。它们像几扇不完整的窗：每扇窗都能看见一些，也会挡住一些。</p></header>
+<section class="grid" aria-label="两种不同说法">
+<article class="card"><span class="tag">一份战后记录</span><p class="quote">“将军身先士卒，士兵奋勇冲锋，因此大获全胜。”</p><p class="small">它可能写给朝廷或后人看。作者也许想表扬将领、解释胜利，或让一场艰难的仗显得体面。</p></article>
+<article class="card"><span class="tag">另一份记录</span><p class="quote">“敌军粮草不足，又遇大雨，队伍混乱，最后撤走。”</p><p class="small">它可能来自另一方，也可能离事件更久。作者有自己的消息来源和立场，也可能遗漏细节。</p></article>
+</section>
+<p>两段都可能抓到了一部分，也都可能把原因讲得太简单。关键是分清：<b>发生了什么</b>，以及<b>作者怎样解释、评价它</b>。</p>
+<section class="steps" aria-label="比较史料的方法">
+<div class="step"><b>① 拆开说法</b>把“英勇”“懦弱”拆成具体问题：谁下了什么命令？什么时候撤退？当时还有哪些选择？</div>
+<div class="step"><b>② 查材料从哪来</b>谁写的、何时写、写给谁看？亲历者也会有盲区；离得近不等于什么都知道。</div>
+<div class="step"><b>③ 找独立线索对照</b>把不同记录与信件、地形、遗址、武器或粮食账目比较。彼此独立的线索相合，判断通常更稳。</div>
+</section>
+<section class="interactive" aria-labelledby="try-title"><h2 id="try-title">试着判断：这条线索能证明什么？</h2><p>下面是一个<b>虚构</b>的古代战例，只用来练习推理，不对应真实战争。点一条线索，看看它支持到哪一步。</p>
+<div class="choices" role="group" aria-label="选择一条线索">
+<button type="button" aria-pressed="true" data-key="record">本方记载：将军带头冲锋，军队获胜。</button>
+<button type="button" aria-pressed="false" data-key="letter">士兵家书：雨大、粮少，队伍等不到援军。</button>
+<button type="button" aria-pressed="false" data-key="site">战场遗址：发现双方武器，也有仓储和营地痕迹。</button>
+</div><div class="result" id="result" aria-live="polite"><strong id="result-title">这条线索可以支持什么？</strong><span id="result-text"></span></div></section>
+<section class="interactive" aria-labelledby="independent-title"><h2 id="independent-title">“十本书”一定比“一封家书”更可靠吗？</h2><p>关键要看它们是不是各自从不同线索得来，而不只是数材料有几份。选一个情况看看：</p>
+<div class="choices" role="group" aria-label="比较证据是否独立">
+<button type="button" aria-pressed="true" data-chain="copies">十本书都照抄同一份旧史书。</button>
+<button type="button" aria-pressed="false" data-chain="separate">十本书分别引用不同的家书、军令和考古记录。</button>
+<button type="button" aria-pressed="false" data-chain="letter">只有一封来源可靠、写于当时的士兵家书。</button>
+</div><div class="result" id="chain-result" aria-live="polite"><strong id="chain-title">先看它们背后的来源链。</strong><span id="chain-text">十本书互相重复，并没有让这句话多出九份独立证据；它们可能都依赖同一个旧来源。还要查它们有没有额外材料。</span></div><p class="small">“独立”主要说证据来源或依据彼此分开，不是说作者一定互不认识。作者认识也不自动让证据无效；重点是他们是否共享同一个消息来源。</p></section>
+<div class="caveat"><b>所以，“更接近哪一种”不是看谁写得更激动，也不是简单数有几本书赞成。</b><br>看哪些具体细节能被不同来源互相印证，再看剩下的部分是不是作者的解释。两种说法也可能各自正确一部分。若证据不够，我们就应该说“目前不知道”，而不是硬选一个赢家。</div>
+<p>还有一个容易漏掉的区别：资料能帮我们判断“做了什么、为什么可能这样做”，却未必能替我们决定这个人“英不英勇”。评价还要说明你用的标准是什么；史实和评价有关，但不是同一件事。</p>
+<footer class="sources"><b>方法依据：</b>美国国会图书馆建议先观察史料，再思考作者、背景与目的，并提出问题、继续调查；它也提醒，原始材料往往只是过去留下的片段，彼此可能不完整甚至矛盾。<a href="https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/">国会图书馆：原始史料入门</a> · <a href="https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/guides/">史料分析工具</a><br><span>页面中的战争材料为虚构例子；它展示的是读史方法，不是在判断任何一场具体战争。</span></footer>
+</main><script>
+const data={
+ record:{title:'能支持：本方记录把胜利和将军的冲锋联系起来。',text:'还不能单靠它证明将军确实亲自冲锋，也不能证明“勇敢”就是胜利的唯一原因。要继续找作者身份、写作时间和其他独立记录。'},
+ letter:{title:'能支持：写信的人当时感受到雨、缺粮和等待援军。',text:'如果信件确实出自当时的士兵，它是接近现场的证据；但一个人的经历不一定代表整支军队，也还不能单独证明缺粮导致了胜负。'},
+ site:{title:'能支持：那里发生过军事活动，留下了不同类型的痕迹。',text:'遗址能帮助判断地点、装备和生活状况，但通常不会自己告诉我们谁更勇敢、哪道命令是谁下的。还要结合年代测定和文字材料。'}
+};
+document.querySelectorAll('.choices button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.choices button').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));const d=data[btn.dataset.key];document.getElementById('result-title').textContent=d.title;document.getElementById('result-text').textContent=d.text;}));
+const chains={
+ copies:{title:'数量是十本，可能只有一条来源链。',text:'如果它们都抄同一份旧史书，这十本书并没有让这句话多出九份独立证据。还要查旧史书根据什么写成，以及后来作者有没有找到新材料。'},
+ separate:{title:'多种彼此独立的材料互相印证，会让判断更稳。',text:'不同书信、军令和遗址可能从不同角度支持某个细节。但仍要核对年代、真实性，以及这些材料究竟支持哪一个具体说法。'},
+ letter:{title:'一封家书是有价值的一条线索，不是整场战争的全景。',text:'它能说明写信者当时报告或经历了什么；不能单独代表全军，也不能自动证明雨和缺粮就是胜负的原因。若后来找到另一份独立记录支持相同细节，判断会更有把握。'}
+};
+document.querySelectorAll('[data-chain]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-chain]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));const d=chains[btn.dataset.chain];document.getElementById('chain-title').textContent=d.title;document.getElementById('chain-text').textContent=d.text;}));
+</script></body></html>

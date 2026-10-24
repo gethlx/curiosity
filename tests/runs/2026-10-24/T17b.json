@@ -1,0 +1,81 @@
+{
+  "case": "T17b",
+  "baseline": false,
+  "model": "gpt-6-luna",
+  "reasoning_effort": "high",
+  "sandbox": {
+    "type": "readOnly",
+    "networkAccess": false
+  },
+  "discovered_skills": [
+    {
+      "name": "curiosity",
+      "path": "/Users/larry/haoqixin/curiosity/SKILL.md"
+    },
+    {
+      "name": "eli5",
+      "path": "/Users/larry/AI-Tools/shared/skills/eli5/SKILL.md"
+    },
+    {
+      "name": "show-me",
+      "path": "/Users/larry/AI-Tools/shared/skills/show-me/SKILL.md"
+    }
+  ],
+  "skill_sha256": "39dc5fa69172572aadaf60c0286c7d9655f06613f161f03f1288dc38604dbd02",
+  "turns": [
+    {
+      "input": [
+        {
+          "type": "skill",
+          "name": "curiosity",
+          "path": "/Users/larry/haoqixin/curiosity/SKILL.md"
+        },
+        {
+          "type": "text",
+          "text": "只用文字比下浮体静止平横和稳订性，定义懂了，直接说成立条见。"
+        }
+      ],
+      "items": [
+        {
+          "type": "userMessage",
+          "id": "01a16aa0-dab8-7731-84d0-66fc553fee11",
+          "clientId": null,
+          "content": [
+            {
+              "type": "skill",
+              "name": "curiosity",
+              "path": "/Users/larry/haoqixin/curiosity/SKILL.md"
+            },
+            {
+              "type": "text",
+              "text": "只用文字比下浮体静止平横和稳订性，定义懂了，直接说成立条见。",
+              "text_elements": []
+            }
+          ]
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_085863748b4a8bc6016adca21267508191886c236a88d299b1",
+          "text": "我会按 curiosity 技能的要求，跳过已懂的定义，直接讲条件。",
+          "phase": "commentary",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        },
+        {
+          "type": "agentMessage",
+          "id": "msg_085863748b4a8bc6016adca212a828819197c9518c196ecc27",
+          "text": "**浮体静止平衡：**\n\n- 浮力等于重力：\\(F浮=G\\)。\n- 浮力和重力的作用线在同一条竖直线上，因此合力矩为零。\n\n**浮体稳定平衡：**\n\n- 先满足静止平衡。\n- 受到微小倾斜后，浮力与重力形成的力矩能使它回正。小角度范围内，这通常等价于**稳心 M 高于重心 G**（\\(GM>0\\)）。\n\n若 \\(M\\) 与 \\(G\\) 重合，是中性平衡；若 \\(M\\) 低于 \\(G\\)，则是不稳定平衡。",
+          "phase": "final_answer",
+          "memoryCitation": null,
+          "delivery": null,
+          "questions": null
+        }
+      ],
+      "elapsed_seconds": 7.36,
+      "first_message_seconds": 5.89,
+      "status": "completed"
+    }
+  ],
+  "condition": "read-only filesystem; browser UI not provided; web_search disabled only for T10b, live otherwise"
+}

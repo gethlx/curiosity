@@ -1,0 +1,9 @@
+{
+  "type": "targeted_regression",
+  "source": "tests/exploratory/2026-10-24/S1/artifacts/turn-3/curiosity-tree-roots.html",
+  "copy": "input-artifact/curiosity-tree-roots.html",
+  "sha256": "a3e5f5d22b6c74f7bff9030155be58b2005bcdd9c19d190cb6629dd165d2996c",
+  "injected_into": "temporary P6 workspace before first UI message",
+  "model_received_diagnosis": false,
+  "model_received_expected_solution": false
+}

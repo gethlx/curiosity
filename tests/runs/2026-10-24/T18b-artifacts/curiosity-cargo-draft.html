@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>货物有多重，船就沉多深？</title>
+<style>
+:root{color-scheme:light;--ink:#16333b;--muted:#56727a;--paper:#f3f8f7;--card:#fff;--line:#d8e7e5;--teal:#147c79;--blue:#63c6da;--orange:#bd5b34;--soft:#e9f4f2;--shadow:0 16px 48px #153d4310}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#e7f3f0 0,#f3f8f7 340px);color:var(--ink);font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1080px;margin:0 auto;padding:48px 24px 64px}header{max-width:720px;margin:0 auto 28px;text-align:center}.eyebrow{color:var(--teal);font-weight:750;letter-spacing:.08em;font-size:.8rem;text-transform:uppercase}h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.08;letter-spacing:-.04em;margin:12px 0}header p{max-width:620px;margin:14px auto;color:var(--muted);font-size:1.05rem}
+.layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:18px;align-items:stretch}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:24px}.visual-card{display:flex;flex-direction:column;min-height:500px}.visual-top{display:flex;justify-content:space-between;gap:12px;align-items:start}.visual-top h2,.controls h2,.explain h2{font-size:1.2rem;margin:0 0 4px}.micro{font-size:.88rem;color:var(--muted);margin:0}.badge{white-space:nowrap;border-radius:999px;padding:6px 10px;background:var(--soft);color:var(--teal);font-size:.78rem;font-weight:700}.scene{width:100%;max-width:600px;margin:auto;display:block}.scene .water{transition:y .2s,height .2s}.scene .boat{transition:transform .2s}.scene-label{font-size:14px;fill:#315760}.scene-small{font-size:12px;fill:#56727a}.scene-line{stroke:#66858a;stroke-width:1.5;stroke-dasharray:5 5}.readouts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.readout{background:#f5f9f8;border-radius:14px;padding:12px 14px}.readout span{display:block;color:var(--muted);font-size:.8rem}.readout strong{font-size:1.35rem;letter-spacing:-.03em}.readout em{font-size:.8rem;font-style:normal;color:var(--muted);font-weight:500}
+.controls{display:flex;flex-direction:column}.mass{display:flex;justify-content:space-between;align-items:baseline;margin:22px 0 6px}.mass strong{font-size:2.1rem;letter-spacing:-.04em}.mass span{color:var(--muted)}label{font-weight:700}.range{width:100%;accent-color:var(--teal);height:30px;cursor:pointer}.range:focus-visible,button:focus-visible{outline:3px solid #e2a34f;outline-offset:3px}.limits{display:flex;justify-content:space-between;color:var(--muted);font-size:.82rem}.presets{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 20px}button{font:inherit;cursor:pointer}.preset{border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);padding:8px 12px;font-size:.85rem}.preset:hover{border-color:var(--teal);background:#f1f9f7}.preset[aria-pressed="true"]{border-color:var(--teal);background:var(--soft);color:#075f5c;font-weight:700}.status{border-left:4px solid var(--teal);border-radius:8px;background:var(--soft);padding:14px 15px;margin:0 0 16px}.status.warn{border-color:var(--orange);background:#fff2eb}.status strong{display:block;margin-bottom:3px}.status p{margin:0;color:#345961;font-size:.92rem}.equation{border-top:1px solid var(--line);padding-top:16px;margin-top:auto;color:var(--muted);font-size:.9rem}.equation code{font:600 .96rem ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);background:#f3f7f6;border-radius:6px;padding:3px 6px}.explain{margin-top:18px}.explain p{margin:8px 0 0;color:var(--muted);font-size:.94rem}.assumptions{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:18px}.assumptions .card{box-shadow:none}.assumptions h2{font-size:1rem;margin:0 0 8px}.assumptions p,.assumptions li{font-size:.87rem;color:var(--muted)}.assumptions p{margin:0}.assumptions ul{margin:0;padding-left:19px}.source{font-size:.8rem!important;overflow-wrap:anywhere}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:760px){main{padding:30px 16px 40px}.layout{grid-template-columns:1fr}.visual-card{min-height:390px}.scene{margin:16px auto}.assumptions{grid-template-columns:1fr}.card{padding:20px}}
+@media(max-width:390px){.visual-top{display:block}.badge{display:inline-block;margin-top:10px}.scene-label{font-size:13px}.readout strong{font-size:1.2rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="eyebrow">小小浮力实验室</div>
+<h1>货物有多重，船就沉多深？</h1>
+<p>拖动货物滑块，看看船身怎样下沉。船越重，需要排开越多水，浮力才能托住它；但船口有一道不能越过的边界。</p>
+</header>
+<section class="layout" aria-label="载货与吃水互动模型">
+<article class="card visual-card">
+<div class="visual-top"><div><h2>船在水里的样子</h2><p class="micro">示意图：水线会随当前吃水移动</p></div><span class="badge" id="sceneBadge">漂浮平衡</span></div>
+<svg class="scene" viewBox="0 0 600 330" role="img" aria-labelledby="svgTitle svgDesc">
+<title id="svgTitle">长方形船体吃水示意图</title><desc id="svgDesc">船体高零点五米，水线表示当前吃水，标尺表示水面到船底的距离。</desc>
+<defs><pattern id="waves" width="48" height="18" patternUnits="userSpaceOnUse"><path d="M0 9 Q12 2 24 9 T48 9" fill="none" stroke="#a6e0e8" stroke-width="2" opacity=".75"/></pattern><linearGradient id="sea" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#b9eaf0"/><stop offset="1" stop-color="#70c9d8"/></linearGradient></defs>
+<rect x="40" y="62" width="520" height="220" rx="18" fill="#f3faf9"/>
+<rect id="water" x="40" y="192" width="520" height="90" fill="url(#sea)"/><rect id="wavePattern" x="40" y="192" width="520" height="24" fill="url(#waves)"/>
+<line x1="55" y1="192" x2="545" y2="192" stroke="#167f90" stroke-width="3"/>
+<g id="boat" class="boat"><path d="M170 122 H430 V242 Q430 251 420 251 H180 Q170 251 170 242 Z" fill="#f8fbf5" stroke="#315760" stroke-width="4"/><path d="M170 232 H430 V242 Q430 251 420 251 H180 Q170 251 170 242 Z" fill="#d7a65a"/><line x1="170" y1="232" x2="430" y2="232" stroke="#315760" stroke-width="3"/><rect x="205" y="145" width="190" height="62" rx="8" fill="#e5f0ed" stroke="#9bb8b5"/><path d="M224 167h45m15 0h45m15 0h31M224 185h60m16 0h74" stroke="#b0c6c3" stroke-width="4" stroke-linecap="round"/></g>
+<line id="draftLine" x1="458" y1="192" x2="458" y2="232" stroke="#bd5b34" stroke-width="2.5"/><path id="draftTop" d="M452 192l6-8 6 8" fill="none" stroke="#bd5b34" stroke-width="2.5"/><path id="draftBottom" d="M452 232l6 8 6-8" fill="none" stroke="#bd5b34" stroke-width="2.5"/>
+<line x1="447" y1="122" x2="470" y2="122" class="scene-line"/><line x1="447" y1="251" x2="470" y2="251" class="scene-line"/>
+<text x="64" y="179" class="scene-label">水面</text><text x="176" y="108" class="scene-label">船口边界</text><text x="464" y="215" class="scene-label" id="svgDraft">吃水</text><text x="48" y="307" class="scene-small">船底</text><text x="435" y="305" class="scene-small">水面到船底 = 吃水</text>
+</svg>
+<div class="readouts"><div class="readout"><span>当前吃水</span><strong id="draftValue">0.10 <em>m</em></strong></div><div class="readout"><span>水面到船口余量</span><strong id="freeboardValue">0.40 <em>m</em></strong></div></div>
+</article>
+<article class="card controls">
+<h2>给船加货物</h2><p class="micro">只调整货物质量；船体自身重量固定为 200 kg。</p>
+<div class="mass"><label for="cargo">货物质量</label><strong><span id="cargoValue">0</span><span style="font-size:1rem;letter-spacing:0"> kg</span></strong></div>
+<input class="range" id="cargo" type="range" min="0" max="1000" step="10" value="0" aria-describedby="rangeHelp"><div class="limits"><span>0 kg</span><span>1000 kg</span></div><p class="sr-only" id="rangeHelp">键盘方向键可按步长调整。总质量达到 1000 千克时到达船口边界。</p>
+<div class="presets" aria-label="快速选择货物质量"><button class="preset" data-mass="0" aria-pressed="true">空载</button><button class="preset" data-mass="300" aria-pressed="false">300 kg</button><button class="preset" data-mass="800" aria-pressed="false">到达边界</button><button class="preset" data-mass="1000" aria-pressed="false">超出边界</button></div>
+<div class="status" id="status" role="status" aria-live="polite"><strong id="statusTitle">船正漂浮</strong><p id="explanation">船体和货物合计 200 kg。要托住它，船体排开了 0.20 m³ 的水；在这个模型里，吃水是 0.10 m。</p></div>
+<div class="readouts"><div class="readout"><span>船体自重 + 货物</span><strong id="totalMass">200 <em>kg</em></strong></div><div class="readout"><span>到达船口时最多可载</span><strong>800 <em>kg 货物</em></strong></div></div>
+<div class="equation"><strong>模型关系</strong><p><code>吃水 d = 总质量 m ÷ (水密度 ρ × 水下截面积 A)</code></p><p>此船：A = 2 m²，ρ = 1000 kg/m³，船口高 H = 0.5 m。</p></div>
+</article>
+</section>
+<section class="card explain"><h2>为什么加货会让船下沉？</h2><p>船下沉一点，就会排开更多水。静止漂浮时，水给船的向上浮力刚好平衡船体加货物的总重量。这里把真实船的复杂形状简化成直壁长方形：水下体积 = 截面积 × 吃水，所以质量增加时，吃水按比例增加。</p></section>
+<section class="assumptions" aria-label="模型条件与来源">
+<article class="card"><h2>模型条件与边界</h2><ul><li>船是水平、直立、刚性且不漏水的敞口长方形容器；水面静止。</li><li>忽略波浪、侧翻、船体变形，以及水进入船后的运动。</li><li>到达船口后，模型不再判断它是否稳定漂浮，也不推演进水过程。</li><li>“最多可载 800 kg”只对应这个自拟模型的船口边界，不是真船的安全载荷。</li></ul></article>
+<article class="card"><h2>依据</h2><p class="source">浮体平衡关系：得克萨斯大学《Archimedes' Principle》讲义。https://farside.ph.utexas.edu/teaching/336L/Fluidhtml/node27.html</p><p class="source" style="margin-top:8px">船体几何、尺寸、质量与示意图均为本页面的教学设定，不代表某一艘真实船。</p></article>
+</section>
+</main>
+<script>
+(()=>{
+ const cargo=document.getElementById('cargo'), cargoValue=document.getElementById('cargoValue'), draftValue=document.getElementById('draftValue'), freeboardValue=document.getElementById('freeboardValue'), totalMass=document.getElementById('totalMass'), status=document.getElementById('status'), statusTitle=document.getElementById('statusTitle'), explanation=document.getElementById('explanation'), water=document.getElementById('water'), wavePattern=document.getElementById('wavePattern'), boat=document.getElementById('boat'), draftLine=document.getElementById('draftLine'), draftTop=document.getElementById('draftTop'), draftBottom=document.getElementById('draftBottom'), svgDraft=document.getElementById('svgDraft'), badge=document.getElementById('sceneBadge');
+ const A=2,rho=1000,H=.5,hull=200,boundary=rho*A*H,maxCargo=1000,waterlineTop=122,waterlineBottom=251,scale=(waterlineBottom-waterlineTop)/H;
+ const fmt=n=>Number(n).toFixed(2);
+ function update(){
+   const cargoKg=Number(cargo.value),m=hull+cargoKg,atOrPast=m>=boundary,over=m>boundary;
+   cargoValue.textContent=String(cargoKg);totalMass.innerHTML=`${m} <em>kg</em>`;
+   document.querySelectorAll('.preset').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.mass)===cargoKg)));
+   if(!atOrPast){
+     const d=m/(rho*A),y=waterlineBottom-d*scale,free=H-d;
+     water.setAttribute('y',String(y));water.setAttribute('height',String(282-y));wavePattern.setAttribute('y',String(y));boat.setAttribute('transform','translate(0 0)');
+     const lineBottom=waterlineBottom;draftLine.setAttribute('y1',String(y));draftLine.setAttribute('y2',String(lineBottom));draftTop.setAttribute('d',`M452 ${y}l6-8 6 8`);draftBottom.setAttribute('d',`M452 ${lineBottom}l6 8 6-8`);
+     draftValue.innerHTML=`${fmt(d)} <em>m</em>`;freeboardValue.innerHTML=`${fmt(free)} <em>m</em>`;svgDraft.textContent=`${fmt(d)} m`;
+     status.classList.remove('warn');badge.textContent='漂浮平衡';statusTitle.textContent='船正漂浮';explanation.textContent=`船体和货物合计 ${m} kg。要托住它，船体排开了 ${fmt(m/rho)} m³ 的水；在这个模型里，吃水是 ${fmt(d)} m。`;
+   }else{
+     water.setAttribute('y',String(waterlineTop));water.setAttribute('height','160');wavePattern.setAttribute('y',String(waterlineTop));boat.setAttribute('transform','translate(0 0)');
+     draftLine.setAttribute('y1',String(waterlineTop));draftLine.setAttribute('y2',String(waterlineBottom));draftTop.setAttribute('d',`M452 ${waterlineTop}l6-8 6 8`);draftBottom.setAttribute('d',`M452 ${waterlineBottom}l6 8 6-8`);
+     draftValue.innerHTML='— <em>m</em>';freeboardValue.innerHTML='0.00 <em>m</em>';svgDraft.textContent='边界';
+     status.classList.add('warn');badge.textContent=over?'超过船口边界':'到达船口边界';statusTitle.textContent=over?'已超过进水边界':'已到达进水边界';
+     explanation.textContent=over?`船体和货物合计 ${m} kg，已超过模型边界 ${boundary} kg。船口会没入水中；此后公式外推值不能当作实际吃水，也不代表稳定漂浮。`:`船体和货物合计 ${m} kg，恰好到达模型边界 ${boundary} kg。船口没有余量；页面停止给出稳定漂浮后的吃水。`;
+   }
+ }
+ cargo.addEventListener('input',update);document.querySelectorAll('.preset').forEach(b=>b.addEventListener('click',()=>{cargo.value=b.dataset.mass;update();cargo.focus()}));update();
+})();
+</script>
+</body>
+</html>

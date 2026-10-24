@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>衣服的颜色去哪儿了？</title>
+<style>
+:root{color-scheme:light;--ink:#182b34;--muted:#536971;--paper:#f5f2e9;--card:#fffdf7;--sun:#e8a642;--blue:#427d86;--line:#d9ded8}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:930px;margin:auto;padding:34px 22px 52px}h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.12;letter-spacing:-.04em;margin:12px 0}h2{font-size:1.3rem;margin:0 0 10px}.eyebrow{color:#9a6521;font-weight:750;letter-spacing:.08em;font-size:.82rem}.lead{max-width:690px;font-size:1.12rem;color:#344b54;margin:15px 0 24px}.answer{background:#183b43;color:#f8f5eb;border-radius:20px;padding:20px 23px;margin:24px 0;box-shadow:0 10px 30px #17353d13}.answer strong{color:#ffd584}.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 25px #17353d08}.scene{display:grid;gap:15px}.clothbox{border-radius:14px;background:linear-gradient(135deg,#f5ead5,#f9f4e8);padding:14px;min-height:155px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}.cloth{width:195px;height:110px;background-color:rgb(33,129,119);border-radius:8px 8px 22px 22px;clip-path:polygon(17% 0,39% 0,50% 16%,61% 0,83% 0,100% 28%,82% 40%,77% 24%,77% 100%,23% 100%,23% 24%,18% 40%,0 28%);filter:saturate(var(--sat,1));transition:filter .25s ease,background-color .25s ease}.sunbeam{position:absolute;inset:0 0 auto;height:100%;background:linear-gradient(110deg,transparent 22%,#ffd56855 47%,#fff0 72%);pointer-events:none}.cabinet{background:#e4e8e3;border-radius:12px;padding:12px 14px;color:#344b54;display:flex;justify-content:space-between;gap:10px;align-items:center}.cabinet .shirt{width:64px;height:40px;background:#218177;border-radius:5px;clip-path:polygon(20% 0,40% 0,50% 15%,60% 0,80% 0,100% 25%,83% 40%,75% 25%,75% 100%,25% 100%,25% 25%,17% 40%,0 25%)}.control{margin-top:12px}.control label{display:flex;justify-content:space-between;font-weight:700;gap:10px}.control input{width:100%;accent-color:#b47a24;margin:13px 0 4px}.small{font-size:.89rem;color:var(--muted)}.molecule{height:118px;border-radius:14px;background:#edf3ef;display:flex;align-items:center;justify-content:center;margin:13px 0;gap:9px;position:relative}.atom{width:53px;height:53px;border-radius:50%;background:#218177;box-shadow:inset -6px -7px 0 #00000018;transition:background .25s,transform .25s}.bond{height:4px;width:21px;background:#49666c;border-radius:9px}.spark{position:absolute;top:16px;right:19px;color:#c3831e;font-size:1.4rem;opacity:var(--spark,.7)}.status{font-weight:750;color:#285e62;margin-top:10px}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.step{border-top:2px solid #bdc9c3;padding-top:9px;font-size:.92rem;color:#38515a}.step b{display:block;color:#173b43;margin-bottom:3px}.note{background:#f0eadc;border-radius:12px;padding:12px 14px;font-size:.9rem;color:#4e5c5c;margin-top:15px}.sources{margin-top:22px;color:var(--muted);font-size:.86rem}.sources p{margin:6px 0}.sources code{font-family:inherit;color:#364b50;overflow-wrap:anywhere}.footer{margin-top:18px;color:#687b7f;font-size:.8rem}
+@media(max-width:700px){main{padding:25px 16px 40px}.grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.step{border-top:1px solid #bdc9c3}.card{padding:17px}.lead{font-size:1.04rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">从阳台上的衣服说起</div>
+<h1>颜色是怎么被太阳“晒没”的？</h1>
+<p class="lead">你看到的不是布料里的颜色像水一样蒸发了。通常是给布染色的分子被光改变了，布料因此反射出不同的光，我们眼里的颜色也就变淡或变了。</p>
+<section class="answer"><strong>先抓住关键：</strong>阳光里的紫外线和可见光都可能给染料分子能量。分子结构一变，它吸收、反射光的方式也会变；有些还会和空气中的氧发生反应，逐渐失去原来的颜色。柜子里接触到的光少得多，所以变化通常慢得多。</section>
+<div class="grid">
+<section class="card scene" aria-labelledby="scene-title">
+<div><h2 id="scene-title">把衣服从柜子移到阳光下</h2><p class="small">拖动“光照累积”滑块。布面和右边的染料示意会一起变化。</p></div>
+<div class="clothbox" aria-label="衣服颜色随光照累积逐渐变淡的示意"><div class="cloth" id="cloth"></div><div class="sunbeam" id="beam"></div></div>
+<div class="cabinet"><div><b>柜子里的衣服</b><div class="small">光少，光照造成的变化通常较慢</div></div><div class="shirt" aria-hidden="true"></div></div>
+<div class="control"><label for="exposure"><span>阳台上的光照累积</span><output id="value">35 / 100</output></label><input id="exposure" type="range" min="0" max="100" value="35" aria-describedby="range-help"><div class="small" id="range-help">这里只表示相对增加的光照，不对应具体天数或真实褪色速度。</div></div>
+</section>
+<section class="card" aria-labelledby="m-title">
+<h2 id="m-title">染料分子发生了什么？</h2>
+<p>能显色的染料分子会挑选性地吸收某些颜色的光，再让其余光进入我们的眼睛。光可能改变它的分子结构，或促成氧化反应。</p>
+<div class="molecule" id="molecule" role="img" aria-label="染料分子结构示意，颜色逐渐改变"><span class="atom"></span><span class="bond"></span><span class="atom"></span><span class="bond"></span><span class="atom"></span><span class="spark" aria-hidden="true">✦</span></div>
+<div class="status" id="status" aria-live="polite">光照增加，部分染料分子已改变</div>
+<p class="small" id="explain">分子吸收光的方式改变了，布料反射出来的颜色也跟着变。图中只是解释关系的示意，不是某一种真实染料的化学结构。</p>
+<div class="steps"><div class="step"><b>1 · 光到达</b>阳光含可见光，也含肉眼看不见的紫外线。</div><div class="step"><b>2 · 分子改变</b>染料吸收光能后，可能发生结构变化或氧化。</div><div class="step"><b>3 · 颜色改变</b>分子不再像原来那样吸收光，衣服就褪色或变色。</div></div>
+</section>
+</div>
+<div class="note"><b>还有一层：</b>光也会慢慢损伤某些纤维，让布料变脆或变弱。褪色程度不只看“晒了多久”，还和染料种类、光强、紫外线、空气与湿度等有关；不同衣服差别很大。</div>
+<section class="sources" aria-label="资料来源"><b>资料依据</b><p>加拿大文物保护研究所（Canadian Conservation Institute），《Caring for textiles and costumes》：讨论光和紫外线对纺织品染料及纤维的损伤。</p><p>美国国会图书馆，《Why does ultraviolet light cause color to fade?》：将光引发的褪色称为光降解（photodegradation）。</p><p>本页图形是定性教学模型：只呈现“光照累积增加，颜色改变风险上升”的关系，不预测某件衣服会在几天内褪到什么程度。</p></section>
+<div class="footer">可以把它记成：衣服还在，染料分子和它与光的关系变了。</div>
+</main>
+<script>
+const slider=document.getElementById('exposure');
+const out=document.getElementById('value');
+const cloth=document.getElementById('cloth');
+const beam=document.getElementById('beam');
+const status=document.getElementById('status');
+const explain=document.getElementById('explain');
+const atoms=[...document.querySelectorAll('.atom')];
+const molecule=document.getElementById('molecule');
+function update(){
+ const x=Number(slider.value), t=x/100;
+ out.value=`${x} / 100`;out.textContent=`${x} / 100`;
+ const s=1-.72*t;
+ cloth.style.setProperty('--sat',`${s}`);
+ cloth.style.backgroundColor=`rgb(${Math.round(33+180*t)},${Math.round(129+76*t)},${Math.round(119+78*t)})`;
+ beam.style.opacity=String(.14+.72*t);
+ const colors=['#218177','#d5a94d','#b9a69a'];
+ atoms.forEach((a,i)=>{a.style.backgroundColor=t<.12?'#218177':colors[Math.min(2,Math.floor(t*3.2))];a.style.transform=`scale(${1-.12*t})`});
+ molecule.style.setProperty('--spark',String(.15+.8*t));
+ if(x===0){status.textContent='几乎没有光照：染料仍接近原来的状态';explain.textContent='这是示意起点。柜子里光少，光造成的褪色通常会慢很多，但不代表衣物永远不会老化。'}
+ else if(x<35){status.textContent='少量光照：可能已有少部分分子改变';explain.textContent='人眼通常不会逐个看见分子变化；许多分子一起改变后，整体颜色才可能看出差异。'}
+ else if(x<72){status.textContent='光照累积：部分染料分子已改变';explain.textContent='分子吸收光的方式改变了，布料反射出来的颜色也跟着变。实际速度取决于具体染料、光照和环境。'}
+ else{status.textContent='较多光照：褪色更明显，纤维也可能受损';explain.textContent='长时间强光会累积损伤。某些染料先褪，混合颜色就可能偏向另一种颜色；纤维也可能逐渐变弱。'}
+ molecule.setAttribute('aria-label',status.textContent+'。分子形状和具体反应仅作示意');
+}
+slider.addEventListener('input',update);update();
+</script>
+</body>
+</html>

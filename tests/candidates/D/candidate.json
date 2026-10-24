@@ -1,0 +1,18 @@
+{
+  "candidate": "D",
+  "date": "2026-10-24",
+  "status": "experience_complete_with_unresolved_findings",
+  "previous_candidate_record": "../../candidates/C/tests/runs/2026-10-24/candidate.json",
+  "files": {
+    "curiosity/SKILL.md": "83aebcc590fdd1cd618d918896b79737a8cdda5e3e6a6106581ac6c85a78d341",
+    "curiosity/references/page-spec.md": "89bd7b1cfc2e463836db1d689ba7ff2ea8782a37944a41a93c7d2bc05660c7ea",
+    "samples/curiosity-buoyancy.html": "cd7ff161960f4a7498576124ff13e133f7c27a0f57475690b1fb3c985cc35c2e",
+    "samples/curiosity-shadow.html": "3577236c35c3b5b83e494f970e03bb438c6091abc83c93fcd61514400e571648"
+  },
+  "skill_characters": {
+    "C": 2184,
+    "D": 2154
+  },
+  "change": "Merged accuracy conditions, replace affected text/labels/interaction when correcting, main-explanation concepts, ordinary source links allowed. No age profiles or safety gates added.",
+  "report": "../../exploratory/2026-10-24-D/REPORT.md"
+}

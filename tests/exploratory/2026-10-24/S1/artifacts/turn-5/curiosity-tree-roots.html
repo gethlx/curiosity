@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>树根怎么顶起地砖？</title>
+<style>
+  :root { color-scheme: light; --ink:#19332b; --muted:#53665f; --green:#28734e; --soil:#b88b62; --tile:#d7dfe1; --line:#9badab; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#f3f7f2; color:var(--ink); font:17px/1.55 system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC",sans-serif; }
+  main { width:min(900px,100%); margin:auto; padding:28px 20px 36px; }
+  h1 { font-size:clamp(1.7rem,5vw,2.35rem); line-height:1.2; margin:0 0 10px; }
+  p { margin:8px 0; }
+  .lead { color:var(--muted); max-width:690px; }
+  .card { background:#fff; border:1px solid #dce7de; border-radius:18px; padding:18px; margin-top:18px; box-shadow:0 8px 26px #244b3510; }
+  figure { margin:0; }
+  svg { display:block; width:100%; height:auto; border-radius:12px; background:#edf5e9; }
+  .controls { display:grid; grid-template-columns:1fr auto; align-items:center; gap:8px 16px; margin-top:14px; }
+  label { font-weight:700; }
+  output { color:var(--green); font-weight:700; }
+  input[type=range] { grid-column:1 / -1; width:100%; accent-color:var(--green); min-height:28px; }
+  input[type=range]:focus-visible { outline:3px solid #e29f35; outline-offset:4px; border-radius:4px; }
+  .explain { min-height:3.2em; margin-top:8px; color:#28463a; }
+  .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:16px; }
+  .step { background:#f4f8f3; border-radius:12px; padding:12px; }
+  .step b { display:block; color:var(--green); margin-bottom:3px; }
+  .note { font-size:.9rem; color:var(--muted); }
+  .sources { font-size:.86rem; color:#52645d; border-top:1px solid #e3ebe3; padding-top:12px; margin-top:16px; }
+  @media (max-width:520px) {
+    main { padding:22px 14px 28px; }
+    .card { padding:13px; }
+    .steps { grid-template-columns:1fr; gap:7px; }
+    body { font-size:16px; }
+  }
+  @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>树根怎么顶起地砖？</h1>
+  <p class="lead">摸起来不够硬，为什么还能抬起石头？拖动下面的滑块，看看“根慢慢变粗”时会发生什么。</p>
+  <section class="card" aria-labelledby="diagram-title">
+    <figure>
+      <svg viewBox="0 0 760 360" role="img" aria-labelledby="diagram-title diagram-desc">
+        <title id="diagram-title">树根在地砖下面逐渐变粗的示意图</title>
+        <desc id="diagram-desc">树根横向长在土里，位于两块地砖下方。拖动滑块会让根变粗，并在示意图中逐渐把右边地砖顶起。</desc>
+        <rect x="0" y="170" width="760" height="190" fill="#b88b62"/>
+        <path d="M0 171 Q120 165 235 171 T470 170 T760 171" fill="none" stroke="#72543c" stroke-width="5"/>
+        <path d="M118 172 C118 130 115 91 111 50 M116 110 C75 92 55 73 42 53 M114 101 C151 83 168 62 178 40 M117 132 C157 127 182 114 205 94" fill="none" stroke="#28734e" stroke-width="18" stroke-linecap="round"/>
+        <path d="M116 170 C200 189 286 204 378 218 C450 229 518 228 600 222" fill="none" stroke="#795438" stroke-width="54" stroke-linecap="round" id="root-shadow" opacity=".22"/>
+        <path d="M116 170 C200 189 286 204 378 218 C450 229 518 228 600 222" fill="none" stroke="#a8794d" stroke-width="46" stroke-linecap="round" id="root"/>
+        <path d="M116 170 C200 189 286 204 378 218 C450 229 518 228 600 222" fill="none" stroke="#d0a276" stroke-width="18" stroke-linecap="round" id="root-light"/>
+        <g id="left-tile">
+          <path d="M300 168 L470 168 L470 198 L300 198 Z" fill="#d7dfe1" stroke="#71858a" stroke-width="3"/>
+          <path d="M305 173 H465" stroke="#f8fbfb" stroke-width="4"/>
+        </g>
+        <g id="right-tile">
+          <path d="M474 168 L645 168 L645 198 L474 198 Z" fill="#d7dfe1" stroke="#71858a" stroke-width="3"/>
+          <path d="M480 173 H640" stroke="#f8fbfb" stroke-width="4"/>
+        </g>
+        <path d="M50 205 H257" stroke="#6a805d" stroke-width="2" stroke-dasharray="7 7"/>
+        <text x="56" y="231" fill="#3c5945" font-size="18">土壤</text>
+        <text x="510" y="150" fill="#354e50" font-size="18">地砖</text>
+        <text x="267" y="290" fill="#fff9ec" font-size="18">根在下面逐渐长粗</text>
+        <path d="M578 270 V236" stroke="#fff9ec" stroke-width="3" id="arrow" opacity="0"/>
+        <path d="M570 243 L578 233 L586 243" fill="none" stroke="#fff9ec" stroke-width="3" id="arrow-head" opacity="0"/>
+      </svg>
+      <figcaption class="note">这是帮助想象的示意图；真实树根形状、砖的重量和土壤情况各不相同。滑块只表示根变粗，不表示“挤压时间”。</figcaption>
+    </figure>
+    <div class="controls">
+      <label for="growth">根变粗的程度（示意）</label>
+      <output id="level" for="growth">刚开始</output>
+      <input id="growth" type="range" min="1" max="10" value="2" step="1" aria-describedby="explanation">
+    </div>
+    <p class="explain" id="explanation" aria-live="polite">根还比较细，周围有空间，地砖暂时没有明显抬高。</p>
+    <div class="steps" aria-label="过程的三个要点">
+      <div class="step"><b>1. 根在找空间</b>根常沿着土壤里比较适合生长的地方伸展。</div>
+      <div class="step"><b>2. 根慢慢变粗</b>树根会逐年加粗，挤占周围的空间。</div>
+      <div class="step"><b>3. 地砖可能移动</b>根长粗后，如果推力超过地砖和周围支撑的阻力，砖可能翘起或裂开。</div>
+    </div>
+  </section>
+  <section class="card">
+    <p><strong>顶不顶得动，主要看推力能不能克服阻力。</strong>时间本身不会把力越攒越大；时间让根继续生长，而根变粗时推挤情况可能改变，所以地砖后来才可能移动。</p>
+    <p class="note"><strong>模型限制：</strong>图里把根画粗到一定程度时，就设定成地砖会翘，方便看出关系；它没有算砖有多重、根能施多大力或地面有多牢。因此它不表示“等得够久，任何重物都会被顶起”。现实中，根的生长力必须克服砖的重量和周围支撑，砖才会移动；根也可能绕开、停止生长或把铺面挤裂。树旁地砖翘起还可能和土壤湿干变化、砖下面原有的裂缝等有关；只凭位置不能确定唯一原因。地砖翘起容易绊倒人，可以告诉家长或小区工作人员，别自己去挖根或掰砖。</p>
+    <p class="sources">资料依据：爱荷华州立大学推广与外展《树木与人行道》；英国森林研究机构《树根与沟槽》。它们介绍了浅层树根变粗可能抬起铺面。图中的具体形状和滑块效果是示意模型，不是测量数据。</p>
+  </section>
+</main>
+<script>
+(() => {
+  const slider = document.getElementById('growth');
+  const root = document.getElementById('root');
+  const light = document.getElementById('root-light');
+  const shadow = document.getElementById('root-shadow');
+  const tile = document.getElementById('right-tile');
+  const level = document.getElementById('level');
+  const explanation = document.getElementById('explanation');
+  const arrow = document.getElementById('arrow');
+  const arrowHead = document.getElementById('arrow-head');
+  const labels = ['刚开始','很细','较细','开始变粗','继续变粗','变得更粗','越来越挤','空间很挤','挤压明显','最挤（示意）'];
+  function update() {
+    const n = Number(slider.value);
+    const width = 18 + n * 4.2;
+    root.setAttribute('stroke-width', width);
+    shadow.setAttribute('stroke-width', width + 8);
+    light.setAttribute('stroke-width', Math.max(8, width * .38));
+    const lift = Math.max(0, (n - 4) * 3.4);
+    tile.setAttribute('transform', `translate(0 ${-lift}) rotate(${-Math.min(5, lift * .35)} 474 168)`);
+    const lifted = n >= 7;
+    arrow.setAttribute('opacity', lifted ? '1' : '0');
+    arrowHead.setAttribute('opacity', lifted ? '1' : '0');
+    level.textContent = labels[n - 1];
+    explanation.textContent = n < 5
+      ? '根还比较细，周围有空间，地砖暂时没有明显抬高。'
+      : n < 8
+        ? '根逐渐变粗，空间越来越少；如果它的生长力克服了地砖和周围支撑，地砖才可能移动。'
+        : '示意图设定根够粗时砖会翘，真实结果还要看根的位置、砖的重量和支撑等条件。';
+  }
+  slider.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>
