@@ -74,6 +74,7 @@ Skill 源文件位于 `curiosity/`，`.agents/skills/curiosity` 是指向它的�
 
 ## 阅读与参与评审
 
+- **查看项目变化：** [更新日志](CHANGELOG.md)
 - **查看实际体验与实现：** [D修订与新画像体验](tests/exploratory/2026-10-24-D/REPORT.md)、[C体验与原始问题](tests/exploratory/2026-10-24/REPORT.md)、[诊断](DIAGNOSIS_C_2026-10-24.md)、[外部评审](REVIEW_DIAGNOSIS_C.md)及[前序结构化运行记录](tests/runs/2026-10-24/REPORT.md)
 
 - **了解项目与文件职责：** [项目导航](项目导航.md)
