@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>树上那个蘑菇，不是植物</title>
+<style>
+  :root{
+    --paper:#f7f4ee;
+    --card:#fffdf9;
+    --ink:#22201d;
+    --muted:#6b665e;
+    --line:#e2dbcf;
+    --plant:#3d7a44;
+    --fungi:#a2542f;
+    --animal:#2f5f8a;
+    --mark:#c9a227;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    font-size:17px;
+    line-height:1.75;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:40px 22px 72px}
+  h1,h2{font-family:"Songti SC","Source Han Serif SC",Georgia,serif;font-weight:700;letter-spacing:.01em}
+  h1{font-size:clamp(28px,6vw,40px);line-height:1.25;margin:0 0 10px}
+  .sub{font-size:clamp(16px,3.4vw,19px);color:var(--muted);margin:0 0 34px}
+  h2{font-size:clamp(20px,4.2vw,25px);margin:46px 0 14px;padding-top:22px;border-top:1px solid var(--line)}
+  h2 .num{color:var(--mark);font-size:.62em;margin-right:.55em;font-family:"PingFang SC",sans-serif;font-weight:700;letter-spacing:.06em;vertical-align:.08em}
+  p{margin:0 0 14px}
+  .lead{font-size:19px}
+  b{font-weight:700}
+  .hl-f{color:var(--fungi);font-weight:700}
+  .hl-p{color:var(--plant);font-weight:700}
+  .hl-a{color:var(--animal);font-weight:700}
+
+  /* 剖面图 */
+  .cut{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 8px}
+  .panel{margin:0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 14px 6px}
+  .panel svg{display:block;width:100%;height:auto}
+  .panel figcaption{font-size:14.5px;line-height:1.6;color:var(--muted);margin-top:6px;padding-bottom:8px}
+  .panel figcaption b{color:var(--ink)}
+  .legend{display:flex;align-items:center;gap:9px;font-size:14.5px;color:var(--muted);margin:2px 0 20px;flex-wrap:wrap}
+  .legend .sw{display:inline-block;width:28px;height:14px;border-radius:3px;background:linear-gradient(to bottom,transparent 40%,#fff6e4 40%,#fff6e4 60%,transparent 60%),#c9a97a}
+  .legend .sw2{display:inline-block;width:18px;height:11px;border-radius:6px 6px 2px 2px;background:#a2542f}
+  .note{background:#fbf6ea;border-left:3px solid var(--mark);padding:12px 16px;border-radius:0 10px 10px 0;font-size:16px;margin:0 0 8px}
+
+  /* 三界对比 */
+  .krow{display:grid;grid-template-columns:112px 1fr;gap:12px;border-top:1px solid var(--line);padding:14px 0}
+  .krow:first-of-type{border-top:none}
+  .kname{font-size:14.5px;color:var(--muted);line-height:1.5;padding-top:3px}
+  .kcells{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .kc{font-size:15px;line-height:1.55;padding:8px 10px;border-radius:9px;background:#fff;border:1px solid var(--line)}
+  .kc .tag{display:block;font-size:12.5px;letter-spacing:.06em;color:var(--muted);margin-bottom:2px}
+  .kc.plant{border-color:#c9dcc9}
+  .kc.plant .tag{color:var(--plant)}
+  .kc.fungi{border-color:#e2c3b0;background:#fdf4ee}
+  .kc.fungi .tag{color:var(--fungi);font-weight:700}
+  .kc.animal{border-color:#c2d4e4}
+  .kc.animal .tag{color:var(--animal)}
+
+  /* 测试器 */
+  .tester{margin:22px 0 10px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .ask{font-size:16.5px;margin:0 0 14px}
+  .crit{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:18px}
+  .crit button{
+    font:inherit;font-size:15px;line-height:1.4;padding:9px 14px;border-radius:999px;cursor:pointer;
+    background:#fff;color:var(--ink);border:1.5px solid var(--line);transition:background .15s,border-color .15s;
+  }
+  .crit button:hover{border-color:#bdb3a1}
+  .crit button[aria-pressed="true"]{background:var(--ink);color:#fffdf9;border-color:var(--ink)}
+  .rule{font-size:14.5px;color:var(--muted);margin:-6px 0 16px;padding-bottom:12px;border-bottom:1px dashed var(--line)}
+  .res{list-style:none;margin:0 0 16px;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+  .org{border:1px solid var(--line);border-radius:11px;padding:11px 12px;background:#fff}
+  .org-h{display:flex;justify-content:space-between;align-items:baseline;gap:6px;margin-bottom:6px}
+  .org-h b{font-size:16px}
+  .mark{font-size:18px;font-weight:700;line-height:1}
+  .mark.ok{color:#2f7a44}
+  .mark.no{color:#b5482f}
+  .org dl{margin:0;font-size:13.5px;line-height:1.55;display:grid;grid-template-columns:auto 1fr;gap:1px 8px}
+  .org dt{color:var(--muted)}
+  .org dd{margin:0}
+  .org .truth{font-weight:700}
+  .score{font-size:15.5px;margin:0;padding:10px 13px;border-radius:9px;background:#f2eee5}
+  .score b{font-size:18px;font-family:"Songti SC",serif}
+  .tnote{font-size:14.5px;color:var(--muted);margin:12px 0 0}
+
+  /* 亲缘 */
+  .kin{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0 6px}
+  .kincard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px 16px;font-size:15.5px;line-height:1.65}
+  .kincard .who{font-size:13px;letter-spacing:.05em;color:var(--muted);margin-bottom:4px}
+  .kincard .verdict{font-family:"Songti SC",serif;font-size:20px;font-weight:700;margin-bottom:6px}
+  .kincard.near{border-color:#e2c3b0}
+  .kincard.near .verdict{color:var(--fungi)}
+  .kincard.far .verdict{color:var(--plant)}
+
+  footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);line-height:1.7}
+  @media (max-width:640px){
+    .cut{grid-template-columns:1fr}
+    .krow{grid-template-columns:1fr;gap:6px}
+    .kcells{grid-template-columns:1fr}
+    .kin{grid-template-columns:1fr}
+    .wrap{padding:30px 18px 60px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+  }
+  :focus-visible{outline:3px solid var(--animal);outline-offset:2px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>树上那个蘑菇，<br>不是植物。</h1>
+  <p class="sub">它是真菌——跟植物、动物并排的另一大家。</p>
+
+  <p class="lead">你的判断里有一半是对的：蘑菇确实几乎不动。但“不动”从来不是植物这个身份的证据。它真正的身份，藏在三件你看不见的事上。</p>
+
+  <h2><span class="num">01</span>你看到的，只是它的“果子”</h2>
+  <p>先解决“树上为什么会长蘑菇”。你以为的是树上结出一个蘑菇，像苹果结在枝头。实际情况不是这样。</p>
+
+  <div class="cut">
+    <figure class="panel">
+      <svg viewBox="0 0 300 240" role="img" aria-label="从外面看：一段树干上长出一朵蘑菇，木头里看不出别的">
+        <rect x="40" y="20" width="150" height="200" rx="7" fill="#6b4a2f"/>
+        <path d="M62,22 V218 M86,21 V219 M112,22 V218 M140,21 V219 M166,22 V218" stroke="#5b3d26" stroke-width="2" opacity=".55"/>
+        <path d="M40,20 H190" stroke="#7d5836" stroke-width="3"/>
+        <path d="M189,112 C180,118 176,127 176,136 C182,129 187,123 189,119 Z" fill="#3f2a1a" opacity=".22"/>
+        <path d="M170,110 A36,25 0 0 1 242,110 Z" fill="#a2542f"/>
+        <path d="M172,108.5 H240" stroke="#7d3b1f" stroke-width="3" opacity=".5" stroke-linecap="round"/>
+        <path d="M179,105 A27,18.5 0 0 1 233,105" fill="none" stroke="#8a4425" stroke-width="2" opacity=".5"/>
+      </svg>
+      <figcaption><b>外面看。</b>树干上冒出一朵蘑菇，底下的木头看不出什么特别。</figcaption>
+    </figure>
+
+    <figure class="panel">
+      <svg viewBox="0 0 300 240" role="img" aria-label="把树干切开后：木头内部布满白色菌丝网，蘑菇只是从网里伸出来的一小块">
+        <defs>
+          <clipPath id="trunkCut"><rect x="40" y="20" width="150" height="200" rx="7"/></clipPath>
+        </defs>
+        <g clip-path="url(#trunkCut)">
+          <rect x="40" y="20" width="150" height="200" fill="#c9a97a"/>
+          <g fill="none" stroke="#b8955f" stroke-width="2.2" opacity=".65">
+            <ellipse cx="16" cy="122" rx="152" ry="132"/>
+            <ellipse cx="16" cy="122" rx="108" ry="94"/>
+            <ellipse cx="16" cy="122" rx="64" ry="56"/>
+          </g>
+          <g stroke="#fff6e4" stroke-width="2.6" fill="none" stroke-linecap="round" opacity=".95">
+            <path d="M189,112 C168,104 150,112 132,102"/>
+            <path d="M133,102 C118,88 100,90 84,80"/>
+            <path d="M84,80 C74,66 76,48 62,34"/>
+            <path d="M189,118 C172,132 152,140 128,148"/>
+            <path d="M128,148 C112,158 96,168 78,176"/>
+            <path d="M78,176 C66,190 68,204 56,216"/>
+            <path d="M189,122 C176,150 178,176 164,200"/>
+            <path d="M164,200 C158,208 156,214 150,218"/>
+            <path d="M152,110 C160,96 164,80 156,62"/>
+            <path d="M156,62 C152,50 146,44 148,30"/>
+            <path d="M100,90 C106,74 100,58 108,44"/>
+            <path d="M112,158 C104,142 96,136 84,128"/>
+            <path d="M132,102 C138,86 136,68 128,56"/>
+          </g>
+          <g fill="#fff6e4" opacity=".95">
+            <circle cx="132" cy="102" r="2.6"/><circle cx="84" cy="80" r="2.6"/><circle cx="128" cy="148" r="2.6"/>
+            <circle cx="78" cy="176" r="2.6"/><circle cx="156" cy="62" r="2.6"/><circle cx="164" cy="200" r="2.6"/>
+            <circle cx="108" cy="44" r="2.6"/><circle cx="84" cy="128" r="2.6"/><circle cx="128" cy="56" r="2.6"/>
+          </g>
+        </g>
+        <rect x="40" y="20" width="150" height="200" rx="7" fill="none" stroke="#b8955f" stroke-width="2.5"/>
+        <path d="M170,110 A36,25 0 0 1 242,110 Z" fill="#a2542f"/>
+        <path d="M172,108.5 H240" stroke="#7d3b1f" stroke-width="3" opacity=".5" stroke-linecap="round"/>
+        <path d="M179,105 A27,18.5 0 0 1 233,105" fill="none" stroke="#8a4425" stroke-width="2" opacity=".5"/>
+      </svg>
+      <figcaption><b>切开看。</b>木头里铺满了白色的<b>菌丝</b>。那才是它的身体，蘑菇只是从菌丝网上伸出来的一小块。</figcaption>
+    </figure>
+  </div>
+
+  <div class="legend"><span class="sw"></span>菌丝（它的身体）<span class="sw2" style="margin-left:14px"></span>蘑菇（子实体，专门用来撒孢子）</div>
+
+  <p class="note">所以它不是“从树上长出来”的。它的身体早就在木头里铺开了，吃够了、天时对了，才把“果子”探出来。这个果子有个正经名字：<b>子实体</b>——专门负责撒孢子繁殖，不负责吃喝。</p>
+
+  <h2><span class="num">02</span>三条硬指标，把它从植物里划出去</h2>
+  <p>生物学家不看动不动，看三件更硬的事：怎么吃饭、墙用什么砌、能量存成什么。</p>
+
+  <div class="krow">
+    <div class="kname">怎么吃饭</div>
+    <div class="kcells">
+      <div class="kc plant"><span class="tag">植物</span>自己做。有叶绿素，用阳光把水和二氧化碳变成糖。</div>
+      <div class="kc fungi"><span class="tag">真菌</span>吃现成的。往木头里倒消化液，把木头拆碎，再吸进来。</div>
+      <div class="kc animal"><span class="tag">动物</span>吃现成的。吞进肚子，在里面消化。</div>
+    </div>
+  </div>
+
+  <div class="krow">
+    <div class="kname">细胞壁用什么砌</div>
+    <div class="kcells">
+      <div class="kc plant"><span class="tag">植物</span>纤维素——纸和棉花的主要成分。</div>
+      <div class="kc fungi"><span class="tag">真菌</span>几丁质——跟虾壳、蟹壳、昆虫外壳同一种材料。</div>
+      <div class="kc animal"><span class="tag">动物</span>没有细胞壁，只有一层软膜。</div>
+    </div>
+  </div>
+
+  <div class="krow">
+    <div class="kname">能量存成什么</div>
+    <div class="kcells">
+      <div class="kc plant"><span class="tag">植物</span>淀粉。</div>
+      <div class="kc fungi"><span class="tag">真菌</span>糖原——跟你肌肉里存的那种一样。</div>
+      <div class="kc animal"><span class="tag">动物</span>糖原。</div>
+    </div>
+  </div>
+
+  <p style="margin-top:18px">第二行最要命。植物是“拿纸和棉花砌墙”，真菌是“拿虾壳砌墙”。两套完全不同的建材，说明它们根本不是一家人。</p>
+
+  <h2><span class="num">03</span>“不动就是植物”这条标准，骗了人类两千年</h2>
+  <p>你这个想法一点都不笨——从古希腊到三百年前的植物学家，全都这么想。他们把蘑菇、地衣、海带一起塞进“植物”这个抽屉，理由就是“它们不动”。直到人们开始用显微镜看细胞、再后来比 DNA，才发现这个抽屉根本装不下。</p>
+  <p>下面这个小工具，你可以自己试：只给你一条标准，看它能不能判对。</p>
+
+  <div class="tester">
+    <p class="ask" id="ask">假设你手上只有一条标准，要把下面四样东西分类。哪条靠得住？</p>
+
+    <div class="crit" role="group" aria-labelledby="ask">
+      <button type="button" data-c="move" aria-pressed="true">① 会不会动</button>
+      <button type="button" data-c="chloro" aria-pressed="false">② 有没有叶绿素</button>
+      <button type="button" data-c="wall" aria-pressed="false">③ 细胞壁是不是纤维素</button>
+    </div>
+
+    <p class="rule" id="rule"></p>
+    <ul class="res" id="res"></ul>
+    <p class="score" id="score" aria-live="polite"></p>
+    <p class="tnote" id="tnote"></p>
+  </div>
+
+  <h2><span class="num">04</span>它跟谁更亲？答案有点意外</h2>
+  <div class="kin">
+    <div class="kincard near">
+      <div class="who">蘑菇 ↔ 你</div>
+      <div class="verdict">近亲</div>
+      都不能自己做饭，都存糖原，细胞上都带着“后鞭毛”这个家族记号。这三条才是把真菌和动物拴在同一根枝上的证据。
+    </div>
+    <div class="kincard far">
+      <div class="who">蘑菇 ↔ 那棵树</div>
+      <div class="verdict">远亲</div>
+      隔了十几亿年的一道分岔。在进化树上，蘑菇和植物根本不在同一根枝上。
+    </div>
+  </div>
+  <p style="margin-top:16px">这不是形容词，是比对了 DNA 之后的结论：论同一根枝上的远近，<span class="hl-f">蘑菇离你比离树近得多</span>。这里说的“亲戚”指演化上的同宗——不是说它跟你家有家谱。</p>
+
+  <p class="note" style="margin-top:18px"><b>这里最容易读岔，说清一句：</b>几丁质不等于“大家都有细胞壁”。蘑菇有细胞壁，材料是几丁质；虾、蟹、昆虫用几丁质做外骨骼；<b>你没有细胞壁</b>，你的细胞外面只有一层软膜，叫细胞膜。同一门材料，三种用法：砌墙、做壳、不碰。</p>
+
+  <h2><span class="num">05</span>那它趴在树上，到底在干什么</h2>
+  <p>在<b>吃</b>。木头的骨架是纤维素，正好是它的口粮。它把木头拆开、吸收掉，所以你最常见到它的地方，是枯木、树桩、断枝和受伤的树干。</p>
+  <p>不过别急着给它扣“凶手”的帽子。有一大类真菌跟<b>活着</b>的树是合伙关系：地下的菌丝缠住树根，树把糖分给它，它把水和矿物质递给树。松露、牛肝菌多半就是这么来的。所以“树上有蘑菇”不等于“这棵树要死了”。</p>
+
+  <p style="margin-top:30px;font-size:19px">下次在树干上看到它，别再把它当成植物的花。那是另一个世界的生物，正贴着你家树吃晚饭。</p>
+
+  <footer>
+    这篇里的事实属于现代生物分类的稳定共识：真菌界与植物界、动物界并列；真菌细胞壁主要成分为几丁质、储存糖原、与动物同属“后鞭毛生物”一支。判断依据是细胞结构与 DNA，不是“会不会动”。
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var DATA = {
+    move: {
+      rule: '规则：不动的算植物，会动的算动物。',
+      rows: [
+        { n:'蘑菇',   see:'钉在木头上，一动不动', judge:'植物', truth:'真菌', ok:false },
+        { n:'珊瑚',   see:'一辈子长在原地',       judge:'植物', truth:'动物', ok:false },
+        { n:'含羞草', see:'手指一碰，叶子就合上', judge:'动物', truth:'植物', ok:false },
+        { n:'银杏树', see:'一年也不挪一步',       judge:'植物', truth:'植物', ok:true  }
+      ],
+      note: '这条标准基本没救：珊瑚不动却是动物，含羞草会动却是植物。'
+    },
+    chloro: {
+      rule: '规则：有叶绿素算植物，没有就不算。',
+      rows: [
+        { n:'蘑菇',   see:'没有叶绿素',           judge:'不是植物', truth:'真菌', ok:true },
+        { n:'珊瑚',   see:'自己也没有叶绿素',     judge:'不是植物', truth:'动物', ok:true },
+        { n:'含羞草', see:'有叶绿素',             judge:'植物',     truth:'植物', ok:true },
+        { n:'银杏树', see:'有叶绿素',             judge:'植物',     truth:'植物', ok:true }
+      ],
+      note: '这条能判“是不是植物”，但判不出“到底是动物还是真菌”——蘑菇和珊瑚会被扔进同一堆。'
+    },
+    wall: {
+      rule: '规则：细胞壁是纤维素算植物，别的都不算。',
+      rows: [
+        { n:'蘑菇',   see:'细胞壁是几丁质',   judge:'不是植物', truth:'真菌', ok:true },
+        { n:'珊瑚',   see:'压根没有细胞壁',   judge:'不是植物', truth:'动物', ok:true },
+        { n:'含羞草', see:'细胞壁是纤维素',   judge:'植物',     truth:'植物', ok:true },
+        { n:'银杏树', see:'细胞壁是纤维素',   judge:'植物',     truth:'植物', ok:true }
+      ],
+      note: '同样是“是不是植物”的指标。想再往下分，还得看更多证据——没有哪一条能单独包打天下。'
+    }
+  };
+
+  var btns = document.querySelectorAll('.crit button');
+  var ruleEl = document.getElementById('rule');
+  var resEl  = document.getElementById('res');
+  var scoreEl= document.getElementById('score');
+  var noteEl = document.getElementById('tnote');
+
+  function render(key) {
+    var d = DATA[key];
+    ruleEl.textContent = d.rule;
+
+    resEl.innerHTML = d.rows.map(function (r) {
+      return '<li class="org">' +
+        '<div class="org-h"><b>' + r.n + '</b>' +
+          '<span class="mark ' + (r.ok ? 'ok' : 'no') + '" aria-hidden="true">' + (r.ok ? '✓' : '✗') + '</span>' +
+        '</div>' +
+        '<dl>' +
+          '<dt>看到</dt><dd>' + r.see + '</dd>' +
+          '<dt>判成</dt><dd>' + r.judge + '</dd>' +
+          '<dt>实际</dt><dd class="truth">' + r.truth + (r.ok ? '（判对了）' : '（判错了）') + '</dd>' +
+        '</dl></li>';
+    }).join('');
+
+    var right = d.rows.filter(function (r) { return r.ok; }).length;
+    scoreEl.innerHTML = '这条标准：4 样东西里判对了 <b>' + right + '</b> 个。';
+    noteEl.textContent = d.note;
+  }
+
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      btns.forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+      render(b.dataset.c);
+    });
+  });
+
+  render('move');
+})();
+</script>
+</body>
+</html>

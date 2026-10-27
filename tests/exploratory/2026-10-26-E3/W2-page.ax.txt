@@ -1,0 +1,3 @@
+Browser tab: 7, Title: "群体极化 vs 回音室", URL: "http://127.0.0.1:8772/W2/curiosity-polarization-vs-echo-chamber.html".
+There has been no change in the accessibility tree.
+The focused UI element is 0 AXWebArea 群体极化 vs 回音室, URL: 127.0.0.1:8772/W2/curiosity-polarization-vs-echo-chamber.html

@@ -1,0 +1,100 @@
+Window: "WorkBuddy", App: WorkBuddy.
+0 标准窗口 WorkBuddy, Secondary Actions: Raise
+		2 container
+			3 container
+				4 container
+					5 按钮 展开侧边栏
+						6 图像
+					7 按钮
+					8 文本 理解镜面反射形成的走廊效应
+					9 按钮 对话内搜索
+					10 按钮 分享
+						11 图像
+					12 按钮 打开右侧面板
+				13 container
+					14 container
+						15 container
+							16 container
+								17 文本 用好奇心聊聊：我知道镜面反射，可两面镜子面对面怎么就像有很长的走廊？想弄懂图像是怎么排出来的。
+								18 工具栏
+									19 文本 09:10
+									20 按钮 复制
+										21 图像
+							22 container
+								23 图像
+								24 文本 WorkBuddy
+								25 文本 已取消 4m15s
+								26 text 空目录，干净。先把答案说清楚，再给你一张能 自 己 拧 的 图 。 用户已取消
+								27 按钮 复制
+									28 图像
+								29 按钮 点赞
+									30 图像
+								31 按钮 点踩
+									32 图像
+								33 按钮 朗读
+									34 图像
+								35 按钮 分享
+									36 图像
+								37 按钮 更多操作
+									38 图像
+								39 text 共消耗 2.74
+								40 图像
+								41 text Deepseek-V4.1-Flash 09:14
+							42 container
+								43 文本 等太久了，先别做网页了。用文字直接讲清前面几个像分别是怎么来的，我知道一次反射的规则。
+								44 工具栏
+									45 文本 09:14
+									46 按钮 复制
+										47 图像
+							48 container
+								49 图像
+								50 text WorkBuddy 已处理 39s
+								51 文本 深度思考中
+					52 container
+						53 container
+							54 container 无法播放媒体。
+						55 container
+							56 文本输入区 (settable) ﻿
+今天帮你做些什么？@ 添加上下文，/调用技能与指令
+								57 container
+									58 文本 ﻿
+									59 文本 今天帮你做些什么？@ 添加上下文，/调用技能与指令
+							60 组合框 (settable) 更多操作
+							61 按钮 复制分支名
+							62 文本 main
+							63 组合框 (settable) 允许完全访问
+								64 文本 允许完全访问
+							65 container
+								66 按钮
+									67 图像
+								68 组合框 (settable) Description: Select model: Deepseek-V4.1-Flash, Value: Deepseek-V4.1-Flash
+									69 图像
+									70 文本 Deepseek-V4.1-Flash
+								71 按钮 语音输入 ⌘D 或长按 ⌥
+									72 图像
+								73 按钮 停止
+					74 文本 内容由 AI 生成，请核实重要信息
+				75 container
+					76 按钮 新标签页
+					77 按钮 进入全屏
+					78 按钮 收起右侧面板
+					79 container
+						80 内容列表
+							81 文本 打开浏览器
+							82 文本 查看工作空间
+							83 文本 查看变更
+							84 文本 打开终端
+				85 container
+					86 文本 引用来源 (0)
+					87 按钮 关闭
+	88 关闭按钮
+	89 全屏幕按钮 Help: 此按钮也可以执行缩放窗口的操作, Secondary Actions: 缩放窗口
+	90 最小化按钮
+91 menu bar
+	92 WorkBuddy
+	93 编辑
+	94 查看
+	95 窗口
+	96 帮助
+
+今天帮你做些什么？@ 添加上下文，/调用技能与指令

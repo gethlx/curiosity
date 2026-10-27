@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-27",
+  "boundary": "UI evidence privacy redaction only; no tested user/assistant message, timing or generated HTML changed. Originals retained outside repository.",
+  "files": [
+    {
+      "file": "W1-turn2-final.ax.txt",
+      "scope": "pre-conversation sidebar, unrelated task titles and personal nickname only",
+      "before_sha256": "230ca54d0ff9299d0568579acbd68f0ce48a32dd7884acb5eaacc9e4d6bf62ae",
+      "after_sha256": "86e5d724f46da52164f90831d021585956019af2d60c9393f2508da9dec1f3d0"
+    },
+    {
+      "file": "W1-turn3-final.ax.txt",
+      "scope": "pre-conversation sidebar, unrelated task titles and personal nickname only",
+      "before_sha256": "bbae744b489950211032b33d256bcfe6a9cd7840873c05beeda0193b65bddbe1",
+      "after_sha256": "13b71bffc8f2d2b4104def35b3d06fce61ab5f9b61bbd5188277ead816a05d43"
+    },
+    {
+      "file": "W1-turn3-start.ax.txt",
+      "scope": "pre-conversation sidebar, unrelated task titles and personal nickname only",
+      "before_sha256": "a2c4ffe556ac2133a8cdde640b00848e17d54da0281d33a67dfaadddad1c8e55",
+      "after_sha256": "b0a0941968f47b9cc9bfc1f7bae527e18f596fcab167e8138f155706904aaccf"
+    }
+  ]
+}

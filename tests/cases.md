@@ -232,3 +232,8 @@ T8仅用于保留已有宿主流程衔接观察，不设置额外人工安全审
 运行：`python3 tests/run_dialogues.py T1a`；首次会创建真实模型会话并消耗账户额度。脚本采用 ephemeral 会话，不创建侧栏任务；默认写入只读测试，页面例写入临时工作区。临时原始交付路径在会话结束后删除，HTML 复制到对应 artifacts 目录。
 
 T10b 使用 `--no-apps`；T18d 使用 `--no-optionals`。结构验证：`uv run --with pyyaml python /path/to/skill-creator/scripts/quick_validate.py curiosity`。样板模型检查：`node tests/check_samples.mjs`；这两者均不能替代 Computer use。
+
+
+## 2026-10-26 呈现契约调整
+
+本轮E系列候选以[优化方案](../OPTIMIZATION_PLAN_2026-10-26.md)和实施规划第5节为准：首次聚焦的实质讲解默认HTML图解，有解释增益再加交互；短确认、局部释义不重复建页。T18g及关系型任务的旧文字判据不再代表新呈现契约。原输入与旧输出保留，本批采用WorkBuddy自然画像体验，不将既有历史用例预写成用户追问。

@@ -1,0 +1,9 @@
+Browser tab: 3, Title: "原子的最小结构", URL: "http://127.0.0.1:8772/curiosity-%E5%8E%9F%E5%AD%90%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BB%93%E6%9E%84.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 34, 40-41
++		53 text 第 4 层 · 打进质子内部
+~		35 slider (settable, integer) Description: 投入的能量，从 0.01 电子伏到 100 吉电子伏, Value: 300, ID: energy
++				54 text 能量足够穿透质子，看到里面的三个夸克。但你会撞上一个奇怪的墙：
++				55 text 打不出单个夸克
++				56 text 。你给它多少能量，它就变成多少新粒子，夸克始终被关在里面。所谓「最小零件」，到这里只能观察，不能拿出。
+The focused UI element is 35 slider (settable, integer) Description: 投入的能量，从 0.01 电子伏到 100 吉电子伏, Value: 300, ID: energy

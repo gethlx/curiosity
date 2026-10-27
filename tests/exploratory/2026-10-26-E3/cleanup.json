@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-27",
+  "temporary_workbuddy_entry": "/Users/larry/.workbuddy/skills/curiosity",
+  "resolved_target_before_cleanup": "/Users/larry/haoqixin/curiosity",
+  "tool": "existing skill-pool mount.sh del curiosity with temporary SKILL_POOL_HOME",
+  "entry_absent_after_cleanup": true,
+  "production_source_intact": true,
+  "requested_scope": "curiosity only",
+  "command_output_note": "Process stdout/stderr decoding raised UnicodeDecodeError after operation; did not repeat deletion. Filesystem post-check confirms temporary link absent.",
+  "host_cached_index_refresh_verified": false
+}

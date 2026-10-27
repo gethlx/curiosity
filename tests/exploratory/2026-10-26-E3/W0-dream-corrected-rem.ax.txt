@@ -1,0 +1,8 @@
+Browser tab: 5, Title: "梦是怎么回事", URL: "http://127.0.0.1:8772/curiosity-%E6%A2%A6%E5%A2%83.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 14-15, 17
+~		13 slider (settable, integer) Description: 入睡后的时间，从 0 到 480 分钟, Value: 450, ID: time
++		70 text 入睡后 7 时 30 分
++		71 text REM 睡眠
++			72 text 做梦的主场。 这段 REM 已经持续 45 分钟。画面、情绪、情节全在线，逻辑审查缺席。如果你此刻醒来，大概能讲出一个完整的故事——不过几分钟后就会开始忘。
+The focused UI element is 13 slider (settable, integer) Description: 入睡后的时间，从 0 到 480 分钟, Value: 450, ID: time

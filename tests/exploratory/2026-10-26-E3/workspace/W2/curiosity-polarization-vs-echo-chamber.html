@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>群体极化 vs 回音室</title>
+<style>
+  :root{
+    --ink:#1c1f23;
+    --ink-2:#4a4f57;
+    --ink-3:#767c85;
+    --line:#dcdcd6;
+    --bg:#faf9f6;
+    --card:#ffffff;
+    --env:#e8f0fb;
+    --env-line:#185fa5;
+    --env-ink:#0c447c;
+    --proc:#fcebeb;
+    --proc-line:#a32d2d;
+    --proc-ink:#791f1f;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:15px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:48px 24px 72px}
+  header{margin-bottom:34px}
+  h1{font-size:26px;font-weight:500;letter-spacing:-0.01em;margin:0 0 10px}
+  .sub{margin:0;color:var(--ink-2);font-size:15px}
+  .sub strong{font-weight:500;color:var(--ink)}
+  h2{font-size:15px;font-weight:500;margin:44px 0 14px;letter-spacing:0.01em}
+  h2 .idx{color:var(--ink-3);margin-right:8px;font-variant-numeric:tabular-nums}
+  p{margin:0 0 12px}
+  .muted{color:var(--ink-3);font-size:13px}
+
+  .band{
+    border-radius:12px;
+    padding:20px 22px;
+    border:1px solid var(--line);
+    background:var(--card);
+    position:relative;
+  }
+  .band-env{background:var(--env);border-color:#b5d4f4}
+  .band-proc{background:var(--proc);border-color:#f7c1c1}
+  .band-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .layer{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  .band-env .layer{color:var(--env-line)}
+  .band-proc .layer{color:var(--proc-line)}
+  .term{font-size:19px;font-weight:500}
+  .band-env .term{color:var(--env-ink)}
+  .band-proc .term{color:var(--proc-ink)}
+  .en{font-size:12px;color:var(--ink-3);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .def{margin:0 0 10px;color:var(--ink)}
+  .def b{font-weight:500}
+  dl.meta{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;margin:12px 0 0;font-size:13px}
+  dl.meta dt{color:var(--ink-3)}
+  dl.meta dd{margin:0;color:var(--ink-2)}
+
+  .link{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 0}
+  .link svg{display:block}
+  .link .lbl{font-size:13px;color:var(--ink-2);text-align:center}
+  .link .lbl em{font-style:normal;color:var(--ink-3)}
+
+  .feedback{
+    margin-top:18px;
+    border:1px dashed #c3c2ba;
+    border-radius:10px;
+    padding:12px 16px;
+    font-size:13.5px;
+    color:var(--ink-2);
+    background:transparent;
+  }
+  .feedback b{font-weight:500;color:var(--ink)}
+
+  .callout{
+    margin-top:26px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:3px solid var(--env-line);
+    border-radius:8px;
+    padding:16px 18px;
+    font-size:14px;
+  }
+  .callout .k{font-weight:500;display:block;margin-bottom:4px}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+  th,td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-weight:500;color:var(--ink-3);font-size:12.5px;letter-spacing:.03em}
+  td:first-child{color:var(--ink-2);white-space:nowrap;padding-left:0}
+  td:last-child{padding-right:0}
+  .tag-env{color:var(--env-ink)}
+  .tag-proc{color:var(--proc-ink)}
+
+  .evi{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+  .evi > div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .evi h3{font-size:13.5px;font-weight:500;margin:0 0 6px}
+  .evi p{font-size:13px;color:var(--ink-2);margin:0}
+  .badge{display:inline-block;font-size:11.5px;line-height:1.6;padding:1px 9px;border-radius:999px;margin-top:11px}
+  .badge-hard{background:#f7c1c1;color:#791f1f}
+  .badge-soft{background:#b5d4f4;color:#0c447c}
+
+  .final{
+    margin-top:44px;padding-top:22px;border-top:1px solid var(--line);
+    font-size:16px;color:var(--ink);
+  }
+  .final span{color:var(--ink-3);font-size:13px;display:block;margin-top:8px}
+
+  @media (max-width:640px){
+    .wrap{padding:32px 18px 56px}
+    h1{font-size:22px}
+    .term{font-size:17px}
+    .band{padding:16px 16px}
+    .evi{grid-template-columns:1fr}
+    dl.meta{grid-template-columns:1fr;gap:0}
+    dl.meta dt{margin-top:8px}
+    table,tbody,tr,td{display:block;width:100%}
+    thead{display:none}
+    tr{padding:14px 0;border-bottom:1px solid var(--line)}
+    tr:last-child{border-bottom:none}
+    td{border:none;padding:0;white-space:normal;margin-bottom:3px}
+    td:first-child{font-weight:500;color:var(--ink);font-size:13.5px;margin-bottom:6px}
+    td:nth-child(2),td:nth-child(3){font-size:13px}
+    td:nth-child(2)::before{content:"回音室 · ";color:var(--env-ink)}
+    td:nth-child(3)::before{content:"群体极化 · ";color:var(--proc-ink)}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>群体极化 与 回音室</h1>
+    <p class="sub">一个是<strong>过程</strong>，一个是<strong>结构</strong>。混着用，就会把「我们讨论完更激进」错诊成「算法把我们关起来了」。</p>
+  </header>
+
+  <h2><span class="idx">01</span>先把两层分开</h2>
+
+  <section class="band band-env">
+    <div class="band-head">
+      <span class="layer">环境层 · 结构</span>
+      <span class="term">回音室</span>
+      <span class="en">echo chamber</span>
+    </div>
+    <p class="def">信息环境里<b>同向内容被反复供给、异向内容被系统性排除</b>的状态。它描述的是环境，不是人。</p>
+    <dl class="meta">
+      <dt>时间尺度</dt><dd>周、月、年</dd>
+      <dt>观测对象</dt><dd>信息网络：谁和谁连着，你被推送到什么</dd>
+      <dt>成立条件</dt><dd>不需要讨论。一个人反复刷同向内容就够了</dd>
+    </dl>
+  </section>
+
+  <div class="link" aria-hidden="true">
+    <svg width="26" height="46" viewBox="0 0 26 46">
+      <path d="M13 2 V34" fill="none" stroke="#8a8f97" stroke-width="1.2"/>
+      <path d="M6 28 L13 37 L20 28" fill="none" stroke="#8a8f97" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="lbl">提供同向论据池、抬高身份显著性<br><em>——抬高极化的概率与幅度，但不是必要条件</em></div>
+  </div>
+
+  <section class="band band-proc">
+    <div class="band-head">
+      <span class="layer">过程层 · 变化</span>
+      <span class="term">群体极化</span>
+      <span class="en">group polarization</span>
+    </div>
+    <p class="def">群体讨论后，成员立场的<b>平均值向讨论前已有倾向的同侧移动</b>，同时组内分歧收窄。它描述的是一次变化，不是一种环境。</p>
+    <dl class="meta">
+      <dt>时间尺度</dt><dd>一次讨论，分钟到小时</dd>
+      <dt>观测对象</dt><dd>成员的立场：讨论前后的测差值</dd>
+      <dt>成立条件</dt><dd>必须有互动。信息通道与规范通道都靠「看见别人」</dd>
+    </dl>
+  </section>
+
+  <div class="feedback">
+    <b>反向也成立：</b>反复极化会把少数派推到「说了也白说」的位置，他们退群、闭嘴，环境进一步同质化。于是过程反过来加固了结构——这是回路，不是单向因果。
+  </div>
+
+  <div class="callout">
+    <span class="k">最能拆开两者的一件事实</span>
+    科罗拉多实验：60 名市民被随机分进小组，彼此陌生，没有算法、没有筛选、没有长期同质化环境，只讨论了 15 分钟，立场就整体向同侧移动。<br>
+    <span class="muted">结论：极化可以在零回音室的条件下发生。反过来，回音室里如果没人讨论，也未必产生极化。</span>
+  </div>
+
+  <h2><span class="idx">02</span>三问分清你看到的是哪个</h2>
+  <table>
+    <thead>
+      <tr><th>问什么</th><th>答「环境」→ 回音室</th><th>答「变化」→ 群体极化</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>你在测什么</td>
+        <td class="tag-env">信息结构的封闭程度</td>
+        <td class="tag-proc">立场的前后差值</td>
+      </tr>
+      <tr>
+        <td>要多长时间</td>
+        <td class="tag-env">数周以上的接触模式</td>
+        <td class="tag-proc">一场对话就够了</td>
+      </tr>
+      <tr>
+        <td>需不需要讨论</td>
+        <td class="tag-env">不需要，单向接收即可</td>
+        <td class="tag-proc">必须，要有来回</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2><span class="idx">03</span>两者的证据强度也不一样</h2>
+  <p class="muted">这不是同一个层级的概念，所以也不要指望它们有同等的实证支持。</p>
+  <div class="evi">
+    <div>
+      <h3>群体极化：实验室里可复现</h3>
+      <p>1960 年代至今数百项实验支持，Isenberg 1986 年对 21 项研究的元分析确认现象稳健，方向不限于「更冒险」。</p>
+      <span class="badge badge-hard">证据较硬</span>
+    </div>
+    <div>
+      <h3>回音室：概念流行度 &gt; 实证确定性</h3>
+      <p>测量口径一变，结论就变。Dubois &amp; Blank（2018）认为多数人的媒体接触并不封闭；Barberá（2015）发现社媒上的跨立场接触并不罕见。</p>
+      <span class="badge badge-soft">效应量有争议</span>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:12px">注意分寸：说「回音室被夸大」不等于「回音室不存在」。是效应量被测小了，不是机制被证伪。</p>
+
+  <div class="final">
+    一句话记住：<b>回音室是土壤，群体极化是植物生长。</b>
+    <span>土壤好，长得快；但没有这块土壤，只要有人凑在一起讨论，它照样长。</span>
+  </div>
+
+</div>
+</body>
+</html>

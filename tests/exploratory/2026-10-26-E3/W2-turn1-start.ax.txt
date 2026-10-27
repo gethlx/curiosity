@@ -1,0 +1,84 @@
+Window: "WorkBuddy", App: WorkBuddy.
+0 标准窗口 WorkBuddy, Secondary Actions: Raise
+		2 container
+			3 container
+				4 container
+					5 按钮 展开侧边栏
+						6 图像
+					7 按钮
+					8 文本 为什么群里本来意见不太一样，聊着聊着大家反而更极端？我想知道背后有哪些概念。
+					9 按钮 对话内搜索
+					10 按钮 分享
+						11 图像
+					12 按钮 打开右侧面板
+				13 container
+					14 container
+						15 container
+							16 container
+								17 图像
+								18 文本 WorkBuddy
+								19 按钮 复制
+									20 图像
+								21 按钮 点赞
+									22 图像
+								23 按钮 点踩
+									24 图像
+								25 按钮 朗读
+									26 图像
+								27 按钮 分享
+									28 图像
+								29 按钮 更多操作
+									30 图像
+								31 文本 09:04
+							32 container
+								33 文本 为什么群里本来意见不太一样，聊着聊着大家反而更极端？我想知道背后有哪些概念。
+								34 工具栏
+									35 文本 09:04
+									36 按钮 复制
+										37 图像
+							38 container
+								39 图像
+								40 text WorkBuddy 已处理 1s 正在启动对话运行环境…
+					41 container
+						42 container
+							43 container 无法播放媒体。
+						44 container
+							45 文本输入区 (settable) ﻿
+今天帮你做些什么？@ 添加上下文，/调用技能与指令
+								46 container
+									47 文本 ﻿
+									48 文本 今天帮你做些什么？@ 添加上下文，/调用技能与指令
+							49 组合框 (settable) 更多操作
+							50 按钮 复制分支名
+							51 文本 main
+							52 组合框 (settable) 允许完全访问
+								53 文本 允许完全访问
+							54 container
+								55 组合框 (settable) Description: Select model: Deepseek-V4.1-Flash, Value: Deepseek-V4.1-Flash
+									56 图像
+									57 文本 Deepseek-V4.1-Flash
+								58 按钮 语音输入 ⌘D 或长按 ⌥
+									59 图像
+								60 按钮 停止
+					61 文本 内容由 AI 生成，请核实重要信息
+				62 container
+					63 按钮 新标签页
+					64 按钮 进入全屏
+					65 按钮 收起右侧面板
+					66 container
+						67 内容列表
+							68 文本 打开浏览器
+							69 文本 查看工作空间
+							70 文本 打开终端
+				71 container
+					72 文本 引用来源 (0)
+					73 按钮 关闭
+	74 关闭按钮
+	75 全屏幕按钮 Help: 此按钮也可以执行缩放窗口的操作, Secondary Actions: 缩放窗口
+	76 最小化按钮
+77 menu bar
+	78 WorkBuddy
+	79 编辑
+	80 查看
+	81 窗口
+	82 帮助

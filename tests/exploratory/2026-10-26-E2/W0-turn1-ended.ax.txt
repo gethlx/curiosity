@@ -1,0 +1,103 @@
+Window: "WorkBuddy", App: WorkBuddy.
+0 标准窗口 WorkBuddy, Secondary Actions: Raise
+		2 container
+			3 container
+				4 container
+					5 按钮 展开侧边栏
+						6 图像
+					7 按钮
+					8 文本 测试好奇心技能 原子结构问题
+					9 按钮 对话内搜索
+					10 按钮 分享
+						11 图像
+					12 按钮 打开右侧面板
+				13 container
+					14 container
+						15 container
+							16 container
+								17 container
+									18 text 我想现在测试好奇心这个技能 ﻿ ﻿ 原子的最小结构是什么？
+								19 工具栏
+									20 文本 22:57
+									21 按钮 复制
+										22 图像
+									23 按钮 编辑
+										24 图像
+							25 container
+								26 图像
+								27 文本 WorkBuddy
+								28 文本 已取消 8m17s
+								29 文本 三个真实问题浮出来了：
+								30 文本 hidden
+								31 文本  被 
+								32 文本 display:flex
+								33 文本  覆盖、标尺左端标签溢出 1px、整块读数挂 
+								34 文本 aria-live
+								35 文本  会念一长串。另外那个 
+								36 文本 scrollW: 18850
+								37 文本  是臣自己的探针 
+								38 文本 <pre>
+								39 text  撑出来的假警报，不是页面问 题 。 现 在 修 。 圆点坐标看着没动，是又一次踩到过渡动画的测量假象。禁 用 过 渡 重 测 。 用户已取消
+								40 按钮 复制
+									41 图像
+								42 按钮 点赞
+									43 图像
+								44 按钮 点踩
+									45 图像
+								46 按钮 朗读
+									47 图像
+								48 按钮 点击将重新生成会话和产物，请谨慎操作
+									49 图像
+								50 按钮 分享
+									51 图像
+								52 按钮 更多操作
+									53 图像
+								54 text 共消耗 5.83
+								55 图像
+								56 text Deepseek-V4.1-Flash 23:05
+					57 container
+						58 container
+							59 container 无法播放媒体。
+						60 container
+							61 文本输入区 (settable) ﻿
+今天帮你做些什么？@ 添加上下文，/调用技能与指令
+								62 container
+									63 文本 ﻿
+									64 文本 今天帮你做些什么？@ 添加上下文，/调用技能与指令
+							65 组合框 (settable) 更多操作
+							66 按钮 复制分支名
+							67 文本 main
+							68 组合框 (settable) 允许完全访问
+								69 文本 允许完全访问
+							70 container
+								71 按钮
+									72 图像
+								73 组合框 (settable) Description: Select model: Deepseek-V4.1-Flash, Value: Deepseek-V4.1-Flash
+									74 图像
+									75 文本 Deepseek-V4.1-Flash
+								76 按钮 语音输入 ⌘D 或长按 ⌥
+									77 图像
+								78 按钮 (disabled) 发送
+					79 文本 内容由 AI 生成，请核实重要信息
+				80 container
+					81 按钮 新标签页
+					82 按钮 进入全屏
+					83 按钮 收起右侧面板
+					84 container
+						85 内容列表
+							86 文本 打开浏览器
+							87 文本 查看工作空间
+							88 文本 查看变更
+							89 文本 打开终端
+				90 container
+					91 文本 引用来源 (0)
+					92 按钮 关闭
+	93 关闭按钮
+	94 全屏幕按钮 Help: 此按钮也可以执行缩放窗口的操作, Secondary Actions: 缩放窗口
+	95 最小化按钮
+96 menu bar
+	97 WorkBuddy
+	98 编辑
+	99 查看
+	100 窗口
+	101 帮助

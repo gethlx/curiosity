@@ -1,0 +1,14 @@
+{
+  "sessionId": "ef14f8d8-d345-44cf-bee7-b908cfe8090c",
+  "tool_call_counts": {
+    "Skill": 1,
+    "Read": 1,
+    "WebFetch": 2,
+    "Write": 1,
+    "Bash": 31,
+    "ViewImage": 9,
+    "Edit": 4
+  },
+  "skill_E2_loaded": true,
+  "source": "read-only export of target WorkBuddy session; input actions all via CUA"
+}

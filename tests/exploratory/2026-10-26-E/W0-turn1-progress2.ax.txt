@@ -1,0 +1,76 @@
+Window: "WorkBuddy", App: WorkBuddy.
+0 标准窗口 WorkBuddy, Secondary Actions: Raise
+		2 container
+			3 container
+				4 container
+					5 按钮 展开侧边栏
+						6 图像
+					7 按钮
+					8 文本 测试好奇心技能并询问原子结构
+					9 按钮 对话内搜索
+					10 按钮 分享
+						11 图像
+					12 按钮 打开右侧面板
+				13 container
+					14 container
+						15 container
+							16 container
+								17 container
+									18 text 我想现在测试好奇心这个技能 ﻿ ﻿ 原子的最小结构是什么？
+								19 工具栏
+									20 文本 22:45
+									21 按钮 复制
+										22 图像
+							23 container
+								24 图像
+								25 text WorkBuddy 预计消耗 0.5 ~ 22.58 已处理 1m11s
+								26 文本 继续处理任务过程
+								27 文本 深度思考
+								28 text 主公想试「好奇心」这门功夫，那臣就先请出这本功法，再 拆 了 这 问 题 。
+								29 文本 深度思考中
+								30 text 已消耗 0.64 长流程任务，选一个更擅长规划的模型来做
+								31 按钮 不再显示
+					32 container
+						33 container
+						34 container
+							35 文本输入区 (settable) ﻿
+今天帮你做些什么？@ 添加上下文，/调用技能与指令
+								36 container
+									37 文本 ﻿
+									38 文本 今天帮你做些什么？@ 添加上下文，/调用技能与指令
+							39 组合框 (settable) 更多操作
+							40 按钮 复制分支名
+							41 文本 main
+							42 组合框 (settable) 允许完全访问
+								43 文本 允许完全访问
+							44 container
+								45 按钮
+									46 图像
+								47 组合框 (settable) Description: Select model: Deepseek-V4.1-Flash, Value: Deepseek-V4.1-Flash
+									48 图像
+									49 文本 Deepseek-V4.1-Flash
+								50 按钮 语音输入 ⌘D 或长按 ⌥
+									51 图像
+								52 按钮 停止
+					53 文本 内容由 AI 生成，请核实重要信息
+				54 container
+					55 按钮 新标签页
+					56 按钮 进入全屏
+					57 按钮 收起右侧面板
+					58 container
+						59 内容列表
+							60 文本 打开浏览器
+							61 文本 查看工作空间
+							62 文本 打开终端
+				63 container
+					64 文本 引用来源 (0)
+					65 按钮 关闭
+	66 关闭按钮
+	67 全屏幕按钮 Help: 此按钮也可以执行缩放窗口的操作, Secondary Actions: 缩放窗口
+	68 最小化按钮
+69 menu bar
+	70 WorkBuddy
+	71 编辑
+	72 查看
+	73 窗口
+	74 帮助

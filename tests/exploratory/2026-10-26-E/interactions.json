@@ -1,0 +1,16 @@
+[
+  {
+    "session": "W0",
+    "turn": 1,
+    "input": "我想现在测试好奇心这个技能\n原子的最小结构是什么？",
+    "method": "WorkBuddy native UI via CUA",
+    "modelLabel": "Deepseek-V4.1-Flash",
+    "status": "submitted; awaiting response"
+  },
+  {
+    "session": "W0",
+    "turn": 2,
+    "input": "这些半径和公式我看不懂。我只是想知道原子一层层拆开是什么，先讲组成就行。",
+    "method": "WorkBuddy native UI via CUA"
+  }
+]

@@ -1,0 +1,84 @@
+Window: "WorkBuddy", App: WorkBuddy.
+0 标准窗口 WorkBuddy, Secondary Actions: Raise
+		2 container
+			3 container
+				4 container
+					5 按钮 展开侧边栏
+						6 图像
+					7 按钮
+					8 文本 测试好奇心技能并询问原子结构
+					9 按钮 对话内搜索
+					10 按钮 分享
+						11 图像
+					12 按钮 打开右侧面板
+				13 container
+					14 container
+						15 container
+							16 container
+								17 container
+									18 text 我想现在测试好奇心这个技能 ﻿ ﻿ 原子的最小结构是什么？
+								19 工具栏
+									20 文本 22:45
+									21 按钮 复制
+										22 图像
+							23 container
+								24 图像
+								25 text WorkBuddy 预计消耗 0.5 ~ 22.58 已处理 3m2s
+								26 文本 继续处理任务过程
+								27 文本 深度思考
+								28 text 主公想试「好奇心」这门功夫，那臣就先请出这本功法，再 拆 了 这 问 题 。
+								29 文本 处理、查看文件：质子电荷半径 2023 CODA…
+								30 文本 主公这个问题，问法里藏了三把刀。臣先把答案摆平，再给主公一张能自己动手的图。
+								31 文本 短答：这句话有三把刀，先确定要抓哪把。
+								32 文本 写入 curiosity-原子的最小结…
+								33 text 页面已写好，臣先把它拖进浏览器里实跑一遍，别拿没开过的东 西 糊 弄 主 公 。
+								34 container
+									35 图像
+									36 文本 裁剪对数尺下半部分
+								37 text 已消耗 2.43 在给重点画圈，怕你漏掉关键信息
+								38 按钮 不再显示
+					39 container
+						40 container
+						41 container
+							42 文本输入区 (settable) ﻿
+今天帮你做些什么？@ 添加上下文，/调用技能与指令
+								43 container
+									44 文本 ﻿
+									45 文本 今天帮你做些什么？@ 添加上下文，/调用技能与指令
+							46 组合框 (settable) 更多操作
+							47 按钮 复制分支名
+							48 文本 main
+							49 组合框 (settable) 允许完全访问
+								50 文本 允许完全访问
+							51 container
+								52 按钮
+									53 图像
+								54 组合框 (settable) Description: Select model: Deepseek-V4.1-Flash, Value: Deepseek-V4.1-Flash
+									55 图像
+									56 文本 Deepseek-V4.1-Flash
+								57 按钮 语音输入 ⌘D 或长按 ⌥
+									58 图像
+								59 按钮 停止
+					60 文本 内容由 AI 生成，请核实重要信息
+				61 container
+					62 按钮 新标签页
+					63 按钮 进入全屏
+					64 按钮 收起右侧面板
+					65 container
+						66 内容列表
+							67 文本 打开浏览器
+							68 文本 查看工作空间
+							69 文本 查看变更
+							70 文本 打开终端
+				71 container
+					72 文本 引用来源 (0)
+					73 按钮 关闭
+	74 关闭按钮
+	75 全屏幕按钮 Help: 此按钮也可以执行缩放窗口的操作, Secondary Actions: 缩放窗口
+	76 最小化按钮
+77 menu bar
+	78 WorkBuddy
+	79 编辑
+	80 查看
+	81 窗口
+	82 帮助

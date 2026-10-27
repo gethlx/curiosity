@@ -1,0 +1,57 @@
+Browser tab: 6, Title: "树上那个蘑菇，不是植物", URL: "http://127.0.0.1:8772/W1/curiosity-mushroom-not-a-plant.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 54, 56-103, 105-106
+~		51 checkbox ① 会不会动, Value: 0
+~		53 checkbox ③ 细胞壁是不是纤维素, Value: 1
++	125 text 规则：细胞壁是纤维素算植物，别的都不算。
++		126 container
++			127 text 蘑菇
++			128 definition list
++				129 container 看到
++					130 text 看到
++				131 text 细胞壁是几丁质
++				132 container 判成
++					133 text 判成
++				134 text 不是植物
++				135 container 实际
++					136 text 实际
++				137 text 真菌（判对了）
++		138 container
++			139 text 珊瑚
++			140 definition list
++				141 container 看到
++					142 text 看到
++				143 text 压根没有细胞壁
++				144 container 判成
++					145 text 判成
++				146 text 不是植物
++				147 container 实际
++					148 text 实际
++				149 text 动物（判对了）
++		150 container
++			151 text 含羞草
++			152 definition list
++				153 container 看到
++					154 text 看到
++				155 text 细胞壁是纤维素
++				156 container 判成
++					157 text 判成
++				158 text 植物
++				159 container 实际
++					160 text 实际
++				161 text 植物（判对了）
++		162 container
++			163 text 银杏树
++			164 definition list
++				165 container 看到
++					166 text 看到
++				167 text 细胞壁是纤维素
++				168 container 判成
++					169 text 判成
++				170 text 植物
++				171 container 实际
++					172 text 实际
++				173 text 植物（判对了）
++		174 text 这条标准：4 样东西里判对了  4  个。
++	175 text 同样是“是不是植物”的指标。想再往下分，还得看更多证据——没有哪一条能单独包打天下。
+The focused UI element is 53 checkbox ③ 细胞壁是不是纤维素, Value: 1

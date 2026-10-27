@@ -1,0 +1,119 @@
+{
+  "boundary": "HTML originals and snapshots only; generated files were not hand-edited by evaluator.",
+  "files": [
+    {
+      "file": "W0/artifacts/turn-1/curiosity-原子的最小结构.html",
+      "sha256": "b6c98a6b68ca69c0a90a6a3cc436371b98f923d743bfd0e89d952cce50c260e7",
+      "bytes": 16140,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    },
+    {
+      "file": "W0/artifacts/turn-2-at-lock/curiosity-原子的最小结构.html",
+      "sha256": "ed71144bfe37ee724bc2f157841a879bbabe9637f3dff627e9836ef922947289",
+      "bytes": 9506,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    },
+    {
+      "file": "W0/artifacts/turn-2-post-lock/curiosity-原子的最小结构.html",
+      "sha256": "ed71144bfe37ee724bc2f157841a879bbabe9637f3dff627e9836ef922947289",
+      "bytes": 9506,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    },
+    {
+      "file": "W0/artifacts/turn-3/curiosity-原子的最小结构.html",
+      "sha256": "ed71144bfe37ee724bc2f157841a879bbabe9637f3dff627e9836ef922947289",
+      "bytes": 9506,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    },
+    {
+      "file": "W0/artifacts/turn-3/curiosity-梦境.html",
+      "sha256": "ff858f38c79a2acb1d1272d57e94ae1e0accba80c5b15ba21535a0a668685283",
+      "bytes": 18402,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    },
+    {
+      "file": "W0/artifacts/turn-3-initial/curiosity-原子的最小结构.html",
+      "sha256": "ed71144bfe37ee724bc2f157841a879bbabe9637f3dff627e9836ef922947289",
+      "bytes": 9506,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    },
+    {
+      "file": "W0/artifacts/turn-3-initial/curiosity-梦境.html",
+      "sha256": "ff858f38c79a2acb1d1272d57e94ae1e0accba80c5b15ba21535a0a668685283",
+      "bytes": 18402,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    },
+    {
+      "file": "W0/artifacts/turn-4/curiosity-原子的最小结构.html",
+      "sha256": "ed71144bfe37ee724bc2f157841a879bbabe9637f3dff627e9836ef922947289",
+      "bytes": 9506,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    },
+    {
+      "file": "W0/artifacts/turn-4/curiosity-梦境.html",
+      "sha256": "6a598af05f06295db8049c1fb7884db7dd17204c51ee64e6ecc91ec62f48eeed",
+      "bytes": 18926,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    },
+    {
+      "file": "W1/artifacts/turn-1/curiosity-mushroom-not-a-plant.html",
+      "sha256": "82c8d2da98d3dd63324c922f63770cb3303a5203a1582799bfc658c42b34be32",
+      "bytes": 18649,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    },
+    {
+      "file": "W1/artifacts/turn-2/curiosity-mushroom-not-a-plant.html",
+      "sha256": "fded944d20c87195f20938d38cda4c2d30719b9d5aa063b74b0e4d85c49148f5",
+      "bytes": 19086,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    },
+    {
+      "file": "W2/artifacts/turn-2/curiosity-polarization-vs-echo-chamber.html",
+      "sha256": "2183109e2cb1a37a939d5c2a1337e0551cd405f6ec99a50ff8b2ef8c33e3d6f4",
+      "bytes": 9839,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    },
+    {
+      "file": "W3/artifacts/turn-1-stopped/curiosity-mirror-corridor.html",
+      "sha256": "6cc85a09505ff43a3de690802712da485d6a2c4d2a2e20127ee9e9c54a3079cc",
+      "bytes": 18911,
+      "delivery_status": "partial canceled trial, not delivered"
+    },
+    {
+      "file": "W3/artifacts/turn-2/curiosity-mirror-corridor.html",
+      "sha256": "6cc85a09505ff43a3de690802712da485d6a2c4d2a2e20127ee9e9c54a3079cc",
+      "bytes": 18911,
+      "delivery_status": "partial canceled trial, not delivered"
+    },
+    {
+      "file": "workspace/W1/curiosity-mushroom-not-a-plant.html",
+      "sha256": "fded944d20c87195f20938d38cda4c2d30719b9d5aa063b74b0e4d85c49148f5",
+      "bytes": 19086,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    },
+    {
+      "file": "workspace/W2/curiosity-polarization-vs-echo-chamber.html",
+      "sha256": "2183109e2cb1a37a939d5c2a1337e0551cd405f6ec99a50ff8b2ef8c33e3d6f4",
+      "bytes": 9839,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    },
+    {
+      "file": "workspace/W3/curiosity-mirror-corridor.html",
+      "sha256": "6cc85a09505ff43a3de690802712da485d6a2c4d2a2e20127ee9e9c54a3079cc",
+      "bytes": 18911,
+      "delivery_status": "partial canceled trial, not delivered"
+    },
+    {
+      "file": "workspace/curiosity-原子的最小结构.html",
+      "sha256": "ed71144bfe37ee724bc2f157841a879bbabe9637f3dff627e9836ef922947289",
+      "bytes": 9506,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    },
+    {
+      "file": "workspace/curiosity-梦境.html",
+      "sha256": "6a598af05f06295db8049c1fb7884db7dd17204c51ee64e6ecc91ec62f48eeed",
+      "bytes": 18926,
+      "delivery_status": "preserved generated sample; see report for turn and failures"
+    }
+  ]
+}

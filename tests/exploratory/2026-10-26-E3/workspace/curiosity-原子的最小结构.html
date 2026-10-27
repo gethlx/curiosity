@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>原子里面谁装着谁</title>
+<style>
+  :root{
+    --ink:#1c1b19;
+    --ink-2:#565349;
+    --ink-3:#8d8a80;
+    --line:#e4e1d8;
+    --line-2:#d3cfc3;
+    --paper:#ffffff;
+    --bg:#faf9f5;
+    --proton:#b5432f;
+    --neutron:#7b8794;
+    --electron:#2f6f9f;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font:16px/1.78 -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  main{max-width:700px;margin:0 auto;padding:52px 22px 80px}
+  .kicker{
+    font-size:12px;letter-spacing:.16em;color:var(--ink-3);
+    margin:0 0 14px;
+  }
+  h1{font-size:29px;line-height:1.32;font-weight:600;margin:0 0 20px;letter-spacing:-.01em}
+  .lede{font-size:17px;color:var(--ink-2);margin:0 0 10px}
+  .lede b{color:var(--ink);font-weight:600}
+  hr.rule{border:0;border-top:1px solid var(--line);margin:34px 0}
+  h2{
+    font-size:13px;letter-spacing:.1em;color:var(--ink-3);
+    font-weight:600;text-transform:uppercase;margin:0 0 18px;
+  }
+  p{margin:0 0 14px}
+
+  /* ---------- 嵌套示意图 ---------- */
+  .diagram{
+    display:flex;flex-direction:column;align-items:center;gap:16px;
+    margin:8px 0 6px;
+  }
+  .atom{
+    position:relative;width:100%;max-width:400px;aspect-ratio:1;
+    border-radius:50%;
+    background:radial-gradient(circle at 50% 50%,
+      #eef4f8 0%, #edf3f8 26%, #f7f9fa 62%, #fdfdfc 100%);
+    border:1px dashed #c8d6e0;
+  }
+  .atom .outer-label{
+    position:absolute;left:50%;top:-2px;transform:translate(-50%,-50%);
+    background:var(--bg);padding:0 10px;font-size:12.5px;color:var(--ink-3);
+    letter-spacing:.02em;white-space:nowrap;
+  }
+  .nucleus{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:31%;aspect-ratio:1;border-radius:50%;
+    background:#f5f1e7;border:1px solid #dcd5c6;
+    display:flex;align-items:center;justify-content:center;gap:4%;
+    box-shadow:0 0 0 6px rgba(245,241,231,.65);
+  }
+  .nucleus span{display:block;width:40%;aspect-ratio:1;border-radius:50%}
+  .nucleus .p{background:var(--proton)}
+  .nucleus .n{background:var(--neutron)}
+  .e{
+    position:absolute;width:13px;height:13px;border-radius:50%;
+    background:var(--electron);
+    box-shadow:0 0 0 6px rgba(47,111,159,.13);
+  }
+  .e.a{left:74%;top:26%}
+  .e.b{left:19%;top:76%}
+  .nucleus-tag{
+    position:absolute;left:50%;top:calc(50% - 15.5%);transform:translate(-50%,-100%);
+    font-size:12.5px;color:var(--ink-2);white-space:nowrap;
+  }
+  .nucleus-tag::after{
+    content:"";display:block;margin:3px auto 0;width:1px;height:22px;
+    background:linear-gradient(180deg,#c9c2b1,rgba(201,194,177,0));
+  }
+  .legend{
+    display:flex;flex-wrap:wrap;gap:6px 20px;justify-content:center;
+    font-size:13px;color:var(--ink-2);
+  }
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto}
+  .dot.p{background:var(--proton)}
+  .dot.n{background:var(--neutron)}
+  .dot.el{background:var(--electron)}
+  .figcap{font-size:12.5px;color:var(--ink-3);text-align:center;margin:0;line-height:1.7}
+
+  /* ---------- 名单 ---------- */
+  .list{margin:0;border-left:2px solid var(--line-2);padding-left:22px}
+  .item{margin-bottom:26px;position:relative}
+  .item:last-child{margin-bottom:0}
+  .item::before{
+    content:"";position:absolute;left:-28px;top:9px;
+    width:9px;height:9px;border-radius:50%;background:var(--line-2);
+    box-shadow:0 0 0 4px var(--bg);
+  }
+  .item.proton::before{background:var(--proton)}
+  .item.neutron::before{background:var(--neutron)}
+  .item.electron::before{background:var(--electron)}
+  .item .nm{font-size:17px;font-weight:600;letter-spacing:.01em}
+  .item .where{
+    font-size:12px;color:var(--ink-3);margin-left:10px;font-weight:400;letter-spacing:.02em;
+  }
+  .item p{font-size:15px;color:var(--ink-2);margin:4px 0 0;line-height:1.72}
+
+  /* ---------- 提醒 ---------- */
+  .warn{
+    background:var(--paper);border:1px solid var(--line);border-radius:14px;
+    padding:20px 22px;margin:0 0 16px;
+  }
+  .warn h3{
+    font-size:15px;font-weight:600;margin:0 0 8px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .warn h3::before{
+    content:"";width:3px;height:15px;background:var(--proton);border-radius:2px;
+  }
+  .warn p{font-size:15px;color:var(--ink-2);margin:0 0 10px;line-height:1.75}
+  .warn p:last-child{margin-bottom:0}
+  .warn b{color:var(--ink);font-weight:600}
+
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-3);line-height:1.7}
+  footer p{margin:0 0 8px}
+
+  @media (max-width:480px){
+    main{padding:34px 16px 56px}
+    h1{font-size:23px}
+    .lede{font-size:16px}
+    .atom{max-width:320px}
+    .e{width:11px;height:11px;box-shadow:0 0 0 5px rgba(47,111,159,.13)}
+    .item .nm{font-size:16px}
+    .item p{font-size:14.5px}
+    .warn{padding:16px 16px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;animation:none !important}
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <p class="kicker">好奇心 · 一层包含关系</p>
+  <h1>原子里面谁装着谁</h1>
+
+  <p class="lede"><b>原子</b>是最大的一层，你看到的整个东西都叫原子。</p>
+  <p class="lede">原子里面只装两样：正中间一小团<b>原子核</b>，和核外面飞着的<b>电子</b>。</p>
+  <p class="lede">原子核里面再分，装的是<b>质子</b>和<b>中子</b>。</p>
+
+  <hr class="rule">
+
+  <h2>看这张图就够</h2>
+
+  <div class="diagram">
+    <div class="atom">
+      <span class="outer-label">原子（整个圆都是）</span>
+      <span class="nucleus-tag">原子核</span>
+      <div class="nucleus">
+        <span class="p"></span>
+        <span class="n"></span>
+      </div>
+      <span class="e a"></span>
+      <span class="e b"></span>
+    </div>
+
+    <div class="legend">
+      <span><i class="dot p"></i>质子</span>
+      <span><i class="dot n"></i>中子</span>
+      <span><i class="dot el"></i>电子</span>
+    </div>
+  </div>
+
+  <p class="figcap" style="margin:10px 0 0">
+    中间米色小圆是原子核，核里的两个球是质子（红）和中子（灰）。<br>
+    蓝点是电子，在核外面，不在核里。图不按真实比例——真实情况下核比这还小得多。
+  </p>
+
+  <hr class="rule">
+
+  <h2>五个名字，各在一层</h2>
+
+  <div class="list">
+
+    <div class="item">
+      <span class="nm">原子</span><span class="where">最外层</span>
+      <p>整个东西。里面装着一个核，和若干个电子。你摸到的、看到的、烧起来的，都是原子的外层在起作用。</p>
+    </div>
+
+    <div class="item">
+      <span class="nm">原子核</span><span class="where">原子正中间</span>
+      <p>原子中心那一小团。<b>它不是一个质子</b>，是一个容器，里面装着质子和中子。它几乎背着原子的全部重量。</p>
+    </div>
+
+    <div class="item proton">
+      <span class="nm">质子</span><span class="where">在核里面</span>
+      <p>核里的一种零件，带正电。<b>一个原子是哪种元素，由质子的个数决定</b>——1 个是氢，6 个是碳，8 个是氧。</p>
+    </div>
+
+    <div class="item neutron">
+      <span class="nm">中子</span><span class="where">在核里面</span>
+      <p>核里的另一种零件，不带电，重量和质子差不多。它不影响「是什么元素」，但影响这个核稳不稳。</p>
+    </div>
+
+    <div class="item electron">
+      <span class="nm">电子</span><span class="where">在核外面</span>
+      <p>绕着核飞的小东西，带负电，非常轻——大约只有质子的 1/1836。<b>它不在核里。</b>电子决定这个原子会不会跟别的原子拉手。</p>
+    </div>
+
+  </div>
+
+  <hr class="rule">
+
+  <h2>最容易混的两点</h2>
+
+  <div class="warn">
+    <h3>原子核 ≠ 质子</h3>
+    <p>核是那个「装东西的盒子」，质子是盒子里的一种零件。两者的名字长得像，但不是一回事。</p>
+    <p>最典型的例子：<b>氢的核就只有一个质子，一个中子都没有。</b>其他元素的核里，质子和中子都有。所以「核里一定有中子」是错的。</p>
+  </div>
+
+  <div class="warn" style="margin-bottom:0">
+    <h3>电子不在核里</h3>
+    <p>电子在核外面的空间里，而且散布在一片区域里，不是沿着某条固定轨道绕圈。所以严格说，原子绝大部分是「空的」。</p>
+  </div>
+
+  <hr class="rule">
+
+  <h2>再往下还有一层</h2>
+
+  <p>质子和中子里面还有零件，叫<b>夸克</b>。电子里面至今没发现任何零件——它是这一条链的终点。</p>
+  <p style="margin-bottom:0">所以「原子由什么组成」这条链，到电子就断了：<br>
+  <b>原子 → 核 + 电子 →（核里）质子 + 中子 →（质子和中子里）夸克 →（电子里）没有了。</b></p>
+
+  <footer>
+    <p><b>数字说明</b>：电子质量约为质子的 1/1836，这是公认值。本页只讲包含关系，不涉及尺寸和能量单位。</p>
+    <p><b>待确认</b>：图中零件数量仅为示意（画了 1 个质子、1 个中子、2 个电子）。真实原子里电子数等于质子数，中子数在有些元素里可以为零。</p>
+  </footer>
+
+</main>
+</body>
+</html>

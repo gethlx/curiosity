@@ -1,0 +1,18 @@
+{
+  "candidate": "E2",
+  "date": "2026-10-26",
+  "reason": "user added speed and depth requirements during E run",
+  "host": "WorkBuddy V5.9.2 native UI",
+  "model": "Deepseek-V4.1-Flash UI label; backend revision unknown",
+  "files": {
+    "curiosity/SKILL.md": "dbdd2f63c211c3529bd05d4924f68d3640471e0e200f67340b9e0a1deca81345",
+    "curiosity/references/page-spec.md": "71f445ce9e92dec12896ecc0050de32d92df963e0b24f75f526f2f2ca7216727"
+  },
+  "targets_seconds": {
+    "first_useful_explanation": 30,
+    "basic_visual_delivery": 120,
+    "local_definition": 30,
+    "small_page_update": 90
+  },
+  "status": "frozen before E2 experience"
+}

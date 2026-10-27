@@ -1,0 +1,13 @@
+Browser tab: 1, Title: "原子的最小结构 · 三种\"最小\"，三个冠军", URL: "http://127.0.0.1:8770/curiosity-%E5%8E%9F%E5%AD%90%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BB%93%E6%9E%84.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 37-39, 49, 53, 56, 59-60
++			87 text m/m
++			88 text e
++			89 text  = 207
+~		40 slider (settable, integer) Description: 绕行粒子质量，以电子质量为单位，1 到 207, Value: 207, ID: mass
++			90 text 511.3 fm
++			91 text 255.6 fm
++			92 text 304
++			93 text 8,869,743
++		94 text μ 子氢。轨道半径只剩质子半径的约 300 倍，波函数在核里的密度放大了近千万倍——核的大小直接写进光谱线里。2010 年就是靠它量出了质子半径。
+The focused UI element is 40 slider (settable, integer) Description: 绕行粒子质量，以电子质量为单位，1 到 207, Value: 207, ID: mass

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>梦是怎么回事</title>
+<style>
+  :root{
+    --ink:#1c1b19;
+    --ink-2:#565349;
+    --ink-3:#8d8a80;
+    --line:#e4e1d8;
+    --line-2:#d3cfc3;
+    --paper:#ffffff;
+    --bg:#faf9f5;
+    --rem:#2f6f9f;
+    --deep:#6b6357;
+    --warm:#b5432f;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.78 -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  main{max-width:700px;margin:0 auto;padding:52px 22px 80px}
+  .kicker{font-size:12px;letter-spacing:.16em;color:var(--ink-3);margin:0 0 14px}
+  h1{font-size:29px;line-height:1.32;font-weight:600;margin:0 0 20px;letter-spacing:-.01em}
+  .lede{font-size:17px;color:var(--ink-2);margin:0 0 10px}
+  .lede b{color:var(--ink);font-weight:600}
+  hr.rule{border:0;border-top:1px solid var(--line);margin:34px 0}
+  h2{font-size:13px;letter-spacing:.1em;color:var(--ink-3);font-weight:600;margin:0 0 18px}
+  p{margin:0 0 14px}
+
+  /* ---------- 睡眠图 ---------- */
+  .chartwrap{
+    background:var(--paper);border:1px solid var(--line);border-radius:14px;
+    padding:20px 20px 12px;margin:0 0 14px;
+  }
+  .plot{position:relative;padding-left:72px}
+  .ylab{
+    position:absolute;left:0;top:0;height:100%;width:72px;
+    font-size:12px;color:var(--ink-3);
+  }
+  .ylab span{
+    position:absolute;right:12px;transform:translateY(-50%);
+    white-space:nowrap;line-height:1.3;
+  }
+  .ylab span b{display:block;font-size:12.5px;color:var(--ink-2);font-weight:600}
+  .ylab span i{display:block;font-style:normal;font-size:10.5px;color:var(--ink-3)}
+  .ylab .r0{top:12.5%}
+  .ylab .r1{top:36.7%}
+  .ylab .r2{top:60.8%}
+  .ylab .r3{top:85%}
+  svg.hypno{display:block;width:100%;height:auto;aspect-ratio:640/240;overflow:visible}
+  .xlab{
+    display:flex;justify-content:space-between;
+    font-size:11px;color:var(--ink-3);font-variant-numeric:tabular-nums;
+    padding:2px 3.125% 0;margin-left:72px;
+  }
+  .clegend{
+    display:flex;gap:18px;font-size:11.5px;color:var(--ink-3);
+    margin:10px 0 0;padding-left:72px;flex-wrap:wrap;
+  }
+  .clegend i{display:inline-block;width:16px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+  .clegend i.rem{background:var(--rem);height:5px}
+  .clegend i.other{background:#b9b3a4}
+
+  .sliderwrap{padding-left:72px}
+  input[type=range]{
+    -webkit-appearance:none;appearance:none;width:100%;height:24px;background:transparent;
+    margin:14px 0 0;cursor:pointer;
+  }
+  input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:#e6e2d7}
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;
+    background:var(--ink);border:3px solid var(--paper);box-shadow:0 0 0 1px var(--line-2);
+    margin-top:-7px;
+  }
+  input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:#e6e2d7}
+  input[type=range]::-moz-range-thumb{
+    width:14px;height:14px;border-radius:50%;background:var(--ink);
+    border:3px solid var(--paper);box-shadow:0 0 0 1px var(--line-2);
+  }
+  input[type=range]:focus-visible{outline:2px solid var(--rem);outline-offset:6px;border-radius:20px}
+
+  .readout{
+    display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+    margin:6px 0 0;padding-top:12px;border-top:1px solid var(--line);
+  }
+  .readout .t{font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+  .readout .s{
+    font-size:11.5px;letter-spacing:.06em;padding:2px 9px;border-radius:20px;
+    background:#eef1f4;color:var(--ink-2);
+  }
+  .readout .s.rem{background:#e7f0f6;color:#245c85}
+  .readout .s.deep{background:#eeebe4;color:#5b544a}
+  .desc{font-size:14.5px;color:var(--ink-2);line-height:1.72;margin:8px 0 0;min-height:56px}
+  .desc b{color:var(--ink);font-weight:600}
+
+  /* ---------- 脑区开关 ---------- */
+  .switch{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 16px}
+  .switch .box{border-radius:12px;padding:16px 16px 8px;border:1px solid var(--line)}
+  .switch .on{background:#fdf6f4;border-color:#ecd9d3}
+  .switch .off{background:#f6f6f4;border-color:#e3e2dc}
+  .switch h3{font-size:13px;font-weight:600;margin:0 0 10px;letter-spacing:.02em}
+  .switch .on h3{color:var(--warm)}
+  .switch .off h3{color:var(--ink-2)}
+  .switch ul{list-style:none;margin:0;padding:0}
+  .switch li{font-size:13.5px;color:var(--ink-2);line-height:1.65;padding:0 0 8px}
+  .switch li b{color:var(--ink);font-weight:600}
+  .bar{display:inline-block;width:34px;height:4px;border-radius:2px;vertical-align:middle;margin-right:8px}
+  .on .bar{background:var(--warm);opacity:.85}
+  .off .bar{background:#c7c2b6}
+
+  /* ---------- 理论卡 ---------- */
+  .claim{
+    border-left:2px solid var(--line-2);padding:2px 0 2px 18px;margin:0 0 22px;
+  }
+  .claim h3{font-size:15.5px;font-weight:600;margin:0 0 4px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .tag{
+    font-size:10.5px;letter-spacing:.05em;padding:1px 8px;border-radius:20px;
+    font-weight:400;white-space:nowrap;
+  }
+  .tag.strong{background:#e6efe4;color:#3f6b3a}
+  .tag.mid{background:#f4efe0;color:#7a652c}
+  .tag.weak{background:#f4e8e6;color:#8a4438}
+  .tag.open{background:#ebebee;color:#4f4f5a}
+  .claim p{font-size:14.5px;color:var(--ink-2);margin:0;line-height:1.72}
+  .claim b{color:var(--ink);font-weight:600}
+
+  .warn{
+    background:var(--paper);border:1px solid var(--line);border-radius:14px;
+    padding:20px 22px;margin:0 0 16px;
+  }
+  .warn h3{font-size:15px;font-weight:600;margin:0 0 8px;display:flex;align-items:center;gap:8px}
+  .warn h3::before{content:"";width:3px;height:15px;background:var(--rem);border-radius:2px}
+  .warn p{font-size:14.5px;color:var(--ink-2);margin:0 0 10px;line-height:1.75}
+  .warn p:last-child{margin-bottom:0}
+  .warn b{color:var(--ink);font-weight:600}
+
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-3);line-height:1.7}
+  footer p{margin:0 0 8px}
+
+  @media (max-width:520px){
+    main{padding:34px 16px 56px}
+    h1{font-size:23px}
+    .lede{font-size:16px}
+    .chartwrap{padding:14px 12px 10px}
+    .plot{padding-left:46px}
+    .ylab{width:46px}
+    .ylab span{right:8px}
+    .ylab span i{display:none}
+    .ylab span b{font-size:11px}
+    .xlab{margin-left:46px}
+    .sliderwrap{padding-left:46px}
+    .clegend{padding-left:46px}
+    .switch{grid-template-columns:1fr}
+    .readout .t{font-size:17px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+</style>
+</head>
+<body>
+<main>
+
+  <p class="kicker">好奇心 · 一夜的开关切换</p>
+  <h1>梦是怎么回事</h1>
+
+  <p class="lede">梦不是另一个世界。是同一台大脑，在一种特殊配置下自己跑起来的结果。</p>
+  <p class="lede">它主要发生在 <b>REM 睡眠</b>（快速眼动睡眠）。整夜大约每 90 分钟来一次，<b>而且一次比一次长</b>。</p>
+  <p class="lede">这个配置有三个关键：画面和情绪满功率、负责逻辑和自省的前额叶掉线、身体被锁住不许动。</p>
+
+  <hr class="rule">
+
+  <h2>一夜里，梦什么时候来</h2>
+
+  <div class="chartwrap">
+    <div class="plot">
+      <div class="ylab">
+        <span class="r0"><b>REM</b><i>做梦</i></span>
+        <span class="r1"><b>N1</b><i>刚睡着</i></span>
+        <span class="r2"><b>N2</b><i>浅睡</i></span>
+        <span class="r3"><b>N3</b><i>深睡</i></span>
+      </div>
+      <svg class="hypno" viewBox="0 0 640 240" preserveAspectRatio="xMidYMid meet" role="img"
+           aria-label="一夜睡眠结构示意图：前半夜深睡为主，后半夜快速眼动睡眠变长">
+        <g id="grid"></g>
+        <g id="base"></g>
+        <g id="remlayer"></g>
+        <line id="cursor" x1="20" y1="8" x2="20" y2="228"
+              stroke="#1c1b19" stroke-width="1.5" stroke-dasharray="3 3" opacity=".55"></line>
+        <circle id="dot" cx="20" cy="30" r="4.5" fill="#1c1b19"></circle>
+      </svg>
+    </div>
+    <div class="xlab">
+      <span>0 时</span><span>2 时</span><span>4 时</span><span>6 时</span><span>8 时</span>
+    </div>
+    <div class="clegend">
+      <span><i class="rem"></i>REM 睡眠（梦的主场）</span>
+      <span><i class="other"></i>其他睡眠阶段</span>
+    </div>
+
+    <div class="sliderwrap">
+      <input id="time" type="range" min="0" max="480" step="5" value="120"
+             aria-label="入睡后的时间，从 0 到 480 分钟"
+             aria-valuetext="入睡后 2 小时">
+    </div>
+
+    <div class="readout">
+      <span class="t" id="clock">入睡后 2 时 00 分</span>
+      <span class="s" id="stage">N3 深睡</span>
+    </div>
+    <p class="desc" id="desc"></p>
+  </div>
+
+  <p style="font-size:12.5px;color:var(--ink-3);line-height:1.7;margin:0">
+    拖动时间轴，看你如果在这一刻醒来，会处在什么状态。曲线是典型的成年人结构，具体每个夜里都不一样——熬夜、喝酒、缺觉都会把这个形状改掉。
+  </p>
+
+  <hr class="rule">
+
+  <h2>为什么梦里荒诞，你却不觉得荒诞</h2>
+
+  <div class="switch">
+    <div class="box on">
+      <h3>REM 期间「满功率」</h3>
+      <ul>
+        <li><span class="bar"></span><b>视觉皮层</b>：画面全靠它生出来</li>
+        <li><span class="bar"></span><b>运动皮层</b>：跑、飞、打架的感觉</li>
+        <li><span class="bar"></span><b>杏仁核</b>：恐惧、兴奋，活跃度可以超过白天</li>
+        <li><span class="bar"></span><b>海马体</b>：提供场景和情节的素材</li>
+      </ul>
+    </div>
+    <div class="box off">
+      <h3>同一时刻「掉线」</h3>
+      <ul>
+        <li><span class="bar"></span><b>前额叶背外侧</b>：逻辑、自省、「这合理吗」</li>
+        <li><span class="bar"></span><b>去甲肾上腺素系统</b>：警觉，以及把记忆写牢</li>
+        <li><span class="bar"></span><b>肌张力</b>：被主动抑制，防止把梦演出来</li>
+        <li><span class="bar"></span><b>现实检验</b>：没人核对「这是不是真的」</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>画面和情绪拉满，审查员下班。所以你在梦里能飞、能遇见去世的人、能在一个不存在的城市里找到回家的路——<b>而且全程不觉得奇怪</b>。</p>
+  <p>醒来之后前额叶一上线，第一反应就是「我刚才到底在信什么」。</p>
+
+  <hr class="rule">
+
+  <h2>那梦到底有什么用</h2>
+
+  <p style="color:var(--ink-3);font-size:14.5px;margin-bottom:22px">
+    先说清楚：<b style="color:var(--ink)">没有共识</b>。下面是几种还在竞争的说法，右边的标签是证据强度，不是可信度投票。
+  </p>
+
+  <div class="claim">
+    <h3>记忆整合<span class="tag strong">证据较强</span></h3>
+    <p>睡眠中大脑会重放白天的经历序列，把重要的挑出来加固。这一点在动物实验里能直接观察到。<b>但「梦的内容」和「正被加固的内容」是不是同一件事，还没有定论。</b></p>
+  </div>
+
+  <div class="claim">
+    <h3>情绪脱敏<span class="tag mid">证据中等</span></h3>
+    <p>REM 期间去甲肾上腺素几乎归零，大脑等于在一个「安全模式」下重演情绪记忆。有研究发现 REM 睡眠会削弱情绪记忆带来的反应，睡眠不足则会让情绪反应变大。<b>方向对得上，机制还没闭合。</b></p>
+  </div>
+
+  <div class="claim">
+    <h3>威胁预演<span class="tag weak">证据弱 · 属假说</span></h3>
+    <p>Revonsuo 提出：梦是进化出来的虚拟训练场，专门演练危险场景。这个说法流传很广，但很难检验——你没法证明「不做梦的祖先更容易死」。</p>
+  </div>
+
+  <div class="claim">
+    <h3>没有功能<span class="tag open">无法排除</span></h3>
+    <p>另一种可能：梦只是睡眠中神经活动的副产品，像发动机空转的声音。它不承担任何任务，只是你醒来时恰好看见了自己的脑子在跑。</p>
+  </div>
+
+  <hr class="rule">
+
+  <h2>所有说法都卡在同一个地方</h2>
+
+  <div class="warn" style="margin-bottom:0">
+    <h3>我们研究的是「对梦的回忆」，不是梦</h3>
+    <p>没有任何办法直接观测别人的梦。所有数据都来自醒来后的口头或书面报告，而这份报告在醒后几分钟内就会丢掉大半——从深睡里被叫醒的人，常常一片空白。</p>
+    <p>所以你看到的每一条梦理论，背后都是同一堆二手材料。<b>这不是谁不努力，是方法本身到顶了。</b></p>
+  </div>
+
+  <footer>
+    <p><b>关于这张图</b>：睡眠结构是典型成年人的形状，不是精确记录。深睡集中在前半夜、REM 集中在后半夜，这个趋势是稳定的；每一段的具体长度因人因夜而异。图里省略了夜间短暂觉醒。</p>
+    <p><b>关于数字</b>：本页不给「人一生有几年在做梦」这类推算，不同来源的假设差别很大。文中提到的作用机制均为定性描述。</p>
+    <p><b>未核验</b>：本页内容为教科书与综述层面的共识与争议概述，未在本次会话中逐条核对原始文献。各理论的证据强度是研究界的粗略共识，非精确评级。</p>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var MIN = 480, X0 = 20, XW = 600;
+  var Y = { REM: 30, N1: 88, N2: 146, N3: 204 };
+  var SEG = [
+    [0,   'N1'],
+    [10,  'N2'],
+    [25,  'N3'],
+    [65,  'N2'],
+    [75,  'REM'],
+    [85,  'N2'],
+    [100, 'N3'],
+    [130, 'N2'],
+    [155, 'REM'],
+    [173, 'N2'],
+    [205, 'N3'],
+    [225, 'N2'],
+    [250, 'REM'],
+    [275, 'N2'],
+    [310, 'N3'],
+    [325, 'N2'],
+    [345, 'REM'],
+    [375, 'N2'],
+    [405, 'REM'],
+    [455, 'N1'],
+    [465, 'N2']
+  ];
+  var END = 480;
+  var x = function(m){ return X0 + (m / MIN) * XW; };
+  var NS = 'http://www.w3.org/2000/svg';
+
+  // 网格
+  var grid = document.getElementById('grid');
+  Object.keys(Y).forEach(function(k){
+    var l = document.createElementNS(NS, 'line');
+    l.setAttribute('x1', X0); l.setAttribute('x2', X0 + XW);
+    l.setAttribute('y1', Y[k]); l.setAttribute('y2', Y[k]);
+    l.setAttribute('stroke', '#ece9e0');
+    l.setAttribute('stroke-width', '1');
+    grid.appendChild(l);
+  });
+  [120, 240, 360].forEach(function(m){
+    var l = document.createElementNS(NS, 'line');
+    l.setAttribute('x1', x(m)); l.setAttribute('x2', x(m));
+    l.setAttribute('y1', 8); l.setAttribute('y2', 228);
+    l.setAttribute('stroke', '#f2efe7');
+    l.setAttribute('stroke-width', '1');
+    grid.appendChild(l);
+  });
+
+  // 主折线
+  var pts = [];
+  SEG.forEach(function(seg, i){
+    var start = seg[0];
+    var end = (i + 1 < SEG.length) ? SEG[i + 1][0] : END;
+    pts.push([x(start), Y[seg[1]]]);
+    pts.push([x(end), Y[seg[1]]]);
+  });
+  var base = document.getElementById('base');
+  var poly = document.createElementNS(NS, 'polyline');
+  poly.setAttribute('points', pts.map(function(p){ return p[0].toFixed(1) + ',' + p[1]; }).join(' '));
+  poly.setAttribute('fill', 'none');
+  poly.setAttribute('stroke', '#b9b3a4');
+  poly.setAttribute('stroke-width', '2.5');
+  poly.setAttribute('stroke-linejoin', 'round');
+  poly.setAttribute('stroke-linecap', 'round');
+  base.appendChild(poly);
+
+  // REM 高亮
+  var remLayer = document.getElementById('remlayer');
+  SEG.forEach(function(seg, i){
+    if (seg[1] !== 'REM') return;
+    var start = seg[0];
+    var end = (i + 1 < SEG.length) ? SEG[i + 1][0] : END;
+    var l = document.createElementNS(NS, 'line');
+    l.setAttribute('x1', x(start)); l.setAttribute('x2', x(end));
+    l.setAttribute('y1', Y.REM); l.setAttribute('y2', Y.REM);
+    l.setAttribute('stroke', '#2f6f9f');
+    l.setAttribute('stroke-width', '6');
+    l.setAttribute('stroke-linecap', 'round');
+    remLayer.appendChild(l);
+  });
+
+  var slider = document.getElementById('time');
+  var cursor = document.getElementById('cursor');
+  var dot = document.getElementById('dot');
+  var clockEl = document.getElementById('clock');
+  var stageEl = document.getElementById('stage');
+  var descEl = document.getElementById('desc');
+
+  var DESC = {
+    REM: { label: 'REM 睡眠', cls: 'rem', html: function(dur){
+      return '<b>做梦的主场。</b>这段 REM 已经持续 ' + dur + ' 分钟。画面、情绪、情节全在线，逻辑审查缺席。如果你此刻醒来，大概能讲出一个完整的故事——不过几分钟后就会开始忘。';
+    }},
+    N1: { label: 'N1 刚睡着', cls: '', html: function(){
+      return '刚睡着或快醒了，这一层很浅，容易被叫醒。会有零碎的画面上来，但<b>不成故事</b>，更像走神。';
+    }},
+    N2: { label: 'N2 浅睡', cls: '', html: function(){
+      return '整夜差不多一半时间在这一层。<b>这里也有梦，但短、碎、像一段念头</b>，醒来常常只记得一个画面或一句话。';
+    }},
+    N3: { label: 'N3 深睡', cls: 'deep', html: function(){
+      return '深睡。叫醒你会很困难，而且<b>醒来多半记不住任何东西</b>。整夜的深睡几乎全压在前半夜。';
+    }}
+  };
+
+  function segAt(m){
+    var idx = 0;
+    for (var i = 0; i < SEG.length; i++){
+      if (SEG[i][0] <= m) idx = i; else break;
+    }
+    var start = SEG[idx][0];
+    var end = (idx + 1 < SEG.length) ? SEG[idx + 1][0] : END;
+    return { stage: SEG[idx][1], start: start, end: end };
+  }
+
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+  function update(){
+    var m = Number(slider.value);
+    var s = segAt(m);
+    var h = Math.floor(m / 60), mm = m % 60;
+    var clock = '入睡后 ' + h + ' 时 ' + pad(mm) + ' 分';
+    var dur = Math.max(0, Math.round(m - s.start));
+    var d = DESC[s.stage];
+
+    clockEl.textContent = clock;
+    stageEl.textContent = d.label;
+    stageEl.className = 's ' + d.cls;
+    descEl.innerHTML = d.html(dur);
+
+    var px = x(m);
+    cursor.setAttribute('x1', px); cursor.setAttribute('x2', px);
+    dot.setAttribute('cx', px);
+    dot.setAttribute('cy', Y[s.stage]);
+
+    slider.setAttribute('aria-valuetext', clock + '，' + d.label);
+  }
+
+  slider.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>

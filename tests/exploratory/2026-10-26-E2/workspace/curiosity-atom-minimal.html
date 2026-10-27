@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>原子的最小结构 · 揭开"最小"的两层含义</title>
+<style>
+  :root{
+    --bg:#f5f6f8;
+    --card:#ffffff;
+    --ink:#1a1d21;
+    --muted:#5b6470;
+    --line:#e2e6eb;
+    --proton:#c8433a;
+    --proton-soft:#f6dedb;
+    --electron:#2f6fb0;
+    --electron-soft:#dce8f4;
+    --neutron:#8a9099;
+    --ok:#1c6b46;
+    --ok-bg:#e2f0e8;
+    --no:#8a5200;
+    --no-bg:#f7e8ce;
+    --gluon:#c9a227;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.68;
+    font-size:16px;
+    padding:28px 18px 64px;
+  }
+  .wrap{max-width:960px;margin:0 auto}
+  header{margin-bottom:22px}
+  .kicker{
+    font-size:13px;letter-spacing:.14em;color:var(--muted);
+    text-transform:uppercase;margin:0 0 8px;
+  }
+  h1{
+    font-size:clamp(23px,4.6vw,33px);
+    line-height:1.28;margin:0 0 14px;font-weight:700;letter-spacing:-.01em;
+  }
+  .lede{
+    font-size:clamp(15px,2.4vw,17px);
+    color:#33383f;margin:0;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px;
+    margin-bottom:18px;
+  }
+  h2{
+    font-size:clamp(17px,2.6vw,19px);
+    margin:0 0 4px;font-weight:650;letter-spacing:-.005em;
+  }
+  .sub{color:var(--muted);font-size:14px;margin:0 0 18px}
+  /* ---------- 控制条 ---------- */
+  .segmented{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+    margin:0 0 18px;
+  }
+  .segmented button{
+    appearance:none;
+    font:inherit;font-size:14px;
+    padding:10px 6px;
+    border:1px solid var(--line);
+    background:#fafbfc;
+    color:#2b3238;
+    border-radius:10px;
+    cursor:pointer;
+    line-height:1.35;
+    transition:background .15s,border-color .15s,box-shadow .15s;
+    min-height:48px;
+  }
+  .segmented button .n{
+    display:block;font-size:11px;letter-spacing:.08em;color:var(--muted);margin-bottom:2px;
+  }
+  .segmented button:hover{background:#f0f3f6}
+  .segmented button[aria-pressed="true"]{
+    background:#1a1d21;border-color:#1a1d21;color:#fff;
+  }
+  .segmented button[aria-pressed="true"] .n{color:#aab2bb}
+  .segmented button:focus-visible,
+  summary:focus-visible,
+  a:focus-visible{
+    outline:3px solid #2f6fb0;outline-offset:2px;
+  }
+  /* ---------- 舞台 ---------- */
+  .stage{
+    background:#fbfcfd;
+    max-width:620px;margin-left:auto;margin-right:auto;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:6px 6px 2px;
+    margin-bottom:14px;
+  }
+  .stage svg{display:block;width:100%;height:auto}
+  .scene{display:none}
+  .scene.on{display:block}
+  .legend{
+    list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;
+    max-width:620px;margin:12px auto 6px;padding-left:0;padding:0;font-size:13.5px;color:#4a525b;
+  }
+  .legend li{display:flex;align-items:center;gap:7px}
+  .legend .sw{
+    width:11px;height:11px;border-radius:50%;flex:0 0 auto;
+    border:1px solid rgba(0,0,0,.10);
+  }
+  .scale{max-width:620px;margin:18px auto 4px}
+  .scale-track{
+    position:relative;height:3px;background:#d3dae2;border-radius:2px;margin:0 0 0;
+  }
+  .scale-track .tick{
+    position:absolute;top:-4px;width:1.5px;height:11px;background:#aeb9c5;
+    transform:translateX(-50%);
+  }
+  .scale-track .dot{
+    position:absolute;top:50%;left:100%;width:15px;height:15px;border-radius:50%;
+    background:#1a1d21;box-shadow:inset 0 0 0 3.5px #fff;
+    transform:translate(-50%,-50%);
+    transition:left .32s ease;
+  }
+  .scale-labels{position:relative;height:36px;margin-top:9px;font-size:12.5px;color:#7d8794;line-height:1.45}
+  .scale-labels div{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+  .scale-labels div:first-child{transform:none;text-align:left}
+  .scale-labels div:last-child{transform:translateX(-100%);text-align:right}
+  .scale-labels b{display:block;font-weight:500;color:#5b6470;font-variant-numeric:tabular-nums}
+  .scale-labels span{font-size:11.5px;color:#9aa3ae}
+  .marker{transition:transform .32s ease}
+  .note-sm{
+    font-size:12.5px;color:var(--muted);
+    margin:6px 2px 0;display:flex;gap:6px;flex-wrap:wrap;
+  }
+  .note-sm[hidden]{display:none}
+  .sr-only{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+  }
+  /* ---------- 读数 ---------- */
+  .readout{
+    display:grid;
+    grid-template-columns:104px 1fr;
+    gap:10px 16px;
+    border-top:1px solid var(--line);
+    padding-top:16px;
+    margin-top:6px;
+    font-size:15px;
+  }
+  .readout dt{color:var(--muted);font-size:13px;padding-top:2px}
+  .readout dd{margin:0;font-weight:500}
+  .readout dd.mono{font-variant-numeric:tabular-nums;letter-spacing:.01em}
+  .verdict{
+    display:inline-flex;align-items:center;gap:7px;
+    padding:5px 11px;border-radius:999px;
+    font-size:14px;font-weight:600;line-height:1.5;
+  }
+  .verdict.yes{background:var(--ok-bg);color:var(--ok)}
+  .verdict.no{background:var(--no-bg);color:var(--no)}
+  .verdict .glyph{font-size:14px}
+  .why{color:#3c434b;font-size:14.5px}
+  /* ---------- 三条关系 ---------- */
+  .rules{display:grid;gap:12px;margin-top:14px}
+  .rule{
+    display:grid;grid-template-columns:112px 1fr;
+    gap:14px;align-items:start;
+    padding:13px 14px;
+    background:#fafbfc;border:1px solid var(--line);border-radius:11px;
+  }
+  .rule .tag{
+    font-size:13px;font-weight:650;letter-spacing:.02em;
+    display:flex;flex-direction:column;gap:3px;
+  }
+  .rule .tag span{font-weight:400;font-size:11.5px;color:var(--muted);letter-spacing:.06em}
+  .rule p{margin:0;font-size:14.5px;color:#3c434b}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+  .chip{
+    font-size:12.5px;padding:2px 9px;border-radius:999px;
+    border:1px solid var(--line);background:#fff;color:#3c434b;
+    font-variant-numeric:tabular-nums;
+  }
+  /* ---------- 边界 ---------- */
+  .bounds{display:grid;gap:14px;margin-top:6px}
+  .bound{padding-left:15px;border-left:3px solid #cdd5de}
+  .bound h3{font-size:15px;margin:0 0 4px;font-weight:650}
+  .bound p{margin:0;font-size:14.5px;color:#3c434b}
+  b.hl{background:#fff2c2;padding:0 3px;border-radius:3px;font-weight:600}
+  details{
+    margin-top:16px;border-top:1px solid var(--line);padding-top:14px;
+  }
+  summary{
+    cursor:pointer;font-size:13.5px;color:var(--muted);
+    list-style:none;display:inline-flex;align-items:center;gap:7px;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::before{
+    content:"+";display:inline-flex;align-items:center;justify-content:center;
+    width:18px;height:18px;border:1px solid #c3ccd6;border-radius:50%;
+    font-size:13px;line-height:1;color:#5b6470;
+  }
+  details[open] summary::before{content:"−"}
+  .src{font-size:13.5px;color:#4a525b;margin:12px 0 0;padding-left:6px}
+  .src li{margin-bottom:7px}
+  .src a{color:#215a91;text-underline-offset:2px;overflow-wrap:anywhere}
+  footer{
+    font-size:12.5px;color:var(--muted);
+    text-align:center;margin-top:26px;line-height:1.7;
+  }
+  @media (max-width:720px){
+    .readout{grid-template-columns:1fr;gap:4px 0}
+    .readout dt{padding-top:10px}
+    .readout dt:first-child{padding-top:0}
+    .rule{grid-template-columns:1fr;gap:6px}
+    .segmented{grid-template-columns:repeat(2,1fr)}
+    .card{padding:18px 15px}
+    body{padding:20px 12px 48px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="kicker">原子结构 · 一个问题的两层答案</p>
+    <h1>原子的最小结构是什么？</h1>
+    <p class="lede">
+      这问题里藏着两个不同的"最小"，混在一起就会得出两个互相打架的答案。
+      <strong>能还叫"原子"的最小配置</strong>是 1 个质子 ＋ 1 个电子（氢-1）；
+      <strong>而"原子由什么最小零件拼成"</strong>要一路挖到夸克——那已经不在原子结构这一层了。
+    </p>
+  </header>
+
+  <section class="card">
+    <h2>一层一层剥下去，看"最小"在哪一层失效</h2>
+    <p class="sub">点四个按钮，图形、尺寸和判定会一起变。注意看底部标尺上的圆点怎么走。</p>
+
+    <div class="segmented" role="group" aria-label="选择拆解层级">
+      <button type="button" data-layer="1" aria-pressed="true"><span class="n">第 1 层</span>整个原子</button>
+      <button type="button" data-layer="2" aria-pressed="false"><span class="n">第 2 层</span>只剩原子核</button>
+      <button type="button" data-layer="3" aria-pressed="false"><span class="n">第 3 层</span>核子内部</button>
+      <button type="button" data-layer="4" aria-pressed="false"><span class="n">第 4 层</span>夸克本身</button>
+    </div>
+
+    <div class="stage">
+      <svg viewBox="0 0 520 320" role="img" aria-labelledby="sceneTitle sceneDesc">
+        <title id="sceneTitle">氢原子的分层结构示意图</title>
+        <desc id="sceneDesc">逐层显示整个原子、原子核、核子内部与夸克。图形为示意，不按真实比例。</desc>
+        <defs>
+          <radialGradient id="cloud" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#2f6fb0" stop-opacity=".34"/>
+            <stop offset="42%" stop-color="#2f6fb0" stop-opacity=".16"/>
+            <stop offset="78%" stop-color="#2f6fb0" stop-opacity=".045"/>
+            <stop offset="100%" stop-color="#2f6fb0" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="pg" cx="36%" cy="32%" r="72%">
+            <stop offset="0%" stop-color="#e2776e"/>
+            <stop offset="100%" stop-color="#b03a31"/>
+          </radialGradient>
+          <radialGradient id="blobg" cx="42%" cy="36%" r="70%">
+            <stop offset="0%" stop-color="#f0e3b8" stop-opacity=".95"/>
+            <stop offset="100%" stop-color="#e0cf92" stop-opacity=".35"/>
+          </radialGradient>
+        </defs>
+
+        <!-- 第 1 层：原子 -->
+        <g class="scene on" data-scene="1">
+          <circle cx="260" cy="160" r="134" fill="url(#cloud)"/>
+          <circle cx="260" cy="160" r="134" fill="none" stroke="#a9bccf" stroke-width="1.6" stroke-dasharray="6 7"/>
+          <circle cx="260" cy="160" r="7" fill="url(#pg)"/>
+        </g>
+
+        <!-- 第 2 层：原子核 -->
+        <g class="scene" data-scene="2">
+          <circle cx="260" cy="160" r="82" fill="url(#pg)"/>
+          <text x="260" y="182" font-size="56" fill="#fff" text-anchor="middle" font-weight="600">+</text>
+        </g>
+
+        <!-- 第 3 层：核子内部 -->
+        <g class="scene" data-scene="3">
+          <circle cx="260" cy="160" r="102" fill="url(#blobg)"/>
+          <circle cx="260" cy="160" r="102" fill="none" stroke="#d8c68a" stroke-width="1.4" stroke-dasharray="4 5"/>
+          <path d="M176 108 q13 -15 26 0 t26 0" stroke="#b99a2c" stroke-width="1.8" fill="none"/>
+          <path d="M292 212 q13 -15 26 0 t26 0" stroke="#b99a2c" stroke-width="1.8" fill="none"/>
+          <path d="M186 214 q13 -15 26 0" stroke="#b99a2c" stroke-width="1.8" fill="none"/>
+          <circle cx="218" cy="142" r="27" fill="url(#pg)"/>
+          <text x="218" y="151" font-size="19" fill="#fff" text-anchor="middle" font-weight="600">u</text>
+          <circle cx="302" cy="142" r="27" fill="url(#pg)"/>
+          <text x="302" y="151" font-size="19" fill="#fff" text-anchor="middle" font-weight="600">u</text>
+          <circle cx="260" cy="216" r="27" fill="#2f6fb0"/>
+          <text x="260" y="225" font-size="19" fill="#fff" text-anchor="middle" font-weight="600">d</text>
+        </g>
+
+        <!-- 第 4 层：夸克 -->
+        <g class="scene" data-scene="4">
+          <circle cx="260" cy="160" r="106" fill="none" stroke="#b8c3ce" stroke-width="1.5" stroke-dasharray="6 7"/>
+          <circle cx="210" cy="142" r="18" fill="#c8433a"/>
+          <text x="210" y="149" font-size="16" fill="#fff" text-anchor="middle" font-weight="600">u</text>
+          <circle cx="310" cy="142" r="18" fill="#c8433a"/>
+          <text x="310" y="149" font-size="16" fill="#fff" text-anchor="middle" font-weight="600">u</text>
+          <circle cx="260" cy="200" r="18" fill="#2f6fb0"/>
+          <text x="260" y="207" font-size="16" fill="#fff" text-anchor="middle" font-weight="600">d</text>
+        </g>
+      </svg>
+    </div>
+
+    <ul class="legend" id="legend"></ul>
+
+    <div class="scale" role="img" aria-label="从原子到夸克的对数尺度标尺：夸克约十的负十八次方米，原子核约十的负十五次方米，原子约十的负十次方米">
+      <div class="scale-track">
+        <span class="tick" style="left:0"></span>
+        <span class="tick" style="left:37.5%"></span>
+        <span class="tick" style="left:100%"></span>
+        <span class="dot" id="dot"></span>
+      </div>
+      <div class="scale-labels">
+        <div><b>10⁻¹⁸ m</b><span>夸克上限</span></div>
+        <div style="left:37.5%"><b>10⁻¹⁵ m</b><span>原子核 / 核子</span></div>
+        <div style="left:100%"><b>10⁻¹⁰ m</b><span>原子</span></div>
+      </div>
+    </div>
+
+    <p class="note-sm"><span>对数刻度。</span><span>从原子到原子核，跨度大约五个数量级——原子基本上是空的。</span><span>图形未按真实比例。</span></p>
+
+    <dl class="readout">
+      <dt>组成</dt>
+      <dd id="rComp">1 个质子 ＋ 1 个电子（0 个中子）</dd>
+      <dt>尺寸</dt>
+      <dd class="mono" id="rSize">约 1×10⁻¹⁰ m（0.1 nm）</dd>
+      <dt>判定</dt>
+      <dd><span class="verdict yes" id="rVerdict"><span class="glyph">✓</span>是原子</span></dd>
+      <dt>说明</dt>
+      <dd class="why" id="rWhy">这就是能称为"原子"的最小配置。质子缩在一个点上，电子不是绕着它转的小球，而是一团球对称的概率分布。</dd>
+    </dl>
+    <p class="note-sm" id="markerNote" hidden>圆点没动：在氢里，第 2 层和第 3 层是同一个东西——原子核就是一个质子。</p>
+    <p class="sr-only" aria-live="polite" id="status">第 1 层，整个原子：1 个质子加 1 个电子，是原子。</p>
+  </section>
+
+  <section class="card">
+    <h2>三条数量关系，撑起了整个原子结构</h2>
+    <p class="sub">原子的一切差别，最后都归到这三个数字上。</p>
+    <div class="rules">
+      <div class="rule">
+        <div class="tag">质子数 Z<span>决定"是谁"</span></div>
+        <div>
+          <p>核里几个质子，就是第几号元素。改这个数不是换个说法，是换一种物质。</p>
+          <div class="chips">
+            <span class="chip">1 → 氢</span><span class="chip">2 → 氦</span><span class="chip">6 → 碳</span>
+          </div>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="tag">中子数<span>决定"哪一版"</span></div>
+        <div>
+          <p>质子数不变、中子数不同，叫同位素。化学性质几乎一样，质量和核稳定性不一样。</p>
+          <div class="chips">
+            <span class="chip">0 个 → 氕</span><span class="chip">1 个 → 氘</span><span class="chip">2 个 → 氚</span>
+          </div>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="tag">电子数 − 质子数<span>决定"带不带电"</span></div>
+        <div>
+          <p>相等才是中性原子。少一个电子就是阳离子，多一个就是阴离子——变的是电子，不是质子。</p>
+          <div class="chips">
+            <span class="chip">0 个电子 → H⁺ 裸核</span><span class="chip">1 个 → H 中性</span><span class="chip">2 个 → H⁻</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>三个容易翻车的地方</h2>
+    <p class="sub">说错这三条，比答不出更糟。</p>
+    <div class="bounds">
+      <div class="bound">
+        <h3>电子不是绕圈的小球</h3>
+        <p>氢的基态电子是一团球对称的电子云，密度从中心向外指数衰减，没有轨道、没有轨迹。真正说明"原子有结构"的证据不是画出来的圈，而是<b class="hl">分立的能级和光谱线</b>——电子只能待在特定能量上。</p>
+      </div>
+      <div class="bound">
+        <h3>原子没有硬壳，"半径"是个约定</h3>
+        <p>电子云理论上延伸到无穷远，只是密度越来越低。所以半径必须指定口径：玻尔半径 5.291 772 105 44 × 10⁻¹¹ m 指的是<b class="hl">最可能半径</b>；共价半径、范德华半径、离子半径各是另一套数。</p>
+      </div>
+      <div class="bound">
+        <h3>"最小原子"这个说法要加限定</h3>
+        <p>氢是<b class="hl">结构最简单</b>的原子（Z = 1），这个没争议。但"半径最小"要看口径：按计算半径，氦约 31 pm 比氢约 53 pm 还小；换成范德华半径，氢约 120 pm 又小于氦约 140 pm。排序会翻。</p>
+      </div>
+    </div>
+
+    <details>
+      <summary>依据与口径</summary>
+      <ul class="src">
+        <li>OpenStax《Chemistry 2e》2.3 Atomic Structure and Symbolism：核由质子与中子构成、被大得多的电子空间包围；原子直径约 10⁻¹⁰ m，原子核约 10⁻¹⁵ m；质子数即原子序数、决定元素身份；中子数区分同位素；电荷 = 质子数 − 电子数，不等即为离子。<br><a href="https://openstax.org/books/chemistry-2e/pages/2-3-atomic-structure-and-symbolism">openstax.org/books/chemistry-2e/pages/2-3-atomic-structure-and-symbolism</a></li>
+        <li>NIST CODATA 2022 玻尔半径 a₀ = 5.291 772 105 44(82) × 10⁻¹¹ m。<br><a href="https://physics.nist.gov/cgi-bin/cuu/Value?bohrrada0">physics.nist.gov/cgi-bin/cuu/Value?bohrrada0</a></li>
+        <li>本页省略的条件：图中各层为示意图，不按真实比例；只讨论氢这一族，不判定其他核素是否束缚存在（例如 2 质子 0 中子的"氦-2"实际不束缚）；同位素与离子只取氢的常见例子，不展开核衰变与结合能。</li>
+      </ul>
+    </details>
+  </section>
+
+  <footer>
+    尺寸为数量级；标尺为对数刻度。图形仅表达层级关系，不代表真实比例与形状。
+  </footer>
+</div>
+
+<script>
+(function(){
+  var LAYERS = {
+    "1": {
+      comp: "1 个质子 ＋ 1 个电子（0 个中子）",
+      size: "约 1×10⁻¹⁰ m（0.1 nm）",
+      verdict: "是原子",
+      yes: true,
+      why: "这就是能称为\u201c原子\u201d的最小配置。质子缩在一个点上，电子不是绕着它转的小球，而是一团球对称的概率分布。",
+      pct: 100,
+      note: false,
+      legend: [{c:"#c8433a",t:"红点 = 质子"},{c:"#2f6fb0",t:"浅蓝范围 = 电子云，概率分布而非轨道"},{c:"line",t:"虚线圈 = 习惯上的半径，不是边界"}],
+      status: "第 1 层，整个原子：1 个质子加 1 个电子，是原子。能称为原子的最小配置。"
+    },
+    "2": {
+      comp: "1 个质子",
+      size: "约 1.7×10⁻¹⁵ m",
+      verdict: "不算原子了",
+      yes: false,
+      why: "拿走电子，剩下的是裸核，也叫氢离子 H⁺。质子数还在，但\u201c原子\u201d默认要配一团中性的电子云。",
+      pct: 36.5,
+      note: false,
+      legend: [{c:"#c8433a",t:"红色圆球 = 质子，电荷 +1"},{c:"none",t:"氢只有 1 个质子，没有中子"}],
+      status: "第 2 层，只剩原子核：1 个质子，不算原子了，是裸核也叫氢离子。"
+    },
+    "3": {
+      comp: "2 个上夸克 ＋ 1 个下夸克 ＋ 胶子",
+      size: "同一尺度，约 1.7×10⁻¹⁵ m",
+      verdict: "不属于原子结构",
+      yes: false,
+      why: "到这里是核子内部，归粒子物理管。它就是上一层那个质子，只是换了个问法：不是\u201c核外面有什么\u201d，而是\u201c核里面有什么\u201d。",
+      pct: 36.5,
+      note: true,
+      legend: [{c:"#f0e3b8",shape:"box",t:"浅黄范围 = 胶子场"},{c:"#c8433a",t:"u = 上夸克"},{c:"#2f6fb0",t:"d = 下夸克"}],
+      status: "第 3 层，核子内部：2 个上夸克加 1 个下夸克，不属于原子结构。在氢里它和第 2 层是同一个物体。"
+    },
+    "4": {
+      comp: "夸克（以及电子这类基本粒子）",
+      size: "测不出，实验上限约 10⁻¹⁸ m",
+      verdict: "不属于原子结构",
+      yes: false,
+      why: "目前的结论是\u201c点状、没有可测的内部结构\u201d。再问\u201c夸克由什么组成\u201d，已知物理没有公认答案。",
+      pct: 0,
+      note: false,
+      legend: [{c:"#c8433a",t:"u = 上夸克"},{c:"#2f6fb0",t:"d = 下夸克"},{c:"line",t:"虚线圈 = 实验测不出边界"}],
+      status: "第 4 层，夸克本身：测不出尺寸，不属于原子结构。"
+    }
+  };
+
+  var buttons = Array.prototype.slice.call(document.querySelectorAll(".segmented button"));
+  var scenes = Array.prototype.slice.call(document.querySelectorAll(".scene"));
+  var dot = document.getElementById("dot");
+  var rComp = document.getElementById("rComp");
+  var rSize = document.getElementById("rSize");
+  var rVerdict = document.getElementById("rVerdict");
+  var rWhy = document.getElementById("rWhy");
+  var markerNote = document.getElementById("markerNote");
+
+  var legendEl = document.getElementById("legend");
+  function renderLegend(items){
+    var html = "";
+    for(var i=0;i<items.length;i++){
+      var it = items[i], st;
+      if(it.c === "line"){
+        st = "background:transparent;border:1.5px dashed #a9bccf;border-radius:2px";
+      }else if(it.c === "none"){
+        st = "background:#fff;border:1px solid #c8d0d8";
+      }else if(it.shape === "box"){
+        st = "background:" + it.c + ";border-radius:3px;width:14px;height:11px";
+      }else{
+        st = "background:" + it.c;
+      }
+      html += '<li><span class="sw" style="' + st + '"></span>' + it.t + '</li>';
+    }
+    legendEl.innerHTML = html;
+  }
+
+  function select(id){
+    var d = LAYERS[id];
+    if(!d) return;
+
+    buttons.forEach(function(b){
+      b.setAttribute("aria-pressed", b.getAttribute("data-layer") === id ? "true" : "false");
+    });
+    scenes.forEach(function(s){
+      s.classList.toggle("on", s.getAttribute("data-scene") === id);
+    });
+
+    rComp.textContent = d.comp;
+    rSize.textContent = d.size;
+    rWhy.textContent = d.why;
+
+    rVerdict.className = "verdict " + (d.yes ? "yes" : "no");
+    rVerdict.innerHTML = '<span class="glyph">' + (d.yes ? "✓" : "✗") + '</span>' + d.verdict;
+
+    dot.style.left = d.pct + "%";
+    markerNote.hidden = !d.note;
+    document.getElementById("status").textContent = d.status;
+    renderLegend(d.legend);
+    if(d.note){ markerNote.textContent = "圆点没动：在氢里，第 2 层和第 3 层是同一个东西——原子核就是一个质子。"; }
+  }
+
+  renderLegend(LAYERS["1"].legend);
+
+  buttons.forEach(function(b){
+    b.addEventListener("click", function(){ select(b.getAttribute("data-layer")); });
+  });
+
+  // 键盘：左右箭头在四层之间切换
+  document.querySelector(".segmented").addEventListener("keydown", function(e){
+    var i = buttons.indexOf(document.activeElement);
+    if(i < 0) return;
+    if(e.key === "ArrowRight" || e.key === "ArrowLeft"){
+      e.preventDefault();
+      var next = e.key === "ArrowRight" ? (i + 1) % buttons.length : (i - 1 + buttons.length) % buttons.length;
+      buttons[next].focus();
+      select(buttons[next].getAttribute("data-layer"));
+    }
+  });
+})();
+</script>
+</body>
+</html>

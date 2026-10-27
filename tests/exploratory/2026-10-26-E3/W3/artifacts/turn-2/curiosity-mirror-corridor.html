@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>两面镜子之间，那条走廊是怎么排出来的</title>
+<style>
+  :root{
+    --paper:#fbf8f2;
+    --ink:#1d1a16;
+    --muted:#6f655a;
+    --rule:#e4dbcc;
+    --warm:#9a3412;
+    --cool:#0f5f57;
+    --card:#fffdf8;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:16.5px;
+    line-height:1.78;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:48px 22px 88px}
+  .kicker{
+    font-size:12.5px;letter-spacing:.14em;color:var(--muted);
+    margin:0 0 14px;text-transform:uppercase;
+  }
+  h1{
+    font-family:"Songti SC","Noto Serif CJK SC",Georgia,serif;
+    font-size:clamp(26px,6.4vw,37px);
+    line-height:1.28;margin:0 0 18px;font-weight:600;letter-spacing:-.01em;
+  }
+  .lead{font-size:17.5px;margin:0 0 8px;color:#2c2721}
+  .lead strong{background:linear-gradient(transparent 62%,#f2d9c4 62%);font-weight:600}
+  h2{
+    font-family:"Songti SC","Noto Serif CJK SC",Georgia,serif;
+    font-size:21px;line-height:1.45;margin:52px 0 14px;font-weight:600;
+    padding-bottom:10px;border-bottom:1px solid var(--rule);
+  }
+  h2 .num{
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:12px;color:var(--warm);letter-spacing:.1em;
+    display:block;margin-bottom:4px;font-weight:600;
+  }
+  p{margin:0 0 15px}
+  em{font-style:normal;background:linear-gradient(transparent 60%,#f6e6d3 60%)}
+  .fig{
+    background:var(--card);border:1px solid var(--rule);border-radius:14px;
+    padding:16px 16px 12px;margin:22px 0 26px;
+  }
+  .fig canvas{display:block;width:100%;height:224px;border-radius:8px}
+  #view{height:268px}
+  .cap{font-size:13px;color:var(--muted);line-height:1.65;margin:12px 2px 0}
+  .cap b{color:#3c342c;font-weight:600}
+  .controls{display:grid;gap:14px;margin:0 0 18px}
+  .ctl{display:block}
+  .ctl-top{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;margin-bottom:6px}
+  .ctl-top span{color:var(--muted)}
+  .ctl-top b{font-variant-numeric:tabular-nums;font-weight:600;color:var(--warm)}
+  input[type=range]{
+    -webkit-appearance:none;appearance:none;width:100%;height:26px;
+    background:transparent;margin:0;accent-color:var(--warm);
+  }
+  input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:#e6ddce}
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;width:18px;height:18px;border-radius:50%;
+    background:var(--warm);border:2px solid var(--card);margin-top:-7px;
+    box-shadow:0 1px 3px rgba(0,0,0,.22);
+  }
+  input[type=range]:focus-visible{outline:2px solid var(--warm);outline-offset:4px;border-radius:4px}
+  .readout{
+    font-size:13.5px;color:var(--muted);border-left:3px solid var(--rule);
+    padding-left:12px;margin:0 0 4px;line-height:1.7;
+  }
+  .readout b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .rule-box{
+    background:#fdf6ec;border:1px solid #f0dfc8;border-radius:10px;
+    padding:14px 16px;margin:20px 0 24px;font-size:15.5px;
+  }
+  .rule-box .fx{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:15px;color:var(--warm);display:block;margin:8px 0 6px;letter-spacing:.02em;
+  }
+  ul{padding-left:20px;margin:0 0 16px}
+  li{margin-bottom:9px}
+  li b{font-weight:600}
+  .aside{
+    font-size:14px;color:var(--muted);background:#f4f1e9;
+    border-radius:10px;padding:13px 16px;margin:22px 0;
+  }
+  .aside b{color:#3c342c}
+  footer{
+    margin-top:56px;padding-top:18px;border-top:1px solid var(--rule);
+    font-size:12.5px;color:#8a7f72;line-height:1.7;
+  }
+  .end{
+    font-family:"Songti SC","Noto Serif CJK SC",Georgia,serif;
+    font-size:18px;line-height:1.7;margin:34px 0 0;padding:18px 20px;
+    border-left:3px solid var(--warm);background:#fdf9f3;
+  }
+  @media (max-width:400px){
+    .wrap{padding:36px 18px 70px}
+    body{font-size:16px}
+    .fig{padding:12px 12px 10px}
+    .fig canvas{height:200px}
+    #view{height:240px}
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <p class="kicker">虚像 · 递归 · 深度</p>
+  <h1>两面镜子面对面，那条走廊是怎么“排”出来的</h1>
+  <p class="lead">先给结论：<strong>那条走廊不在镜子后面。</strong>它是你和两面镜子之间的<em>那一段空间</em>，被一遍遍复制、首尾相接地铺在同一条轴线上，一直铺到你眼睛分辨不出为止。你没看到更深的房间，你看到的是同一间房的第几十次复印。</p>
+
+  <h2><span class="num">01</span>一条规则，重复使用</h2>
+  <p>平面镜成像只有一条规则：<b>像和物关于镜面对称</b>。你在镜前 40 厘米，像就在镜后 40 厘米，同样大小，前后翻了个面。</p>
+  <p>多数人到这里就停了，把“像”理解成玻璃上的一幅画。这一步错了。对第二面镜子来说，那个像<b>就是一个真实存在的物体</b>——它在那个位置，有大小，光从那个方向过来。第二面镜子不管你是真的还是虚的，它照规矩办事，给这个像再成一个像。</p>
+  <p>于是：你的像 → 被对面镜子成像 → 那个像的像 → 再被成像……每一轮多一次反射，多一段光程。这就是<em>递归</em>，也是整个现象的全部机制。没有额外的东西。</p>
+
+  <div class="rule-box">
+    把镜子 A 放在 x = 0，镜子 B 放在 x = d，你站在 x = a。所有副本的位置是：
+    <span class="fx">x = 2nd ± a &nbsp;&nbsp;(n = …, −1, 0, 1, 2, …)</span>
+    换句话说：<b>你和镜子之间那一段宽 d 的空间，被整段整段复制到了轴线两侧</b>，每复制一次就翻个面。走廊不是造出来的，是“铺”出来的。
+  </div>
+
+  <h2><span class="num">02</span>俯视看：一条被折来折去的轴</h2>
+  <p>下面是俯视图。两条实线是真正的两面镜子，中间那一格是你所在的空间。向两边延伸的浅色格子，全是这一格的副本；每个格子的边界都是一道“折痕”——在副本里，镜子被折了一次，朝向翻转一次。</p>
+
+  <div class="fig">
+    <div class="controls">
+      <label class="ctl">
+        <span class="ctl-top"><span>你站的位置</span><b id="aOut">0.46 m</b></span>
+        <input id="a" type="range" min="8" max="92" step="1" value="38" aria-label="你在两镜之间的位置，占镜距的百分比">
+      </label>
+      <label class="ctl">
+        <span class="ctl-top"><span>两镜距离 d</span><b id="dOut">1.20 m</b></span>
+        <input id="d" type="range" min="40" max="200" step="5" value="120" aria-label="两面镜子之间的距离，单位米">
+      </label>
+      <label class="ctl">
+        <span class="ctl-top"><span>镜子反射率 ρ</span><b id="rOut">0.92</b></span>
+        <input id="r" type="range" min="70" max="98" step="1" value="92" aria-label="镜子每次反射保留的光的比例">
+      </label>
+    </div>
+    <canvas id="plan" aria-label="俯视图：你和两面镜子之间的空间被复制成一排"></canvas>
+    <p class="cap"><b>实线</b>是真镜子，<b>虚线</b>是副本里的折痕。每个小圆点都是一个“你”，箭头是朝向。<br>注意它们不是等距的：一份正对你、一份背对你，两两成对。一对内相隔 2a，两对之间相隔 2(d−a)，合起来的节奏正好是 2d。</p>
+  </div>
+
+  <p>这里藏着一个很常见的误读：很多人以为像是“每隔 2d 一个”。真实情况是——<b>格子每 d 一个，人每半个循环翻一次面</b>。镜子的边框每 d 复制一次（那是均匀的节拍），而你在格子里的位置跟着格子一起被翻过去，于是人的间距在 2a 和 2(d−a) 之间来回跳。</p>
+
+  <h2><span class="num">03</span>你眼睛里的那一版</h2>
+  <p>往一面镜子里看，你看到的第一个框是另一面镜子的边框。框里面还有一层框——那是这面镜子在对面镜子里的像；再里面还有……第 n 个框离你的距离是 nd − a，所以它在视野里的高度按 <b>1 /(nd − a)</b> 缩小。</p>
+
+  <div class="fig">
+    <canvas id="view" aria-label="从你的位置看进一面镜子：一圈套一圈、越来越小越来越暗的边框"></canvas>
+    <p class="cap">同一组参数下的视野。外框是最近的镜口，往里每一层多反射一次，因此多乘一次 ρ。缩小和变暗是同一个几何原因在两个通道上的表现——<b>它们都在说“更远”</b>。</p>
+  </div>
+
+  <h2><span class="num">04</span>三件事，让它读起来像“走廊”</h2>
+  <ul>
+    <li><b>透视缩小。</b>框的大小按 1/距离 掉。真实走廊里的门也是这样缩的，你眼睛早就学会这条曲线。</li>
+    <li><b>亮度衰减。</b>每过一面镜子乘一次 ρ。远处的层层变淡，正好对应空气里的雾——这叫“空气透视”。</li>
+    <li><b>边缘嵌套。</b>后一个框被前一个框挡住边缘，形成门框套门框的遮挡关系。遮挡是视觉判断前后顺序最硬的线索。</li>
+  </ul>
+  <p>三条线索全部指向“深”，大脑没有别的选择，只能给你一个纵深。可它们其实是同一件事的三个投影：<b>你在看一个被复制了 N 次的空间，而不是一条真的走廊。</b></p>
+  <div class="aside"><b>亲手验一下：</b>在镜面上贴一小块胶带。胶带的副本会像台阶一样排开——近的两个离得近、远的两个离得远，一正一反交替。那条“台阶”的疏密，就由你站的位置决定：你越靠近一面镜子，那一侧越挤。</div>
+
+  <h2><span class="num">05</span>为什么这条走廊一定有尽头</h2>
+  <p>每一层多一次反射，就多乘一次 ρ（小于 1）。所以第 n 层只剩 ρ<sup>n−1</sup> 的光。这个等比级数加起来是 1/(1−ρ)，是个<b>有限数</b>——ρ = 0.9 时，所有层加起来是入射光的 10 倍。听着不少，但那是把无穷多层求和得到的极限值，不是无穷。</p>
+  <p class="readout" id="ladder"></p>
+  <p>反过来想：如果镜子真的 100% 反射，那就是无穷多像、无穷多能量堆在两面镜子之间，物理上不成立。所以<b>“无限走廊”必然有尽头，尽头由损耗定，不由几何定。</b></p>
+
+  <h2><span class="num">06</span>现实里它为什么会走形</h2>
+  <ul>
+    <li><b>不平行。</b>两面镜子差 0.1°，走上十几层，副本就开始整体漂移、错位，走廊会歪向一边甚至拐弯。</li>
+    <li><b>镜子有边。</b>走到某一层，副本已经被镜子的边切掉，走廊出现一个“出口”。这就是你在理发店看到的那个方形尽头。</li>
+    <li><b>玻璃本身也反射。</b>玻璃和空气的界面大约反射 4% 的光，会在主走廊外侧叠出一层很淡的错位重影。</li>
+    <li><b>灰尘会一起被复制。</b>一粒灰被复制几十次，于是走廊里像起了雾——雾的浓度和反射率是同一件事。</li>
+  </ul>
+
+  <p class="end">两面镜子没有造出一条走廊，它们只是把你所在的那一格，沿轴线复印了无数份。走廊的长度，等于光还能回来几次。</p>
+
+  <footer>
+    模型假设：两面镜子严格平行、口径相同、正对摆放；“能看清几层”按亮度衰减到入射光的 2% 计算。真实装置还会受镜面平整度、玻璃厚度重影、观察角度和杂散光影响，实际可见层数通常低于这里的估算。
+  </footer>
+</main>
+
+<script>
+(function(){
+  const S = { f: 0.38, d: 1.20, rho: 0.92 };
+
+  const plan = document.getElementById('plan');
+  const view = document.getElementById('view');
+  const elA = document.getElementById('a');
+  const elD = document.getElementById('d');
+  const elR = document.getElementById('r');
+  const outA = document.getElementById('aOut');
+  const outD = document.getElementById('dOut');
+  const outR = document.getElementById('rOut');
+  const ladder = document.getElementById('ladder');
+
+  const INK = '#1d1a16', SOFT = '#4a423a', MUTED = '#8a7f72';
+  const WARM = [154,52,18], COOL = [15,95,87];
+
+  function fit(cv){
+    const rect = cv.getBoundingClientRect();
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const w = Math.max(1, Math.round(rect.width * dpr));
+    const h = Math.max(1, Math.round(rect.height * dpr));
+    if (cv.width !== w || cv.height !== h){ cv.width = w; cv.height = h; }
+    const ctx = cv.getContext('2d');
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,rect.width,rect.height);
+    return { ctx, W: rect.width, H: rect.height };
+  }
+
+  function rr(ctx,x,y,w,h,r){
+    r = Math.min(r, w/2, h/2);
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+    ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+    ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+    ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
+    ctx.closePath();
+  }
+
+  function drawPlan(){
+    const { ctx, W, H } = fit(plan);
+    const d = S.d, f = S.f, a = f * d, rho = S.rho;
+    const padL = 14, padR = 14;
+    const xmin = -3.15 * d, xmax = 4.15 * d;
+    const X = x => padL + (x - xmin) / (xmax - xmin) * (W - padL - padR);
+
+    const midY = H * 0.53;
+    const top = midY - H * 0.19;
+    const bot = midY + H * 0.19;
+
+    // 格子
+    const k0 = Math.floor(xmin / d), k1 = Math.ceil(xmax / d);
+    for (let k = k0; k <= k1; k++){
+      const al = Math.pow(rho, Math.abs(k));
+      if (al < 0.035) continue;
+      const L = X(k*d), R = X((k+1)*d);
+      if (R - L < 0.4) continue;
+      const even = Math.abs(k) % 2 === 0;
+      const c = even ? WARM : COOL;
+      ctx.fillStyle = 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + (0.055 + 0.085*al) + ')';
+      ctx.fillRect(L, top, Math.max(0.5, R - L - 1), bot - top);
+    }
+
+    // 折痕 / 镜子
+    for (let k = k0; k <= k1; k++){
+      const x = X(k*d);
+      const al = Math.pow(rho, Math.abs(k === 0 ? 0 : Math.abs(k) - 0.5));
+      const real = (k === 0 || k === 1);
+      ctx.save();
+      ctx.globalAlpha = real ? 1 : 0.18 + 0.34 * al;
+      ctx.strokeStyle = real ? INK : MUTED;
+      ctx.lineWidth = real ? 2.6 : 1;
+      if (!real) ctx.setLineDash([3,4]);
+      ctx.beginPath();
+      ctx.moveTo(x, top - 9);
+      ctx.lineTo(x, bot + 9);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // 每个格子里的“你”
+    for (let k = k0; k <= k1; k++){
+      const al = Math.pow(rho, Math.abs(k));
+      if (al < 0.045) continue;
+      const even = Math.abs(k) % 2 === 0;
+      const xp = even ? k*d + a : (k+1)*d - a;
+      const dir = even ? 1 : -1;
+      drawFigure(ctx, X(xp), midY, dir, al, k === 0);
+    }
+
+    // 轴
+    ctx.strokeStyle = 'rgba(29,26,22,.22)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(padL, midY); ctx.lineTo(W - padR, midY); ctx.stroke();
+
+    // 标签
+    ctx.font = '500 11px -apple-system,"PingFang SC",sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = INK;
+    ctx.fillText('镜 A', X(0), top - 16);
+    ctx.fillText('镜 B', X(d), top - 16);
+
+    const xr = X(a);
+    ctx.fillStyle = WARM;
+    ctx.font = '600 11px -apple-system,"PingFang SC",sans-serif';
+    ctx.fillText('你', xr, bot + 26);
+
+    // 比例尺
+    const bar = d >= 0.9 ? 1 : 0.5;
+    const bx = padL, by = H - 10;
+    const bw = (bar / (xmax - xmin)) * (W - padL - padR);
+    ctx.strokeStyle = MUTED; ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(bx, by - 4); ctx.lineTo(bx, by);
+    ctx.lineTo(bx + bw, by); ctx.lineTo(bx + bw, by - 4);
+    ctx.stroke();
+    ctx.fillStyle = MUTED;
+    ctx.font = '11px ui-monospace,Menlo,monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText(bar + ' m', bx + bw + 6, by + 1);
+  }
+
+  function drawFigure(ctx, x, y, dir, al, big){
+    const r = big ? 5 : 3.6;
+    ctx.save();
+    ctx.globalAlpha = Math.max(0.12, al);
+    ctx.fillStyle = big ? INK : SOFT;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(x + dir * r, y - r * 0.85);
+    ctx.lineTo(x + dir * (r + (big?8:6)), y);
+    ctx.lineTo(x + dir * r, y + r * 0.85);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawView(){
+    const { ctx, W, H } = fit(view);
+    const f = S.f, rho = S.rho;
+    const cx = W / 2, cy = H / 2;
+    const ASPECT = 1.95;
+
+    let R = Math.min(H * 0.46, (W * 0.46) / ASPECT);
+    const layers = [];
+    for (let n = 1; n <= 400; n++){
+      const op = Math.pow(rho, n - 1);
+      if (op < 0.035) break;
+      const hh = R * (1 - f) / (n - f);
+      if (hh < 1.2) break;
+      layers.push({ n: n, op: op, hh: hh });
+    }
+
+    // 底色渐层
+    const g = ctx.createRadialGradient(cx, cy, R*0.2, cx, cy, Math.max(W,H)*0.75);
+    g.addColorStop(0, '#fffdf8');
+    g.addColorStop(1, '#f2ece1');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+
+    for (let i = 0; i < layers.length; i++){
+      const L = layers[i];
+      const hw = L.hh * ASPECT;
+      const even = (L.n - 1) % 2 === 0;
+      const c = even ? WARM : COOL;
+      rr(ctx, cx - hw, cy - L.hh, hw * 2, L.hh * 2, Math.min(9, L.hh * 0.3));
+      ctx.fillStyle = 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + (0.035 + 0.075 * L.op) + ')';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + (0.15 + 0.7 * L.op) + ')';
+      ctx.lineWidth = L.n === 1 ? 1.8 : 1;
+      ctx.stroke();
+    }
+
+    // 消失在尽头的那个点
+    ctx.fillStyle = 'rgba(29,26,22,.35)';
+    ctx.beginPath(); ctx.arc(cx, cy, 1.6, 0, Math.PI*2); ctx.fill();
+
+    ctx.fillStyle = MUTED;
+    ctx.font = '11px -apple-system,"PingFang SC",sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('你的眼睛看进这一面镜子', 10, 18);
+  }
+
+  function updateReadout(){
+    const rho = S.rho;
+    const d10 = Math.pow(rho, 9);
+    const n = Math.round(Math.log(0.02) / Math.log(rho));
+    ladder.innerHTML = '按现在这个反射率，第 10 层只剩 <b>' + (d10*100).toFixed(0) +
+      '%</b> 的光，整条走廊大约能看清 <b>' + n + '</b> 层。';
+  }
+
+  function update(){
+    S.f = parseInt(elA.value,10) / 100;
+    S.d = parseInt(elD.value,10) / 100;
+    S.rho = parseInt(elR.value,10) / 100;
+
+    outA.textContent = (S.f * S.d).toFixed(2) + ' m（占 ' + Math.round(S.f*100) + '%）';
+    outD.textContent = S.d.toFixed(2) + ' m';
+    outR.textContent = S.rho.toFixed(2);
+
+    drawPlan();
+    drawView();
+    updateReadout();
+  }
+
+  [elA, elD, elR].forEach(function(el){ el.addEventListener('input', update); });
+
+  var t = null;
+  window.addEventListener('resize', function(){
+    if (t) clearTimeout(t);
+    t = setTimeout(function(){ drawPlan(); drawView(); }, 120);
+  });
+
+  update();
+})();
+</script>
+</body>
+</html>

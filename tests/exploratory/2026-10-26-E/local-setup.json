@@ -1,0 +1,7 @@
+{
+  "temporary_mount_home": "/var/folders/5j/b8_rzdwn3219tg2qxzk54n2m0000gn/T/curiosity-e-mount-9_z6_n2r",
+  "workbuddy_entry": "/Users/larry/.workbuddy/skills/curiosity",
+  "target": "/Users/larry/haoqixin/curiosity",
+  "workspace": "/Users/larry/haoqixin/tests/exploratory/2026-10-26-E/workspace",
+  "cleanup": "mount.sh del curiosity with SKILL_POOL_HOME set to temporary_mount_home"
+}

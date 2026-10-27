@@ -1,0 +1,18 @@
+{
+  "candidate": "E3",
+  "date": "2026-10-26",
+  "host": "WorkBuddy V5.9.2 native UI",
+  "model": "Deepseek-V4.1-Flash UI label; backend revision unknown",
+  "files": {
+    "curiosity/SKILL.md": "38d95bbc9b25398abe6c398a7f4ca44b2d9481dc375299a3272e0f94c56a0bda",
+    "curiosity/references/page-spec.md": "0bb056e3709f9031bcd225637caba00e79eb9ea0739f360441dba9e02abfc323",
+    "curiosity/references/sample-models.md": "122b19de8bbe4a9e5293f10c8166b170d7fea2ecaa819f979200eddb0f487f93"
+  },
+  "targets_seconds": {
+    "first_useful_explanation": 30,
+    "basic_visual_delivery": 120,
+    "local_definition": 30,
+    "small_page_update": 90
+  },
+  "status": "frozen before E3 experience"
+}

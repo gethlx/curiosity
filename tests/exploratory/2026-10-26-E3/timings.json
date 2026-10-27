@@ -1,0 +1,251 @@
+{
+  "timing_boundary": "Public message timestamp is not precise first-token latency. UI duration from observed completion/cancel state. File creation and operator waiting are separate. W2 turn2 useful message is only a process/structure framing; full distinction in final response.",
+  "records": [
+    {
+      "session": "W0",
+      "turn": 1,
+      "public_record": "public/aac3a0ff-e58f-4316-b391-ec320cde5560.json",
+      "input": "我想现在测试好奇心这个技能\n原子的最小结构是什么？",
+      "ui_duration_seconds": 338,
+      "completion": "completed",
+      "first_useful_public_message_seconds": 64,
+      "public_message_offsets_seconds": [
+        5.0,
+        64.0,
+        338.2
+      ],
+      "tool_counts": {
+        "Skill": 1,
+        "Read": 1,
+        "Bash": 15,
+        "Write": 2,
+        "ViewImage": 10,
+        "Edit": 8,
+        "present_files": 1
+      },
+      "skills_requested": [
+        null
+      ]
+    },
+    {
+      "session": "W0",
+      "turn": 2,
+      "public_record": "public/aac3a0ff-e58f-4316-b391-ec320cde5560.json",
+      "input": "我没学过那些能量单位，原子核、质子、电子我还没分清。先把它们谁包含谁讲清楚就好。",
+      "ui_duration_seconds": 146,
+      "completion": "completed",
+      "first_useful_public_message_seconds": 37.5,
+      "public_message_offsets_seconds": [
+        37.5,
+        146.0
+      ],
+      "tool_counts": {
+        "Write": 2,
+        "Bash": 5,
+        "Read": 1,
+        "Edit": 4,
+        "ViewImage": 3,
+        "Grep": 2,
+        "present_files": 1
+      },
+      "skills_requested": []
+    },
+    {
+      "session": "W0",
+      "turn": 3,
+      "public_record": "public/aac3a0ff-e58f-4316-b391-ec320cde5560.json",
+      "input": "人类梦境是怎么回事",
+      "ui_duration_seconds": 160,
+      "completion": "completed",
+      "first_useful_public_message_seconds": 64.4,
+      "public_message_offsets_seconds": [
+        64.4,
+        160.2
+      ],
+      "tool_counts": {
+        "Write": 1,
+        "Edit": 7,
+        "Bash": 4,
+        "ViewImage": 4,
+        "present_files": 1
+      },
+      "skills_requested": []
+    },
+    {
+      "session": "W0",
+      "turn": 4,
+      "public_record": "public/aac3a0ff-e58f-4316-b391-ec320cde5560.json",
+      "input": "图例上REM写着“做梦”，那是不是别的阶段就不会做梦了？我有点被这个标签弄糊涂了。",
+      "ui_duration_seconds": 77,
+      "completion": "completed",
+      "first_useful_public_message_seconds": 22,
+      "public_message_offsets_seconds": [
+        22.0,
+        77.5
+      ],
+      "tool_counts": {
+        "Edit": 9,
+        "Grep": 1,
+        "Bash": 1,
+        "ViewImage": 2,
+        "present_files": 1
+      },
+      "skills_requested": []
+    },
+    {
+      "session": "W1",
+      "turn": 1,
+      "public_record": "W1/public/1e7812ce-efde-4896-9831-3c1fd400945c.json",
+      "input": "用好奇心聊聊。我11岁：树上长的蘑菇是植物吗？它也不怎么动，可我又听说它不是植物，为什么？",
+      "ui_duration_seconds": 360,
+      "completion": "completed",
+      "first_useful_public_message_seconds": 360.2,
+      "public_message_offsets_seconds": [
+        102.1,
+        360.2
+      ],
+      "tool_counts": {
+        "Skill": 1,
+        "Read": 3,
+        "Bash": 23,
+        "Write": 3,
+        "ViewImage": 16,
+        "Edit": 7,
+        "present_files": 1
+      },
+      "skills_requested": [
+        "curiosity"
+      ]
+    },
+    {
+      "session": "W1",
+      "turn": 2,
+      "public_record": "W1/public/1e7812ce-efde-4896-9831-3c1fd400945c.json",
+      "input": "上面的表说动物没有细胞壁，下面又说我和蘑菇都用几丁质砌墙。我也有这种墙吗？",
+      "ui_duration_seconds": 82,
+      "completion": "completed",
+      "first_useful_public_message_seconds": 22.1,
+      "public_message_offsets_seconds": [
+        22.1,
+        81.9
+      ],
+      "tool_counts": {
+        "Read": 1,
+        "Edit": 2,
+        "Bash": 4,
+        "ViewImage": 2
+      },
+      "skills_requested": []
+    },
+    {
+      "session": "W1",
+      "turn": 3,
+      "public_record": "W1/public/1e7812ce-efde-4896-9831-3c1fd400945c.json",
+      "input": "菌丝是什么？用一句话说就好，这次不用改网页。",
+      "ui_duration_seconds": 8,
+      "completion": "completed",
+      "first_useful_public_message_seconds": 8.5,
+      "public_message_offsets_seconds": [
+        8.5
+      ],
+      "tool_counts": {},
+      "skills_requested": []
+    },
+    {
+      "session": "W2",
+      "turn": 1,
+      "public_record": "W2/public/8ea55472-a01b-4684-8b34-2f900cfdee3c.json",
+      "input": "为什么群里本来意见不太一样，聊着聊着大家反而更极端？我想知道背后有哪些概念。",
+      "ui_duration_seconds": 75,
+      "completion": "completed",
+      "first_useful_public_message_seconds": 60,
+      "public_message_offsets_seconds": [
+        60.0,
+        70.0,
+        75.5
+      ],
+      "tool_counts": {
+        "widget_guidelines": 1,
+        "show_widget": 2
+      },
+      "skills_requested": []
+    },
+    {
+      "session": "W2",
+      "turn": 2,
+      "public_record": "W2/public/8ea55472-a01b-4684-8b34-2f900cfdee3c.json",
+      "input": "用好奇心继续：你列出的词太多了，我只想先弄懂“群体极化”和“回音室”的区别。",
+      "ui_duration_seconds": 175,
+      "completion": "completed",
+      "first_useful_public_message_seconds": 47.2,
+      "public_message_offsets_seconds": [
+        47.2,
+        92.4,
+        174.8
+      ],
+      "tool_counts": {
+        "Skill": 1,
+        "Read": 1,
+        "Write": 2,
+        "Bash": 8,
+        "ViewImage": 4,
+        "Edit": 3,
+        "present_files": 1
+      },
+      "skills_requested": [
+        "curiosity"
+      ]
+    },
+    {
+      "session": "W3",
+      "turn": 1,
+      "public_record": "W3/public/6cb47550-692c-4c36-9aea-b6f2bf46c6de.json",
+      "input": "用好奇心聊聊：我知道镜面反射，可两面镜子面对面怎么就像有很长的走廊？想弄懂图像是怎么排出来的。",
+      "ui_duration_seconds": 255,
+      "completion": "canceled by operator as impatient user; partial artifact, not delivered",
+      "first_useful_public_message_seconds": null,
+      "public_message_offsets_seconds": [
+        217.2,
+        255.6
+      ],
+      "tool_counts": {
+        "Skill": 1,
+        "Read": 1,
+        "Bash": 6,
+        "Write": 1,
+        "Edit": 1
+      },
+      "skills_requested": [
+        "curiosity"
+      ]
+    },
+    {
+      "session": "W3",
+      "turn": 2,
+      "public_record": "W3/public/6cb47550-692c-4c36-9aea-b6f2bf46c6de.json",
+      "input": "等太久了，先别做网页了。用文字直接讲清前面几个像分别是怎么来的，我知道一次反射的规则。",
+      "ui_duration_seconds": 78,
+      "completion": "completed",
+      "first_useful_public_message_seconds": 78.3,
+      "public_message_offsets_seconds": [
+        78.3
+      ],
+      "tool_counts": {},
+      "skills_requested": []
+    },
+    {
+      "session": "W3",
+      "turn": 3,
+      "public_record": "W3/public/6cb47550-692c-4c36-9aea-b6f2bf46c6de.json",
+      "input": "这些位置我看懂了。镜距写成d，我离A镜的距离写成a，在A镜里第n个像的位置有什么公式？只讲这个就行，还是不用网页。",
+      "ui_duration_seconds": 10,
+      "completion": "completed",
+      "first_useful_public_message_seconds": 10.5,
+      "public_message_offsets_seconds": [
+        10.5
+      ],
+      "tool_counts": {},
+      "skills_requested": []
+    }
+  ]
+}

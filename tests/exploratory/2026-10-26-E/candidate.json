@@ -1,0 +1,14 @@
+{
+  "candidate": "E",
+  "date": "2026-10-26",
+  "files": {
+    "curiosity/SKILL.md": "7211a35c8e0594a43b4bf6e3498d859a2e84464900a28fb14093f142bec321d3",
+    "curiosity/references/page-spec.md": "d9f1b4e0036d6739f1e5c0196ae56e194ddfd72b5a832fb896391ebf1bfb329a"
+  },
+  "host": "WorkBuddy native UI",
+  "model": "Deepseek-V4.1-Flash (WorkBuddy UI label; backend revision unknown)",
+  "baseline": "D snapshot; original user thread 01a177f2-7efd-7181-89e8-1c436f33cd9e",
+  "status": "frozen before UI experience",
+  "workbuddy_version": "V5.9.2",
+  "mount_entry_verified": "~/.workbuddy/skills/curiosity -> /Users/larry/haoqixin/.agents/skills/curiosity -> /Users/larry/haoqixin/curiosity"
+}

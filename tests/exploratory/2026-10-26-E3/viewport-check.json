@@ -1,0 +1,12 @@
+{
+  "requested": {
+    "width": 375,
+    "height": 812
+  },
+  "actual": {
+    "height": 1015,
+    "scroll": 469,
+    "width": 469
+  },
+  "conclusion": "Requested 375px not applied as 375 CSS pixels; no operator-side 375px PASS"
+}

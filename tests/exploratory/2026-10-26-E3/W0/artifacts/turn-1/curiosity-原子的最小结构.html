@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>原子的最小结构</title>
+<style>
+  :root{
+    --ink:#1c1b19;
+    --ink-2:#565349;
+    --ink-3:#8d8a80;
+    --line:#e4e1d8;
+    --line-2:#d3cfc3;
+    --paper:#ffffff;
+    --bg:#faf9f5;
+    --proton:#b5432f;
+    --neutron:#7b8794;
+    --electron:#2f6f9f;
+    --quark:#9a6f2f;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font:16px/1.78 -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  main{max-width:740px;margin:0 auto;padding:52px 22px 80px}
+  .kicker{
+    font-size:12px;letter-spacing:.16em;color:var(--ink-3);
+    text-transform:uppercase;margin:0 0 14px;
+  }
+  h1{
+    font-size:30px;line-height:1.3;font-weight:600;margin:0 0 18px;
+    letter-spacing:-.01em;
+  }
+  .lede{font-size:17px;color:var(--ink-2);margin:0 0 8px}
+  .lede b{color:var(--ink);font-weight:600}
+  hr.rule{border:0;border-top:1px solid var(--line);margin:34px 0}
+  h2{
+    font-size:13px;letter-spacing:.1em;color:var(--ink-3);
+    font-weight:600;text-transform:uppercase;margin:0 0 18px;
+  }
+  p{margin:0 0 14px}
+
+  /* ---------- 阶梯 ---------- */
+  .ladder{position:relative;margin:6px 0 10px}
+  .rung{
+    display:grid;grid-template-columns:78px 1fr;gap:18px;
+    padding:16px 16px 16px 14px;border-radius:12px;
+    border:1px solid transparent;transition:background .18s,border-color .18s;
+    opacity:.82;
+  }
+  .rung.on{opacity:1;background:var(--paper);border-color:var(--line);
+    box-shadow:0 1px 2px rgba(28,27,25,.04)}
+  .rung .viz{width:78px;height:78px;display:flex;align-items:center;justify-content:center}
+  .rung h3{
+    font-size:16px;font-weight:600;margin:2px 0 4px;line-height:1.5;
+  }
+  .rung h3 .tag{
+    font-weight:400;font-size:12px;color:var(--ink-3);
+    margin-left:8px;letter-spacing:.02em;
+  }
+  .rung p{font-size:14px;line-height:1.68;color:var(--ink-2);margin:0}
+  .gap{
+    display:flex;align-items:center;gap:10px;
+    padding:2px 0 2px 30px;font-size:12px;color:var(--ink-3);
+  }
+  .gap .bar{width:1px;height:22px;background:var(--line-2);margin-left:8px;flex:0 0 auto}
+  .gap code{
+    font:inherit;color:var(--ink-2);background:#f1eee5;
+    padding:1px 6px;border-radius:5px;font-variant-numeric:tabular-nums;
+  }
+
+  /* ---------- 交互 ---------- */
+  .lab{
+    background:var(--paper);border:1px solid var(--line);border-radius:14px;
+    padding:22px 22px 18px;margin:0 0 14px;
+  }
+  .lab-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:4px;flex-wrap:wrap}
+  .lab-head span{font-size:13px;color:var(--ink-3)}
+  .reading{
+    font-size:26px;font-weight:600;letter-spacing:-.01em;
+    font-variant-numeric:tabular-nums;line-height:1.3;
+  }
+  input[type=range]{
+    -webkit-appearance:none;appearance:none;width:100%;height:26px;
+    background:transparent;margin:10px 0 2px;cursor:pointer;
+  }
+  input[type=range]::-webkit-slider-runnable-track{
+    height:5px;border-radius:3px;background:#d5cfbf;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;
+    background:var(--ink);border:3px solid var(--paper);
+    box-shadow:0 0 0 1px var(--line-2);margin-top:-7.5px;
+  }
+  input[type=range]::-moz-range-track{height:5px;border-radius:3px;background:#d5cfbf}
+  input[type=range]::-moz-range-thumb{
+    width:16px;height:16px;border-radius:50%;background:var(--ink);
+    border:3px solid var(--paper);box-shadow:0 0 0 1px var(--line-2);
+  }
+  input[type=range]:focus-visible{outline:2px solid var(--electron);outline-offset:6px;border-radius:20px}
+  .scale{
+    position:relative;height:17px;font-size:11px;color:var(--ink-3);
+    font-variant-numeric:tabular-nums;margin:2px 10px 0;
+  }
+  .scale span{position:absolute;top:0;left:0;transform:translateX(-50%);white-space:nowrap}
+  .scale span:first-child{transform:none}
+  .scale span:last-child{left:auto;right:0;transform:none}
+  .state{
+    margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
+    font-size:15px;line-height:1.72;color:var(--ink);min-height:78px;
+  }
+  .state .where{
+    display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-3);margin-bottom:6px;
+  }
+  .state strong{font-weight:600}
+
+  /* ---------- 说明 ---------- */
+  .note{
+    border-left:2px solid var(--line-2);padding:2px 0 2px 18px;margin:0 0 20px;
+    font-size:15px;color:var(--ink-2);line-height:1.75;
+  }
+  .note b{color:var(--ink);font-weight:600}
+  .massbar{display:flex;height:34px;border-radius:8px;overflow:hidden;margin:2px 0 10px;border:1px solid var(--line)}
+  .massbar .q{background:var(--quark);flex:0 0 1.1%}
+  .massbar .g{background:#dcd6c6;flex:1 1 auto;display:flex;align-items:center;padding-left:10px;font-size:12px;color:var(--ink-2)}
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-3);line-height:1.7}
+  footer p{margin:0 0 8px}
+
+  @media (max-width:480px){
+    main{padding:34px 16px 56px}
+    h1{font-size:24px}
+    .lede{font-size:16px}
+    .rung{grid-template-columns:60px 1fr;gap:12px;padding:12px 10px}
+    .rung .viz{width:60px;height:60px}
+    .rung .viz svg{width:60px;height:60px}
+    .gap{padding-left:18px}
+    .lab{padding:18px 16px 14px}
+    .reading{font-size:22px}
+    .state{font-size:14px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;animation:none !important}
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <p class="kicker">好奇心 · 一处物理关系</p>
+  <h1>原子的最小结构是什么</h1>
+
+  <p class="lede">原子是<b>核 + 电子</b>。核里是<b>质子</b>和<b>中子</b>，它们各自是三个<b>夸克</b>加一堆<b>胶子</b>。再往里没有了——电子没测到内部结构，夸克被永远关在里面。</p>
+  <p class="lede">所以「最小」不是一个零件名，而是一道<b>能量门槛</b>：你投多少能量，就能看到多深一层。往下推。</p>
+
+  <hr class="rule">
+
+  <h2>分到哪一层，就算拆到哪一层</h2>
+
+  <div class="ladder" id="ladder">
+
+    <div class="rung" data-step="0">
+      <div class="viz">
+        <svg viewBox="0 0 84 84" width="78" height="78" aria-hidden="true">
+          <defs>
+            <radialGradient id="cloud" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#2f6f9f" stop-opacity=".34"/>
+              <stop offset="48%" stop-color="#2f6f9f" stop-opacity=".13"/>
+              <stop offset="100%" stop-color="#2f6f9f" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="42" cy="42" r="39" fill="url(#cloud)"/>
+          <circle cx="42" cy="42" r="39" fill="none" stroke="#2f6f9f" stroke-opacity=".22" stroke-dasharray="2 5"/>
+          <circle cx="42" cy="42" r="2.6" fill="#b5432f"/>
+        </svg>
+      </div>
+      <div>
+        <h3>1&nbsp; 原子<span class="tag">直径约 10⁻¹⁰ 米</span></h3>
+        <p>中心一颗核，外面是电子出现的概率云。云没有硬边界，所谓「原子半径」是统计出来的尺度，不同测法给出不同数。</p>
+      </div>
+    </div>
+
+    <div class="gap"><span class="bar"></span>门槛 <code>~10 eV</code>：夺走电子（电离）</div>
+
+    <div class="rung" data-step="1">
+      <div class="viz">
+        <svg viewBox="0 0 84 84" width="78" height="78" aria-hidden="true">
+          <circle cx="42" cy="42" r="24" fill="#f5f1e7" stroke="#d8d3c7"/>
+          <circle cx="34" cy="36" r="8" fill="#b5432f"/>
+          <circle cx="50" cy="36" r="8" fill="#7b8794"/>
+          <circle cx="42" cy="52" r="8" fill="#b5432f"/>
+          <circle cx="70" cy="18" r="2.8" fill="#2f6f9f"/>
+          <circle cx="14" cy="64" r="2.8" fill="#2f6f9f"/>
+        </svg>
+      </div>
+      <div>
+        <h3>2&nbsp; 裸核 + 飞走的电子<span class="tag">核直径约 10⁻¹⁵ 米</span></h3>
+        <p>电子被剥掉了。核本身分毫未损，但这团东西已经不是那个元素的「原子」——化学身份全靠电子撑着。</p>
+      </div>
+    </div>
+
+    <div class="gap"><span class="bar"></span>门槛 <code>~10 MeV</code>：把核打散（核反应）</div>
+
+    <div class="rung" data-step="2">
+      <div class="viz">
+        <svg viewBox="0 0 84 84" width="78" height="78" aria-hidden="true">
+          <circle cx="26" cy="30" r="11" fill="#b5432f"/>
+          <circle cx="60" cy="28" r="11" fill="#7b8794"/>
+          <circle cx="30" cy="62" r="11" fill="#7b8794"/>
+          <circle cx="61" cy="58" r="11" fill="#b5432f"/>
+        </svg>
+      </div>
+      <div>
+        <h3>3&nbsp; 自由的质子和中子<span class="tag">每颗约 10⁻¹⁵ 米</span></h3>
+        <p>核散了，元素彻底消失。你得到的是一堆质子和中子——它们还是「有内部零件」的，所以这一层不是终点。</p>
+      </div>
+    </div>
+
+    <div class="gap"><span class="bar"></span>门槛 <code>~1 GeV</code>：打进质子内部（但抓不到夸克）</div>
+
+    <div class="rung" data-step="3">
+      <div class="viz">
+        <svg viewBox="0 0 84 84" width="78" height="78" aria-hidden="true">
+          <circle cx="26" cy="28" r="8" fill="#9a6f2f"/>
+          <circle cx="58" cy="26" r="8" fill="#9a6f2f"/>
+          <circle cx="42" cy="58" r="8" fill="#9a6f2f"/>
+          <path d="M30 34 Q42 44 54 32" fill="none" stroke="#b79a5e" stroke-width="1.6" stroke-dasharray="3 3"/>
+          <path d="M48 62 Q52 44 60 34" fill="none" stroke="#b79a5e" stroke-width="1.6" stroke-dasharray="3 3"/>
+          <path d="M36 60 Q28 46 24 36" fill="none" stroke="#b79a5e" stroke-width="1.6" stroke-dasharray="3 3"/>
+        </svg>
+      </div>
+      <div>
+        <h3>4&nbsp; 夸克与胶子<span class="tag">夸克本身没有测到尺寸</span></h3>
+        <p>能量足够打进质子内部，你会看到三个夸克被胶子场连在一起。但把能量再加大，也拿不出一个孤立的夸克——灌进去的能量只会变成新的一对对强子。这叫夸克禁闭。</p>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="font-size:13px;color:var(--ink-3);line-height:1.65;margin-top:14px">
+    示意图不按真实比例。真按比例画，原子画成这张卡片宽，核只有千分之三像素，根本看不见。
+  </p>
+
+  <hr class="rule">
+
+  <h2>推这道门槛</h2>
+
+  <div class="lab">
+    <div class="lab-head">
+      <span>投入的能量</span>
+      <span id="stepname">第 1 层 · 原子完整</span>
+    </div>
+    <div class="reading" id="reading" aria-hidden="true">0.01 eV</div>
+    <input id="energy" type="range" min="0" max="300" step="1" value="0"
+           aria-label="投入的能量，从 10 毫电子伏到 100 吉电子伏"
+           aria-valuetext="0.01 电子伏，原子完整">
+    <div class="scale"><span style="left:0">10 meV</span><span style="left:46.15%">10 keV</span><span style="left:69.23%">10 MeV</span><span>100 GeV</span></div>
+    <div class="state" id="state" aria-live="polite">
+      <span class="where">现在</span>
+      <div id="statetext"></div>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <h2>两个反直觉的地方</h2>
+
+  <p class="massbar-label" style="font-size:13px;color:var(--ink-3);margin-bottom:6px">一颗质子的质量从哪来</p>
+  <div class="massbar" role="img" aria-label="质子质量中，夸克自身静质量约占百分之一，其余约百分之九十九来自胶子场与夸克的能量">
+    <div class="q"></div>
+    <div class="g">胶子场 + 夸克动能 ≈ 99%（按 E = mc² 折成的质量）</div>
+  </div>
+  <p style="font-size:13px;color:var(--ink-3);margin:-2px 0 18px">最左边约 1% 那一细条，才是夸克自己的静质量。所以「往里挖」不是挖出更小的砖块，是把物质挖成了能量。这个比例是量级估计，会随计算方式变动。</p>
+
+  <div class="note">
+    <b>电子是另一个断点。</b>它是点状的——所有实验都只给了它一个越来越小的尺寸上限，从没测到任何内部结构。它不像质子那样「由零件组成」，更像是场的一个激发。就目前证据看，往电子里再分一层，没有东西可分。
+  </div>
+
+  <div class="note" style="margin-bottom:0">
+    <b>还有一层歧义值得记住：</b>如果「最小」指的是「还能算这种元素的最小单元」，答案就是整个原子。你不可能留下半个原子还叫它氧——元素身份由核里的质子数决定，拆核就是换元素。
+  </div>
+
+  <footer>
+    <p><b>尺度数据</b>：原子直径 10⁻¹⁰ 米量级，原子核 10⁻¹⁵ 米量级，差约 10⁵ 倍半径、10¹⁵ 倍体积。这些是数量级，不是精确值。</p>
+    <p><b>门槛数据</b>：电离约 10 eV 量级（随元素和电子层不同）；核子分离约 10 MeV 量级（每核子结合能约 8 MeV）；探入质子内部需要 GeV 量级。均为量级。</p>
+    <p><b>未核验项</b>：本页数字来自教科书量级，未在本次会话中联网核对原始文献。电子尺寸上限的具体数值刻意省略——不同实验方法给的上限差异很大，写一个数会误导。</p>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var MIN_LOG = -2, MAX_LOG = 11;
+  var slider = document.getElementById('energy');
+  var reading = document.getElementById('reading');
+  var statetext = document.getElementById('statetext');
+  var stepname = document.getElementById('stepname');
+  var rungs = Array.prototype.slice.call(document.querySelectorAll('.rung'));
+
+  function trim(n){
+    if (n >= 100) return n.toFixed(0);
+    if (n >= 10)  return n.toFixed(1);
+    return n.toFixed(2);
+  }
+  function fmtE(ev){
+    if (ev >= 1e9)  return trim(ev/1e9) + ' GeV';
+    if (ev >= 1e6)  return trim(ev/1e6) + ' MeV';
+    if (ev >= 1e3)  return trim(ev/1e3) + ' keV';
+    if (ev >= 1)    return trim(ev) + ' eV';
+    if (ev >= 1e-3) return trim(ev*1e3) + ' meV';
+    return trim(ev*1e6) + ' µeV';
+  }
+
+  var STATES = [
+    {
+      name: '第 1 层 · 原子完整',
+      html: '这点能量只够让最外层的电子挪个位置——发生的是化学反应，原子本身还在。<strong>你连它的皮都没碰到。</strong>'
+    },
+    {
+      name: '第 2 层 · 电子被剥离',
+      html: '电子被打飞，剩下一个裸核。核还是原来那颗核，但这团东西化学上已经不是那个元素了——<strong>元素的「性格」几乎全写在电子上</strong>。'
+    },
+    {
+      name: '第 3 层 · 核被打散',
+      html: '能量超过了把核子绑在一起的力量，核碎成一堆自由的质子和中子。这已经不是化学反应，是核反应。<strong>元素身份在这一层彻底没了。</strong>'
+    },
+    {
+      name: '第 4 层 · 打进质子内部',
+      html: '能量足够穿透质子，看到里面的三个夸克。但你会撞上一个奇怪的墙：<strong>打不出单个夸克</strong>。你给它多少能量，它就变成多少新粒子，夸克始终被关在里面。所谓「最小零件」，到这里只能观察，不能拿出。'
+    }
+  ];
+
+  function currentStep(ev){
+    var L = Math.log10(ev);
+    if (L >= 9) return 3;
+    if (L >= 7) return 2;
+    if (L >= 1) return 1;
+    return 0;
+  }
+
+  function update(){
+    var v = Number(slider.value);
+    var logE = MIN_LOG + (MAX_LOG - MIN_LOG) * v / 300;
+    var ev = Math.pow(10, logE);
+    var step = currentStep(ev);
+
+    var text = fmtE(ev);
+    reading.textContent = text;
+    slider.setAttribute('aria-valuetext', text + '，' + STATES[step].name.replace(/\s/g, '').replace('·', '，'));
+
+    for (var i = 0; i < rungs.length; i++){
+      if (i <= step) rungs[i].classList.add('on');
+      else rungs[i].classList.remove('on');
+    }
+
+    stepname.textContent = STATES[step].name;
+    if (statetext.innerHTML !== STATES[step].html) statetext.innerHTML = STATES[step].html;
+  }
+
+  slider.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>

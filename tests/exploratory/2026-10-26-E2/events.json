@@ -1,0 +1,39 @@
+[
+  {
+    "type": "input",
+    "session": "W0",
+    "turn": 1,
+    "time": "2026-10-26T13:57:34.249Z",
+    "text": "我想现在测试好奇心这个技能\n原子的最小结构是什么？"
+  },
+  {
+    "type": "observation",
+    "name": "W0-turn1-start",
+    "time": "2026-10-26T13:57:35.385Z"
+  },
+  {
+    "type": "observation",
+    "name": "W0-turn1-early",
+    "time": "2026-10-26T13:58:05.157Z"
+  },
+  {
+    "type": "observation",
+    "name": "W0-turn1-middle",
+    "time": "2026-10-26T13:59:18.434Z"
+  },
+  {
+    "type": "observation",
+    "name": "W0-turn1-120plus",
+    "time": "2026-10-26T14:00:04.615Z"
+  },
+  {
+    "type": "observation",
+    "name": "W0-turn1-latest",
+    "time": "2026-10-26T14:04:14.119Z"
+  },
+  {
+    "type": "observation",
+    "name": "W0-turn1-ended",
+    "time": "2026-10-26T14:05:52.214Z"
+  }
+]

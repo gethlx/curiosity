@@ -1,0 +1,181 @@
+{
+  "date": "2026-10-27",
+  "frozen_candidate_files_match": true,
+  "actual_file_sha256": {
+    "curiosity/SKILL.md": "38d95bbc9b25398abe6c398a7f4ca44b2d9481dc375299a3272e0f94c56a0bda",
+    "curiosity/references/page-spec.md": "0bb056e3709f9031bcd225637caba00e79eb9ea0739f360441dba9e02abfc323",
+    "curiosity/references/sample-models.md": "122b19de8bbe4a9e5293f10c8166b170d7fea2ecaa819f979200eddb0f487f93"
+  },
+  "sample_models_moved_without_changes": "verified before freeze; unchanged frozen hash rechecked after testing",
+  "captured_auth_url_leaks": [],
+  "actual_host": "WorkBuddy V5.9.2",
+  "model_label": "Deepseek-V4.1-Flash; exact backend revision unknown",
+  "batch_execution": "completed feedback replay and three personas, 12 inputs; W3 initial trial canceled after 255s",
+  "acceptance": "not passed; batch execution finished with documented cancellation and failures",
+  "unresolved": [
+    "speed",
+    "default depth and scope",
+    "content relationships and evidence conditions",
+    "W2 implicit discovery",
+    "operator 375 CSS-pixel check not achieved"
+  ],
+  "temporary_workbuddy_entry_removed": true,
+  "source_skill_intact": true,
+  "host_cached_index_refresh_verified": false,
+  "external_resource_static_scan": [
+    {
+      "file": "W0/artifacts/turn-1/curiosity-原子的最小结构.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "W0/artifacts/turn-2-at-lock/curiosity-原子的最小结构.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "W0/artifacts/turn-2-post-lock/curiosity-原子的最小结构.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "W0/artifacts/turn-3/curiosity-原子的最小结构.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "W0/artifacts/turn-3/curiosity-梦境.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "W0/artifacts/turn-3-initial/curiosity-原子的最小结构.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "W0/artifacts/turn-3-initial/curiosity-梦境.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "W0/artifacts/turn-4/curiosity-原子的最小结构.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "W0/artifacts/turn-4/curiosity-梦境.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "W1/artifacts/turn-1/curiosity-mushroom-not-a-plant.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "W1/artifacts/turn-2/curiosity-mushroom-not-a-plant.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "W2/artifacts/turn-2/curiosity-polarization-vs-echo-chamber.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "W3/artifacts/turn-1-stopped/curiosity-mirror-corridor.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "W3/artifacts/turn-2/curiosity-mirror-corridor.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "workspace/W1/curiosity-mushroom-not-a-plant.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "workspace/W2/curiosity-polarization-vs-echo-chamber.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "workspace/W3/curiosity-mirror-corridor.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "workspace/curiosity-原子的最小结构.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    },
+    {
+      "file": "workspace/curiosity-梦境.html",
+      "active_resource_attributes": [],
+      "css_external_urls": [],
+      "network_call_markers": []
+    }
+  ],
+  "offline_disconnected_test": "not performed",
+  "operator_narrow_viewport": {
+    "requested": {
+      "width": 375,
+      "height": 812
+    },
+    "actual": {
+      "height": 1015,
+      "scroll": 469,
+      "width": 469
+    },
+    "conclusion": "Requested 375px not applied as 375 CSS pixels; no operator-side 375px PASS"
+  },
+  "temporary_viewport_override": "reset",
+  "full_semantic_review": "not performed; report includes specific checked failures",
+  "human_learning_effectiveness": "not tested",
+  "quick_skill_validator": "passed: Skill is valid",
+  "document_links": {
+    "checked": 175,
+    "missing": [],
+    "boundary": "File existence for local Markdown links in changed documents and E3 report; anchors not validated"
+  },
+  "git": "not committed or pushed",
+  "git_diff_check": "passed",
+  "git_state": {
+    "workspace": "/Users/larry/haoqixin",
+    "branch": "main",
+    "head": "f37a538",
+    "origin_main_local_tracking_ref": "f37a538",
+    "live_remote_refresh_this_turn": false,
+    "worktree": "uncommitted local changes and new evidence",
+    "commit_or_push_this_round": false
+  },
+  "publication_checks": {
+    "runtime_and_document_whitespace_check": "passed; raw AX captures excluded to preserve source formatting",
+    "raw_AX_trailing_whitespace": "retained; no production or documentation whitespace failures",
+    "raw_AX_capture_files_with_trailing_spaces": 39,
+    "privacy_redactions": "three unrelated pre-conversation sidebars removed; see publication-redactions.json",
+    "runtime_E3_hashes_unchanged": true
+  }
+}

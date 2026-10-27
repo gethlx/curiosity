@@ -1,0 +1,73 @@
+Window: "WorkBuddy", App: WorkBuddy.
+0 标准窗口 WorkBuddy, Secondary Actions: Raise
+		2 container
+			3 container
+				4 container
+					5 按钮 展开侧边栏
+						6 图像
+					7 按钮
+					8 文本 理解镜面反射形成的走廊效应
+					9 按钮 对话内搜索
+					10 按钮 分享
+						11 图像
+					12 按钮 打开右侧面板
+				13 container
+					14 container
+						15 container
+							16 container
+								17 文本 用好奇心聊聊：我知道镜面反射，可两面镜子面对面怎么就像有很长的走廊？想弄懂图像是怎么排出来的。
+								18 工具栏
+									19 文本 09:10
+									20 按钮 复制
+										21 图像
+							22 container
+								23 图像
+								24 text WorkBuddy 预计消耗 0.39 ~ 17.47 已处理 47s
+								25 文本 深度思考中
+								26 text 已消耗 0.39 脑海里的草稿纸已经写满了第一页
+								27 按钮 不再显示
+					28 container
+						29 container
+							30 container 无法播放媒体。
+						31 container
+							32 文本输入区 (settable) ﻿
+今天帮你做些什么？@ 添加上下文，/调用技能与指令
+								33 container
+									34 文本 ﻿
+									35 文本 今天帮你做些什么？@ 添加上下文，/调用技能与指令
+							36 组合框 (settable) 更多操作
+							37 按钮 复制分支名
+							38 文本 main
+							39 组合框 (settable) 允许完全访问
+								40 文本 允许完全访问
+							41 container
+								42 按钮
+									43 图像
+								44 组合框 (settable) Description: Select model: Deepseek-V4.1-Flash, Value: Deepseek-V4.1-Flash
+									45 图像
+									46 文本 Deepseek-V4.1-Flash
+								47 按钮 语音输入 ⌘D 或长按 ⌥
+									48 图像
+								49 按钮 停止
+					50 文本 内容由 AI 生成，请核实重要信息
+				51 container
+					52 按钮 新标签页
+					53 按钮 进入全屏
+					54 按钮 收起右侧面板
+					55 container
+						56 内容列表
+							57 文本 打开浏览器
+							58 文本 查看工作空间
+							59 文本 打开终端
+				60 container
+					61 文本 引用来源 (0)
+					62 按钮 关闭
+	63 关闭按钮
+	64 全屏幕按钮 Help: 此按钮也可以执行缩放窗口的操作, Secondary Actions: 缩放窗口
+	65 最小化按钮
+66 menu bar
+	67 WorkBuddy
+	68 编辑
+	69 查看
+	70 窗口
+	71 帮助
